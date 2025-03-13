@@ -77,8 +77,7 @@ export default function Footer() {
         </li>
       </ul>
       <p className="mt-8 text-neutral-600 dark:text-neutral-300">
-        built with nextjs+CF mindfuk <br /> © {new Date().getFullYear()} MIT
-        Licensed
+        built with nextjs+CF mindfuk <br /> © 1969 MIT Licensed to fkn no one
       </p>
     </footer>
   );
