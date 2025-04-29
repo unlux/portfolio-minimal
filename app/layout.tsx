@@ -7,12 +7,16 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "./components/footer";
 import { baseUrl } from "./sitemap";
+import Head from "next/head";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
     default: "unlux",
     template: "%s | unlux ",
+  },
+  icons: {
+    icon: "/favicon.ico",
   },
   description: "This is my portfolio.",
   openGraph: {
@@ -52,6 +56,7 @@ export default function RootLayout({
         GeistMono.variable
       )}
     >
+      <link rel="icon" href="./favicon.ico" sizes="any" />
       <body className="antialiased max-w-xl mx-4 mt-8 lg:mx-auto vsc-initialized">
         <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
           <Navbar />
