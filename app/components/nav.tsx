@@ -7,6 +7,12 @@ const navItems = {
   "/blog": {
     name: "blog",
   },
+  "/todo": {
+    name: "todo",
+  },
+  "/currently-reading": {
+    name: "currently reading",
+  },
 };
 
 export function Navbar() {

@@ -8,6 +8,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "./components/footer";
 import { baseUrl } from "./sitemap";
 import Head from "next/head";
+import "react-notion-x/src/styles.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
