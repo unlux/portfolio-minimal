@@ -1,25 +1,17 @@
 "use client";
-import { useMemo } from "react";
 import { NotionRenderer as NotionRendererLib } from "react-notion-x";
 import { useTheme } from "next-themes";
-import CodeBlock from "./CodeBlock";
+import { Collection } from "react-notion-x/build/third-party/collection";
 
 export const NotionRenderer = ({ recordMap }: { recordMap: any }) => {
   const { resolvedTheme } = useTheme();
   const isDarkMode = resolvedTheme === "dark";
 
-  const components = useMemo(
-    () => ({
-      Code: CodeBlock,
-    }),
-    []
-  );
-
   return (
     <NotionRendererLib
-      bodyClassName="text-base sm:text-lg"
+      bodyClassName="text-base sm:text-lg text-neutral-900 dark:text-neutral-300"
       className="!bg-transparent"
-      components={components}
+      components={{ Collection }}
       darkMode={isDarkMode}
       disableHeader
       fullPage
