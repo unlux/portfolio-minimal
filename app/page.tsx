@@ -1,12 +1,13 @@
 import { BlogPosts } from "app/components/posts";
+import { BitcountGridDouble, Inter } from "./layout";
 
 export default function Page() {
   return (
     <section>
-      <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
+      <h1 className="mb-8 text-4xl font-semibold tracking-tighter">
         Hi, I'm Lakshay Choudhary
       </h1>
-      <p className="mb-4">
+      <p className={`mb-4 ${Inter.className}`}>
         a full-stack and cloud developer with a love for solving complex
         problems and building efficient, reliable systems. I thrive on creating
         solutions that work seamlessly and enjoy diving deep into the technical

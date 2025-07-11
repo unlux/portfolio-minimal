@@ -16,7 +16,7 @@ Email providers restrict how many emails you can send per second:
 - **SendGrid**: 10-20 emails/sec (depending on plan)
 - **Postmark**: Optimized for transactional emails but still limited
 
-Our application needed to send hundreds of emails simultaneously—order confirmations, password resets, marketing emails. When we exceeded the limit, emails would fail. Some were delayed, others were lost.
+Our application needed to send hundreds of emails simultaneously. order confirmations, password resets, marketing emails. When we exceeded the limit, emails would fail. Some were delayed, others were lost.
 
 ### First Attempt: Using Redis as a Simple Rate Limiter
 
@@ -26,7 +26,7 @@ We initially tried using Redis to track emails per second.
 i liderally died.
 ```
 
-**Problem?** Any(all) extra emails just failed—no retries, no queuing. Not good.
+**Problem?** Any(all) extra emails just failed. no retries, no queuing. Not good.
 
 ### Solution: Switching to BullMQ for Email Queueing
 

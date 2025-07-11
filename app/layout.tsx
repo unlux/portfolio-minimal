@@ -9,6 +9,19 @@ import Footer from "./components/footer";
 import { baseUrl } from "./sitemap";
 import Head from "next/head";
 import "react-notion-x/src/styles.css";
+import localFont from "next/font/local";
+
+export const BitcountGridDouble = localFont({
+  src: "../public/BitcountGridDouble.ttf",
+  variable: "--font-bitcount-grid-double",
+  display: "swap",
+});
+
+export const Inter = localFont({
+  src: "../public/Inter.ttf",
+  variable: "--font-bitcount-grid-double",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -45,9 +58,9 @@ const cx = (...classes) => classes.filter(Boolean).join(" ");
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html
       lang="en"
@@ -58,7 +71,11 @@ export default function RootLayout({
       )}
     >
       <link rel="icon" href="./favicon.ico" sizes="any" />
-      <body className="antialiased max-w-xl mx-4 mt-8 lg:mx-auto vsc-initialized">
+      <body
+        className={cx(
+          "antialiased max-w-xl mx-4 mt-8 lg:mx-auto vsc-initialized"
+        )}
+      >
         <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
           <Navbar />
           {children}

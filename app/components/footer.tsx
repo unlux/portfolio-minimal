@@ -1,3 +1,6 @@
+import { Inter } from "app/layout";
+import { FaGithub, FaLinkedin, FaFileAlt } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 function ArrowIcon() {
   return (
     <svg
@@ -17,73 +20,61 @@ function ArrowIcon() {
 
 export default function Footer() {
   return (
-    <footer className="mb-16">
-      <ul className="font-sm mt-8 flex flex-col space-x-0 space-y-2 text-neutral-600 md:flex-row md:space-x-4 md:space-y-0 dark:text-neutral-300">
-        {/* <li>
-          <a
-            className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
-            rel="noopener noreferrer"
-            target="_blank"
-            href="/rss"
-          >
-            <ArrowIcon />
-            <p className="ml-2 h-7">rss</p>
-          </a>
-        </li> */}
+    <footer className={`mb-16 ${Inter.className}`}>
+      <ul className="font-sm mt-8 flex flex-row flex-wrap items-center gap-6 text-neutral-600 dark:text-neutral-300">
         <li>
           <a
-            className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
+            className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
             rel="noopener noreferrer"
             target="_blank"
             href="https://dub.sh/luxhub"
           >
-            <ArrowIcon />
-            <p className="ml-2 h-7">github</p>
+            <FaGithub size={20} />
+            <span>github</span>
           </a>
         </li>
-
         <li>
           <a
-            className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
+            className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
             rel="noopener noreferrer"
             target="_blank"
             href="https://x.com/whyunlux"
           >
-            <ArrowIcon />
-            <p className="ml-2 h-7">X</p>
+            <FaXTwitter size={20} />
+            <span>X</span>
           </a>
         </li>
         <li>
           <a
-            className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
+            className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
             rel="noopener noreferrer"
             target="_blank"
             href="https://dub.sh/lux-linkedin"
           >
-            <ArrowIcon />
-            <p className="ml-2 h-7">linkedIn</p>
+            <FaLinkedin size={20} />
+            <span>linkedIn</span>
           </a>
         </li>
         <li>
           <a
-            className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
+            className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
             rel="noopener noreferrer"
             target="_blank"
             href="/resume.pdf"
           >
-            <ArrowIcon />
-            <p className="ml-2 h-7">cv</p>
+            <FaFileAlt size={20} />
+            <span>cv</span>
           </a>
         </li>
         <li>
           <a
-            className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
+            className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
             rel="noopener noreferrer"
             target="_blank"
             href="https://github.com/unlux/portfolio-minimal"
           >
-            <ArrowIcon />
-            <p className="ml-2 h-7">view source</p>
+            <FaGithub size={20} />
+            <span>view source</span>
           </a>
         </li>
       </ul>
