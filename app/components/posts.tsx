@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { formatDate, getBlogPosts } from "app/blog/utils";
-import { BitcountGridDouble } from "app/layout";
+import { BitcountGridDouble } from "app/lib/fonts";
 
 export function BlogPosts() {
   let allBlogs = getBlogPosts();

@@ -9,19 +9,6 @@ import Footer from "./components/footer";
 import { baseUrl } from "./sitemap";
 import Head from "next/head";
 import "react-notion-x/src/styles.css";
-import localFont from "next/font/local";
-
-export const BitcountGridDouble = localFont({
-  src: "../public/BitcountGridDouble.ttf",
-  variable: "--font-bitcount-grid-double",
-  display: "swap",
-});
-
-export const Inter = localFont({
-  src: "../public/Inter.ttf",
-  variable: "--font-bitcount-grid-double",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),

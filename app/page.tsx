@@ -1,5 +1,5 @@
 import { BlogPosts } from "app/components/posts";
-import { BitcountGridDouble, Inter } from "./layout";
+import { Inter } from "./lib/fonts";
 
 export default function Page() {
   return (
