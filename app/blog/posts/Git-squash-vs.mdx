@@ -1,0 +1,152 @@
+---
+title: "Git Rebase vs Merge vs Squash"
+publishedAt: "2025-08-03"
+summary: "no fluff guide to understanding git commits"
+---
+
+# Rebase vs Merge vs Squash - What You Actually Need to Know
+
+Let’s get real for a second. You’ve probably seen all three:
+`git merge`, `git rebase`, and `git squash`.
+People throw them around like they’re interchangeable. They’re not.
+
+Here’s the difference, nice and quick - with the caveats you actually need to care about.
+
+## TL;DR
+
+- `merge` = keeps history, adds a merge commit
+
+- `rebase` = rewrites history, keeps it linear
+
+- `squash` = combines multiple commits into one (usually with rebase)
+
+## `git merge`
+
+This is the default. Safe, simple, and very "meh" when you look at your Git history.
+
+```bash
+git checkout main
+git merge feature-branch
+
+```
+
+What happens:
+
+- Git adds a new commit that joins the two histories.
+
+- Your feature commits stay as they are.
+
+- History shows a branching structure (which can get messy in large teams - try to clone any thicc repo and look at the source tree, you'll get it in a second).
+
+👍 Good when you want a record of everything.
+👎 Bad when you care about a clean, linear log.
+
+🚨 **Caveat**: Merge commits keep context. You’ll know _when_ two branches were integrated and what changes came in. Some devs (and tools like Git bisect or Git blame) rely on that.
+
+## `git rebase`
+
+This is what you use when you care about a tidy history.
+
+```bash
+git checkout feature-branch
+git rebase main
+
+```
+
+What happens:
+
+- It rewrites your feature branch so it looks like it was built on top of the latest `main`.
+
+- It reapplies your commits one by one.
+
+Result:
+Cleaner history. No merge commits. Everything looks like it happened in a straight line.
+
+👍 Good when you're preparing a PR.
+👎 Don’t use on shared branches unless you know what you're doing. Rewriting history that others rely on = chaos.
+
+🚨 **Caveat**: Rebasing hides merge context. If you hit conflicts during rebase, you won’t get the full picture like you would during a merge. Also, it makes it hard to see when things were actually integrated into main.
+
+## `git squash`
+
+Squash is not a command on its own. It’s a _mode_ you can use during an interactive rebase:
+
+```bash
+git rebase -i HEAD~3
+
+```
+
+You'll get something like:
+
+```
+pick abc123 commit one
+pick def456 commit two
+pick ghi789 commit three
+
+```
+
+You change it to:
+
+```
+pick abc123 commit one
+squash def456 commit two
+squash ghi789 commit three
+
+```
+
+Now all three commits become **one**. You write a new commit message. Done. (but now you lost all the commit history)
+
+👍 Great for cleaning up commit spam like “fix typo”, “oops”, “update var name”.
+👎 Don’t squash commits that logically should stay separate.
+
+🚨 **Caveat**: Squashing destroys individual commit info. If you're trying to debug something later, all those changes are now bundled into one block. Reverts also become harder if the PR wasn't atomic.
+
+## When to Use What
+
+| Situation                        | Recommended Git Command           |
+| -------------------------------- | --------------------------------- |
+| Finished a feature, want PR      | `rebase` + `squash`               |
+| Merging in main to continue work | `merge`                           |
+| Cleaning up before merge         | `rebase -i`                       |
+| Collaborating on a shared branch | `merge` (or coordinated `rebase`) |
+| Hate ugly Git logs               | `rebase`                          |
+
+## My Rule of Thumb
+
+- While coding? Commit as often as you want. Doesn’t matter.
+
+- Before pushing? Rebase and squash.
+
+- Before merge to `main`? PR should be clean. 1 commit if it's one logical change.
+
+Good commits = good storytelling. Your future self (and your teammates) should be able to follow what happened and why.
+
+## Bonus: Force Push After Rebase
+
+If you rebase and squash, you’ll need to force push:
+
+```bash
+git push --force-with-lease
+
+```
+
+This is safe **if you're the only one working on the branch**.
+Don’t `--force` blindly. Ever.
+Use `--force-with-lease` so you don’t overwrite someone else’s work by accident.
+
+## Final Notes (from the Real World)
+
+- Most teams use **merge for shared branches** and **rebase/squash for feature PRs**.
+
+- GitHub lets you pick how to merge PRs: squash, rebase, or plain merge. Make sure your team is aligned.
+
+- Rebasing makes your history cleaner, but hides context.
+
+- Merge keeps everything visible, but makes history noisy.
+
+- Squash is great for PRs, but terrible if you ever want to see what happened step-by-step.
+
+No one cares about how many commits you made.
+Make it readable. Make it clean. Make it understandablle.
+
+That’s it.
