@@ -25,7 +25,9 @@ export async function generateMetadata(props: { params: any }) {
     image,
   } = post.metadata;
   const ogImage = image
-    ? image
+    ? image.startsWith("http")
+      ? image
+      : `${baseUrl}${image}`
     : `${baseUrl}/og?title=${encodeURIComponent(title)}`;
 
   return {

@@ -5,11 +5,21 @@ import { NotionAPI } from "notion-client";
 
 export default async function TodoPage() {
   const notion = new NotionAPI();
-  const recordMap = await notion.getPage("22cca11c6d65808b8453ca55e4032397?");
+  let recordMap = null;
+  let error = null;
+  try {
+    recordMap = await notion.getPage("22cca11c6d65808b8453ca55e4032397");
+  } catch (e) {
+    error = e;
+  }
   return (
     <section>
       <div className="prose prose-neutral dark:prose-invert">
-        <NotionRenderer recordMap={recordMap} />
+        {error ? (
+          <div className="text-red-500">Failed to load Notion data.</div>
+        ) : (
+          <NotionRenderer recordMap={recordMap} />
+        )}
       </div>
     </section>
   );

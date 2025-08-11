@@ -8,6 +8,6 @@ export const BitcountGridDouble = localFont({
 
 export const Inter = localFont({
   src: "../../public/Inter.ttf",
-  variable: "--font-bitcount-grid-double",
+  variable: "--font-inter",
   display: "swap",
 });
