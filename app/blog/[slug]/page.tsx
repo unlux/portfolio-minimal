@@ -11,7 +11,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata(props) {
+export async function generateMetadata(props: { params: any }) {
   const params = await props.params;
   const post = getBlogPosts().find((post) => post.slug === params.slug);
   if (!post) {
@@ -52,7 +52,7 @@ export async function generateMetadata(props) {
   };
 }
 
-export default async function Blog(props) {
+export default async function Blog(props: { params: any }) {
   const params = await props.params;
   const post = getBlogPosts().find((post) => post.slug === params.slug);
 
