@@ -1,11 +1,17 @@
 import { BlogPosts } from "app/components/posts";
 import { Inter } from "./lib/fonts";
+import BlurText from "./components/ui/BlurText";
 
 export default function Page() {
   return (
     <section>
       <h1 className="mb-8 text-4xl font-semibold tracking-tighter">
-        Hi, I'm Lakshay Choudhary
+        <BlurText
+          delay={100}
+          stepDuration={0.2}
+          direction="bottom"
+          text="Hi, I'm Lakshay Choudhary"
+        />
       </h1>
       <p className={`mb-4 ${Inter.className}`}>
         a full-stack and cloud developer with a love for solving complex
