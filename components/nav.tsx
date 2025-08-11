@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 const navItems = {
   "/": {
@@ -38,6 +39,7 @@ const itemVariants = {
 
 export function Navbar() {
   const pathname = usePathname();
+  const hasClerk = Boolean(process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY);
   return (
     <aside className="mb-10 tracking-tight">
       <div className="lg:sticky lg:top-20">
@@ -81,6 +83,30 @@ export function Navbar() {
               );
             })}
           </motion.div>
+
+          {hasClerk && (
+            <div className="ml-auto flex items-center gap-2">
+              <SignedIn>
+                <UserButton afterSignOutUrl="/" />
+              </SignedIn>
+              <SignedOut>
+                <SignInButton
+                  mode="modal"
+                  forceRedirectUrl="/gotcha"
+                  fallbackRedirectUrl="/gotcha"
+                  signUpForceRedirectUrl="/gotcha"
+                  signUpFallbackRedirectUrl="/gotcha"
+                >
+                  <button
+                    className="px-3 py-1 rounded-full text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 outline-none focus-visible:ring-1 focus-visible:ring-blue-400 focus-visible:ring-offset-1 focus-visible:ring-offset-background"
+                    aria-label="Sign in"
+                  >
+                    Sign in
+                  </button>
+                </SignInButton>
+              </SignedOut>
+            </div>
+          )}
         </nav>
       </div>
     </aside>
