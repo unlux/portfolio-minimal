@@ -1,3 +1,5 @@
+export const revalidate = 3600;
+
 import { NotionRenderer } from "../components/NotionRenderer";
 import { NotionAPI } from "notion-client";
 
