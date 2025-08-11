@@ -3,7 +3,7 @@ import { formatDate, getBlogPosts } from "@/app/blog/utils";
 import { BitcountGridDouble } from "@/app/lib/fonts";
 
 export function BlogPosts() {
-  let allBlogs = getBlogPosts();
+  const allBlogs = getBlogPosts();
 
   return (
     <div className={BitcountGridDouble.className}>
