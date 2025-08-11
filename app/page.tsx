@@ -2,6 +2,7 @@ import { BlogPosts } from "@/components/posts";
 import { Inter } from "./lib/fonts";
 import BlurText from "@/components/ui/BlurText";
 import { WorkExperience } from "@/components/work-experience";
+import FadeIn from "@/components/animation/FadeIn";
 
 export default function Page() {
   return (
@@ -14,7 +15,8 @@ export default function Page() {
           text="Hi, I'm Lakshay Choudhary"
         />
       </h1>
-      <p className={`mb-4 ${Inter.className}`}>
+
+      <FadeIn className={`mb-4 ${Inter.className}`}>
         a full-stack and cloud developer with a love for solving complex
         problems and building efficient, reliable systems. I thrive on creating
         solutions that work seamlessly and enjoy diving deep into the technical
@@ -43,10 +45,10 @@ export default function Page() {
         Btrfs, NixOS has been central to my development journey.
         <br />
         <br />
-      </p>
+      </FadeIn>
 
       {/* Work Experience */}
-      <div className="mt-10">
+      <FadeIn className="mt-10">
         <WorkExperience
           experiences={[
             {
@@ -67,11 +69,11 @@ export default function Page() {
             },
           ]}
         />
-      </div>
+      </FadeIn>
 
-      <div className="mt-8">
+      <FadeIn className="mt-8" delay={0.05}>
         <BlogPosts />
-      </div>
+      </FadeIn>
       {/* <LanyardRPC /> // TODO */}
     </section>
   );

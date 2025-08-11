@@ -2,6 +2,7 @@ export const revalidate = 3600;
 
 import { NotionRenderer } from "@/components/NotionRenderer";
 import { NotionAPI } from "notion-client";
+import FadeIn from "@/components/animation/FadeIn";
 
 export default async function TodoPage() {
   const notion = new NotionAPI();
@@ -14,13 +15,13 @@ export default async function TodoPage() {
   }
   return (
     <section>
-      <div className="prose prose-neutral dark:prose-invert">
+      <FadeIn className="prose prose-neutral dark:prose-invert">
         {error ? (
           <div className="text-red-500">Failed to load Notion data.</div>
         ) : (
           <NotionRenderer recordMap={recordMap} />
         )}
-      </div>
+      </FadeIn>
     </section>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 
 const navItems = {
   "/": {
@@ -17,6 +18,24 @@ const navItems = {
   },
 };
 
+// Smooth staggered reveal for nav items
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08, delayChildren: 0.05 },
+  },
+} as const;
+
+const itemVariants = {
+  hidden: { opacity: 0, y: -8 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
+  },
+} as const;
+
 export function Navbar() {
   const pathname = usePathname();
   return (
@@ -26,7 +45,13 @@ export function Navbar() {
           className="flex flex-row items-center px-0 pb-0 md:overflow-auto scroll-pr-6 md:relative"
           id="nav"
         >
-          <div className="flex flex-row gap-1 pr-6">
+          {/* Animated nav items */}
+          <motion.div
+            className="flex flex-row gap-1 pr-6"
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+          >
             {Object.entries(navItems).map(([path, { name }]) => {
               const isActive =
                 path === "/" ? pathname === "/" : pathname.startsWith(path);
@@ -43,11 +68,19 @@ export function Navbar() {
                     }`}
                   style={{ fontSize: "1rem" }}
                 >
-                  {name}
+                  {/* Animated label */}
+                  <motion.span
+                    variants={itemVariants}
+                    whileHover={{ y: -1 }}
+                    whileTap={{ scale: 0.98 }}
+                    layout
+                  >
+                    {name}
+                  </motion.span>
                 </Link>
               );
             })}
-          </div>
+          </motion.div>
         </nav>
       </div>
     </aside>
