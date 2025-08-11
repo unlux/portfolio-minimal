@@ -8,6 +8,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "@/components/footer";
 import { baseUrl } from "./sitemap";
 import ClickSpark from "@/components/ui/ClickSpark";
+import LenisProvider from "@/components/LenisProvider";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -40,7 +41,8 @@ export const metadata: Metadata = {
   },
 };
 
-const cx = (...classes) => classes.filter(Boolean).join(" ");
+const cx = (...classes: Array<string | false | null | undefined>) =>
+  classes.filter(Boolean).join(" ");
 
 export default function RootLayout({
   children,
@@ -57,15 +59,17 @@ export default function RootLayout({
       )}
     >
       <body className={cx("bg-white dark:bg-black vsc-initialized")}>
-        <ClickSpark>
-          <main className=" antialiased max-w-xl mx-4 mt-8 lg:mx-auto flex-auto min-w-0 flex flex-col px-2 md:px-0">
-            <Navbar />
-            {children}
-            <Footer />
-            <Analytics />
-            <SpeedInsights />
-          </main>
-        </ClickSpark>
+        <LenisProvider>
+          <ClickSpark>
+            <main className=" antialiased max-w-xl mx-4 mt-8 lg:mx-auto flex-auto min-w-0 flex flex-col px-2 md:px-0">
+              <Navbar />
+              {children}
+              <Footer />
+              <Analytics />
+              <SpeedInsights />
+            </main>
+          </ClickSpark>
+        </LenisProvider>
       </body>
     </html>
   );
