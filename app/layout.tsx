@@ -9,6 +9,7 @@ import Footer from "./components/footer";
 import { baseUrl } from "./sitemap";
 import Head from "next/head";
 import "react-notion-x/src/styles.css";
+import ClickSpark from "./components/ui/ClickSpark";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -58,18 +59,16 @@ export default function RootLayout({
       )}
     >
       <link rel="icon" href="./favicon.ico" sizes="any" />
-      <body
-        className={cx(
-          "antialiased max-w-xl mx-4 mt-8 lg:mx-auto vsc-initialized"
-        )}
-      >
-        <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
-          <Navbar />
-          {children}
-          <Footer />
-          <Analytics />
-          <SpeedInsights />
-        </main>
+      <body className={cx(" vsc-initialized")}>
+        <ClickSpark>
+          <main className=" antialiased max-w-xl mx-4 mt-8 lg:mx-auto flex-auto min-w-0 flex flex-col px-2 md:px-0">
+            <Navbar />
+            {children}
+            <Footer />
+            <Analytics />
+            <SpeedInsights />
+          </main>
+        </ClickSpark>
       </body>
     </html>
   );
