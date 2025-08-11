@@ -115,6 +115,8 @@ const components = {
       }
     />
   ),
+  details: (props) => <details {...props} />,
+  summary: (props) => <summary {...props} />,
 };
 
 export function CustomMDX(props) {
