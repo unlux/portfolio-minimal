@@ -3,8 +3,47 @@ import { Inter } from "./lib/fonts";
 import BlurText from "@/components/ui/BlurText";
 import { WorkExperience } from "@/components/work-experience";
 import FadeIn from "@/components/animation/FadeIn";
+import SkillIcons, { type Skill } from "@/components/ui/SkillIcons";
 
 export default function Page() {
+  const skills: Skill[] = [
+    { name: "VS Code", src: "/Visual Studio Code (VS Code).svg" },
+    { name: "Vim", src: "/Vim.svg" },
+    { name: "Vercel", src: "/Vercel.svg" },
+    { name: "Twitter", src: "/Twitter.svg" },
+    { name: "TypeScript", src: "/TypeScript.svg" },
+    { name: "Terraform", src: "/HashiCorp Terraform.svg" },
+    { name: "Tailwind CSS", src: "/Tailwind CSS.svg" },
+    { name: "React", src: "/React.svg" },
+    { name: "Redis", src: "/Redis.svg" },
+    { name: "Prometheus", src: "/Prometheus.svg" },
+    { name: "Postman", src: "/Postman.svg" },
+    { name: "PostgreSQL", src: "/PostgresSQL.svg" },
+    { name: "Node.js", src: "/Node.js.svg" },
+    { name: "NixOS", src: "/NixOS.svg" },
+    { name: "Linux", src: "/Linux.svg" },
+    { name: "Kubernetes", src: "/Kubernetes.svg" },
+    { name: "Jenkins", src: "/Jenkins.svg" },
+    { name: "JavaScript", src: "/JavaScript.svg" },
+    { name: "Homebrew", src: "/Homebrew.svg" },
+    { name: "Helm", src: "/Helm.svg" },
+    { name: "Grafana", src: "/Grafana.svg" },
+    { name: "Google Cloud", src: "/Google Cloud.svg" },
+    { name: "GitHub Actions", src: "/GitHub Actions.svg" },
+    { name: "GitHub", src: "/GitHub.svg" },
+    { name: "GitLab", src: "/GitLab.svg" },
+    { name: "Express", src: "/Express.svg" },
+    { name: "Cloudflare Workers", src: "/Cloudflare Workers.svg" },
+    { name: "Cloudflare", src: "/Cloudflare.svg" },
+    { name: "Bun", src: "/Bun.svg" },
+    { name: "Bash", src: "/Bash.svg" },
+    { name: "Azure", src: "/Azure.svg" },
+    { name: "Arch Linux", src: "/Arch Linux.svg" },
+    { name: "Docker", src: "/Docker.svg" },
+    { name: "AWS", src: "/AWS.svg" },
+    { name: "Next.js", src: "/Next.js.svg" },
+  ];
+
   return (
     <section>
       <h1 className="mb-8 text-4xl font-semibold tracking-tighter">
@@ -73,6 +112,10 @@ export default function Page() {
 
       <FadeIn className="mt-8" delay={0.05}>
         <BlogPosts />
+      </FadeIn>
+
+      <FadeIn className="mt-10">
+        <SkillIcons skills={skills} iconSize={20} />
       </FadeIn>
       {/* <LanyardRPC /> // TODO */}
     </section>
