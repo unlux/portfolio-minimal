@@ -1,4 +1,4 @@
-import { BlogPosts } from "app/components/posts";
+import { BlogPosts } from "@/app/components/posts";
 import { Inter } from "./lib/fonts";
 import BlurText from "./components/ui/BlurText";
 
