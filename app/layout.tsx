@@ -59,7 +59,7 @@ export default function RootLayout({
       )}
     >
       <link rel="icon" href="./favicon.ico" sizes="any" />
-      <body className={cx(" vsc-initialized")}>
+      <body className={cx("vsc-initialized")}>
         <ClickSpark>
           <main className=" antialiased max-w-xl mx-4 mt-8 lg:mx-auto flex-auto min-w-0 flex flex-col px-2 md:px-0">
             <Navbar />
