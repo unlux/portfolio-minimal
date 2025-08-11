@@ -1,6 +1,6 @@
 export const revalidate = 3600;
 
-import { NotionRenderer } from "../components/NotionRenderer";
+import { NotionRenderer } from "@/components/NotionRenderer";
 import { NotionAPI } from "notion-client";
 
 export default async function TodoPage() {

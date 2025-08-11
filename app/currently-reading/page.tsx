@@ -1,4 +1,4 @@
-import { NotionRenderer } from "../components/NotionRenderer";
+import { NotionRenderer } from "@/components/NotionRenderer";
 
 import { NotionAPI } from "notion-client";
 

@@ -1,6 +1,7 @@
-import { BlogPosts } from "@/app/components/posts";
+import { BlogPosts } from "@/components/posts";
 import { Inter } from "./lib/fonts";
-import BlurText from "./components/ui/BlurText";
+import BlurText from "@/components/ui/BlurText";
+import { WorkExperience } from "@/components/work-experience";
 
 export default function Page() {
   return (
@@ -43,6 +44,31 @@ export default function Page() {
         <br />
         <br />
       </p>
+
+      {/* Work Experience */}
+      <div className="mt-10">
+        <WorkExperience
+          experiences={[
+            {
+              id: "printsaathi",
+              companyName: "PrintSaathi",
+              positions: [
+                {
+                  id: "printsaathi-backend-intern",
+                  title: "Backend Development Intern",
+                  employmentPeriod: "Feb 2025 – Apr 2025",
+                  employmentType: "Internship",
+                  icon: "code",
+                  isExpanded: true,
+                  description:
+                    "- Migrated from MongoDB to PostgreSQL with Prisma ORM, enforcing strict schema validation.\n- Reduced API latency by 70% through caching hot data and optimizing SQL queries.\n- Built a Redis-backed BullMQ queue that processed over 10,000 async tasks and emails daily.\n- Refactored REST APIs, resulting in a 50% reduction in error rates and a 30% improvement in response times.",
+                },
+              ],
+            },
+          ]}
+        />
+      </div>
+
       <div className="mt-8">
         <BlogPosts />
       </div>
