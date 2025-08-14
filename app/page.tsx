@@ -21,18 +21,19 @@ export default function Page() {
         problems and building efficient, reliable systems. I thrive on creating
         solutions that work seamlessly and enjoy diving deep into the technical
         side of things. My approach is practical and detail-oriented, always
-        focused on delivering results that matter. When it comes to web
-        development,
+        focused on delivering results that matter.
         <br />
-        <br />I specialize in building modern, scalable applications that get
-        the job done. I enjoy working with frameworks like Next.js and
-        leveraging tools like Prisma to create robust backends. For me, web
-        development isn’t about flashy designs—it’s about functionality,
-        performance, and creating systems that make life easier for users.
+        <br />
+        When it comes to web development, I specialize in building modern,
+        scalable applications that get the job done. I enjoy working with
+        frameworks like Next.js and leveraging tools like Prisma to create
+        robust backends. For me, web development isn’t about flashy designs-it’s
+        about functionality, performance, and creating systems that make life
+        easier for users.
         <br />
         <br />
         On the cloud side, I’m passionate about designing and optimizing
-        infrastructure. I’ve worked extensively with platforms like AWS and R2,
+        infrastructure. I’ve worked extensively with platforms like AWS and GCP,
         streamlining workflows and deploying scalable solutions. Whether it’s
         automating processes, running containerized applications, or cutting
         operational costs, I’m always looking for ways to make systems more
@@ -49,11 +50,31 @@ export default function Page() {
 
       {/* Work Experience */}
       <FadeIn className="mt-10">
+        <div className="text-2xl">Experience</div>
         <WorkExperience
           experiences={[
             {
+              id: "JoyJunction",
+              companyName: "The Joy Junction",
+              companyLogo: "./JJ.png",
+              isCurrentEmployer: true,
+              positions: [
+                {
+                  id: "JoyJunction-Full-Stack-Developer",
+                  title: "Full Stack Developer",
+                  employmentPeriod: "Apr 2025 - Present",
+                  employmentType: "Part-Time",
+                  icon: "code",
+                  isExpanded: true,
+                  description:
+                    "- Developed an end-to-end e-commerce platform using Next.js for the frontend and a headless MedusaJS backend.\n- Integrated Google Auth, Razorpay payments, and PostHog analytics to create a feature-rich user experience.\n- Established a complete CI/CD pipeline with GitHub Actions for seamless deployments to Vercel and AWS Lightsail.\n- Utilized Supabase for PostgreSQL database management and object storage, with Redis for caching.",
+                },
+              ],
+            },
+            {
               id: "printsaathi",
               companyName: "PrintSaathi",
+              companyLogo: "./PrintSaathi.png",
               positions: [
                 {
                   id: "printsaathi-backend-intern",

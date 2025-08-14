@@ -95,7 +95,7 @@ export default function Footer() {
         </li>
         <li></li>
       </ul>
-      <p className="mt-8 text-neutral-600 dark:text-neutral-300">
+      <p className="text-sm mt-8 text-neutral-600 dark:text-neutral-300">
         built with nextjs and cloudflare mindfuk <br /> © 1969 MIT Licensed to
         fkn no one
         <br />

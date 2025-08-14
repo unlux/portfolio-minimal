@@ -4,160 +4,232 @@ publishedAt: "2025-03-05"
 summary: "How redis helped reduce the load on my Pocket by a Gajillion times"
 ---
 
-# Optimizing Web Applications with Redis: A fkn Journey
+# Optimizing Web Applications with Redis: A Practical Journey
 
-## Understanding the Problem 1: Emails
+This post details our journey of solving two common performance bottlenecks in web applications—email delivery and database load—using Redis and BullMQ.
 
-### The Email Rate Limiting Problem
+---
 
-Email providers restrict how many emails you can send per second:
+## Problem 1: The Email Deluge
+
+### The Challenge: Email Rate Limiting
+
+Nearly every email provider imposes a rate limit on how many emails you can send per second. These limits are crucial for them to prevent spam and maintain their sending reputation.
 
 - **Amazon SES**: ~14 emails/sec (default)
-- **SendGrid**: 10-20 emails/sec (depending on plan)
-- **Postmark**: Optimized for transactional emails but still limited
+- **SendGrid**: 10-20 emails/sec (depending on the plan)
+- **Postmark**: Optimized for transactional emails, but still has limits.
 
-Our application needed to send hundreds of emails simultaneously. order confirmations, password resets, marketing emails. When we exceeded the limit, emails would fail. Some were delayed, others were lost.
+Our application needed to send hundreds of emails for various reasons: order confirmations, password resets, and marketing campaigns. When a burst of activity caused us to exceed the provider's limit, emails would start to fail. Some were delayed, and worse, others were lost entirely.
 
-### First Attempt: Using Redis as a Simple Rate Limiter
+### First Attempt: A Simple Redis Rate Limiter
 
-We initially tried using Redis to track emails per second.
+Our initial thought was to use Redis to simply track the number of emails sent per second.
 
-```md
-i liderally died.
-```
+The result was chaotic. While it prevented us from exceeding the rate limit, any email that _would have_ exceeded it was simply dropped. There were no retries and no queuing. This was not a viable solution.
 
-**Problem?** Any(all) extra emails just failed. no retries, no queuing. Not good.
+### The Solution: Robust Queueing with BullMQ
 
-### Solution: Switching to BullMQ for Email Queueing
+We realized we needed a proper queueing system. While we could have built one manually with Redis Lists, **BullMQ** provided a robust, battle-tested solution out of the box.
 
-We needed a proper queue system. Managing Redis manually was a hassle. **BullMQ** fixed the issue.
+#### **Step 1: Queue Emails Instead of Sending Them Directly**
 
-#### **Step 1: Queue Emails Instead of Sending Directly**
+First, we changed our `sendEmail` function. Instead of trying to send the email immediately, it now adds a "job" to a dedicated email queue.
 
 ```javascript
+import { Queue } from "bullmq";
+
+// Connect to your Redis instance
 const emailQueue = new Queue("email-queue");
 
 const sendEmail = async (userId, emailData) => {
-  //create a job to send email (add params, to, from, subject, etc)
-  const job = await emailQueue.add("send-email", emailData, jobOptions);
+  // Add a new job to the queue with the email data
+  const job = await emailQueue.add("send-email", emailData, {
+    attempts: 3, // Retry the job up to 3 times if it fails
+    backoff: {
+      // Use exponential backoff for retries
+      type: "exponential",
+      delay: 1000,
+    },
+  });
+  console.log(`Queued job ${job.id} for user ${userId}`);
   return job.id;
 };
 ```
 
-#### **Step 2: Process Emails at a Controlled Rate Using a Worker**
+#### **Step 2: Process the Queue with a Worker**
 
-```js
+Next, we created a worker. This is a separate process that listens for jobs on the `email-queue`. We configured it to process jobs at a rate that respects our email provider's limits.
+
+```JavaScript
+import { Worker } from 'bullmq';
+
 const processEmail = async (job) => {
   try {
-    const {} = job.data;
+    const { to, from, subject, body } = job.data;
 
-    // Send email using email service(data)
-    // error handling
+    // Call your actual email sending service here
+    // await emailService.send({ to, from, subject, body });
 
-    return result;
-  } catch (error) {}
+    console.log(`Email job ${job.id} completed successfully.`);
+    return { status: "Success" };
+  } catch (error) {
+    console.error(`Email job ${job.id} failed:`, error);
+    // The error is thrown so BullMQ knows to retry the job
+    throw error;
+  }
 };
 
-// Start the email worker
-useWorker(QUEUE_NAMES.EMAIL, processEmail);
+// Initialize a worker to process jobs from the 'email-queue'
+const worker = new Worker("email-queue", processEmail, {
+  limiter: {
+    max: 10, // Process a maximum of 10 jobs
+    duration: 1000, // per 1000 ms (1 second)
+  },
+});
+
+console.log("Email worker started...");
+
 ```
 
-**Now:**
+**The Result:**
 
-- Emails queue'd instead of failing.
-- The worker processes them at the right speed.
-- **Retries and TTL** ensure no emails are lost.
-- The overload issue is fixed. Life is good.
+- Emails are queued instantly instead of failing during traffic spikes.
+
+- The worker processes the queue at a controlled, sustainable rate.
+
+- Built-in retries and backoff strategies ensure transient errors don't cause lost emails.
+
+- The email overload issue was completely resolved.
 
 <br />
 
 ---
 
-## Understanding the Problem 2: Product Data Caching
+## Problem 2: The Database Bottleneck
 
-### The Database Load Issue
+### The Challenge: Sluggish Performance from Database Overload
 
-Whenever a user browsed, multiple database queries were executed.
+On our product pages, fetching all the necessary data for a single product required multiple database queries.
 
-```javascript
-const getProductData = async () => {
+```JavaScript
+// Example of data fetching for a single product page
+const getProductData = async (id) => {
   const product = await Product.findById(id);
   const variants = await Variant.find({ productId: id });
   const pricing = await Pricing.findOne({ productId: id });
+  // ... and so on
 };
 ```
 
-This led to:
+This approach led to significant performance problems:
 
-1. **Slow page load times** – pages took seconds to load.
-2. **High database load** – MongoDB was constantly being queried.
-3. **Scalability issues** – more users meant even slower performance.
+1.  **Slow Page Load Times**: Complex pages could take several seconds to load.
 
-### Solution: Use Redis for Caching and Refresh It with BullMQ
+2.  **High Database Load**: Our MongoDB instance was constantly under heavy read load.
 
-Instead of hitting the database for every request, we cached product data and used a queue to refresh it periodically.
+3.  **Scalability Issues**: Performance degraded quickly as the number of concurrent users grew.
 
-#### **Step 1: Queue Cache Updates**
+### The Solution: Smart Caching with Redis and BullMQ
 
-```javascript
-const productQueue = useQueue("product-cache");
+Instead of hitting the database for every single request, we implemented a caching layer with Redis. We then used a BullMQ queue as a clever way to manage cache updates and versions.
+
+#### **Step 1: Create a Queue to Manage Cache Versions**
+
+We set up a queue that would hold our cached data. Each "job" in this queue represents a version of the cache at a specific point in time.
+
+```JavaScript
+import { useQueue } from 'bullmq';
+
+const productCacheQueue = useQueue("product-cache");
+
 ```
 
-#### **Step 2: Refresh Cache Periodically**
+#### **Step 2: Periodically Refresh the Cache via a Scheduled Job**
 
-```javascript
+We used a `setInterval` to periodically fetch fresh data from the database and add it as a new job to our cache queue. This process also prunes old cache versions to prevent the queue from growing indefinitely.
+
+```JavaScript
+const MAX_CACHE_ENTRIES = 2; // Keep the current and previous cache versions
+
 setInterval(async () => {
-  // Fetch fresh data from DB
-  // Get all existing jobs
-  const existingJobs = await productQueue.getJobs(["waiting", "completed"]);
-  // Sort by timestamp descending
-  existingJobs.sort((a, b) => b.data.timestamp - a.data.timestamp);
+  console.log("Refreshing product cache...");
 
-  // Remove older jobs if we exceed MAX_CACHE_ENTRIES (to keep just 2 entries)
+  // 1. Fetch the complete, fresh data from the database
+  const freshProducts = await fetchAllProductsFromDB();
+
+  // 2. Get all existing cache jobs
+  const existingJobs = await productCacheQueue.getJobs(["waiting", "completed"]);
+
+  // 3. Prune older cache entries to keep only the last N versions
   if (existingJobs.length >= MAX_CACHE_ENTRIES) {
-    for (let i = MAX_CACHE_ENTRIES - 1; i < existingJobs.length; i++) {
-      await existingJobs[i].remove();
+    existingJobs.sort((a, b) => a.timestamp - b.timestamp); // Sort oldest to newest
+    const jobsToRemove = existingJobs.slice(0, existingJobs.length - (MAX_CACHE_ENTRIES - 1));
+    for (const job of jobsToRemove) {
+      await job.remove();
     }
   }
 
-  // Add new cache entry with products
+  // 4. Add the new data as a new job in the queue
   const timestamp = Date.now();
-  await productQueue.add(
+  await productCacheQueue.add(
     "update-cache",
     {
       timestamp,
-      products: JSON.parse(JSON.stringify(products)), // Ensure proper serialization
+      products: JSON.parse(JSON.stringify(freshProducts)), // Ensure proper serialization
     },
     {
-      jobId: `cache-${timestamp}`,
-      removeOnComplete: false,
+      jobId: `cache-${timestamp}`, // Use a timestamp-based ID for easy identification
+      removeOnComplete: false, // Keep the job in the queue as our cache entry
       attempts: 1,
     }
   );
-}, 50000);
+  console.log(`Cache updated with job ID: cache-${timestamp}`);
+}, 60000); // Refresh every 60 seconds
+
 ```
 
-#### **Step 3: Use Cached Data in API Routes**
+#### **Step 3: Serve API Requests from the Cache**
 
-```javascript
-const getProducts = async function () {
-  const products = await getLatestFromCache();
-  // add some logic to check if cache is empty or expired
-  // add fallback to fetch from DB if cache is empty
-  return products;
+Finally, we updated our API routes to read from the latest entry in our cache queue instead of querying the database directly.
+
+```JavaScript
+// Helper function to get the latest data from our cache queue
+const getLatestFromCache = async () => {
+    const jobs = await productCacheQueue.getJobs(['completed'], 0, 0, false); // Get latest completed job
+    if (jobs && jobs.length > 0) {
+        return jobs[0].data.products;
+    }
+    return null; // Cache is empty
+}
+
+// API endpoint to get products
+const getProducts = async (req, res) => {
+  let products = await getLatestFromCache();
+
+  // Fallback: If cache is empty, fetch directly from the DB
+  if (!products) {
+    console.log("Cache miss! Fetching from DB...");
+    products = await fetchAllProductsFromDB();
+  }
+
+  return res.json(products);
 };
+
 ```
 
-**Now:**
+**The Result:**
 
-- **No more redundant DB queries.**
-- **Cache updates every minute.**
-- **Reads are fast, and database load is reduced.**
+- Page loads are lightning-fast, as data is served directly from Redis memory.
 
-Simple. Efficient. Life is good.
+- Database read load is dramatically reduced, only occurring during the scheduled cache refresh.
 
-Implementing Redis caching was a journey of learning and optimization. The key wasn't just in using Redis, but in understanding how to use it effectively. By starting simple and iterating based on actual needs, we transformed a sluggish application into a responsive, efficient system.
-
-Remember: The goal of caching isn't just to make things faster, it's to make things better for your users while keeping your system reliable and maintainable.
+- The system is far more scalable and resilient to traffic spikes.
 
 ---
+
+## Conclusion
+
+Implementing Redis was a journey of learning and optimization. The key takeaway wasn't just _using_ Redis, but understanding _how_ to use it effectively with the right tools, like BullMQ. By starting with a simple problem and iterating on our solution, we transformed a sluggish application into a responsive, efficient, and reliable system.
+
+> The goal of caching and queueing isn't just to make things faster; it's to build a better experience for your users while keeping your system dependable and maintainable.

@@ -15,8 +15,8 @@ export default function LenisProvider({ children }: LenisProviderProps) {
       autoRaf: true,
       smoothWheel: true,
       // Slightly heavier smoothing and lower wheel delta to reduce jitter on fast scrolls
-      lerp: 0.08,
-      wheelMultiplier: 0.8,
+      lerp: 0.09,
+      wheelMultiplier: 0.9,
       overscroll: true,
     });
 
