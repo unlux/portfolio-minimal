@@ -1,36 +1,147 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Portfolio Minimal (Next.js 15 + React 19)
 
-## Getting Started
+A minimal, fast personal portfolio with a built-in MDX blog, SEO-ready routes (OG images, RSS, sitemap, robots), optional authentication, and tasteful animations.
 
-First, run the development server:
+### Tech stack
+
+- **Next.js 15** (App Router) + **TypeScript**
+- **React 19**
+- **Tailwind CSS v4**
+- **MDX** for blog content
+- **Vercel Analytics** and **Speed Insights**
+- **Clerk** (optional auth; auto-disabled if no env set)
+- **Radix UI** primitives, **Framer Motion**, **Lenis** scrolling, **Geist** fonts
+
+### Features
+
+- **MDX Blog**: drop `.mdx` files with frontmatter into `app/blog/posts`
+- **SEO**: dynamic metadata, Open Graph images at `/og`, JSON-LD per post
+- **Syndication**: **RSS** at `/rss` and **sitemap** at `/sitemap.xml`, **robots** at `/robots.txt`
+- **Optional Auth**: sign-in/up routes included; middleware becomes a no-op without Clerk keys
+- **Performance**: Turbopack dev, optimized fonts, small footprint
+
+## Getting started
+
+### Prerequisites
+
+- Node.js 18+
+
+### Install
+
+Use your preferred package manager:
+
+```bash
+npm install
+# or
+yarn
+# or
+pnpm install
+# or
+bun install
+```
+
+### Develop
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build & run
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+### Lint
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run lint
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Environment variables (optional auth)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+If you want to enable Clerk authentication, copy `.env.example` to `.env.local` and fill the values:
 
-## Deploy on Vercel
+```bash
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_XXXXXXXXXXXXXXXXXXXXXXXX
+CLERK_SECRET_KEY=sk_test_XXXXXXXXXXXXXXXXXXXXXXXX
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- If these are not set, middleware and providers automatically no-op and the app works without auth.
+
+## Content authoring (Blog)
+
+- Add posts to `app/blog/posts` as `.mdx` files. The slug is the filename.
+- Supported frontmatter keys: `title`, `publishedAt` (YYYY-MM-DD), `summary`, `image` (absolute URL or local path).
+
+Frontmatter example:
+
+```md
+---
+title: "Redis to the rescue"
+publishedAt: "2024-07-21"
+summary: "How I used Redis to fix a tricky bottleneck."
+image: "/some/local/og.jpg"
+---
+
+Your MDX content here…
+```
+
+What happens automatically:
+
+- `/blog` lists posts; `/blog/[slug]` renders a post
+- `/rss` exposes an RSS feed sorted by `publishedAt`
+- `/sitemap.xml` includes the homepage, blog index, and all posts
+- `/og?title=...` generates a social card (or use frontmatter `image`)
+
+## Configuration
+
+- Update your site URL in `app/sitemap.ts` by changing `baseUrl`.
+- Global metadata and fonts live in `app/layout.tsx`.
+- Robots and sitemap are generated from `app/robots.ts` and `app/sitemap.ts`.
+- Open Graph image route: `app/og/route.tsx` (customize styles as needed).
+- Middleware for auth: `middleware.ts` (acts as no-op without Clerk env set).
+
+## Project structure
+
+```text
+app/
+  blog/
+    posts/                # Your .mdx posts
+    [slug]/page.tsx       # Blog post page (+metadata/params)
+    page.tsx              # Blog index
+  og/route.tsx            # Dynamic Open Graph image
+  rss/route.ts            # RSS feed
+  robots.ts               # robots.txt
+  sitemap.ts              # sitemap.xml
+  layout.tsx              # Root layout, fonts, providers
+  page.tsx                # Home page
+components/               # UI components (nav, footer, mdx, animations, etc.)
+```
+
+## Deployment
+
+- Recommended: deploy to Vercel.
+- Set environment variables (if using Clerk) in your hosting provider.
+- Ensure `baseUrl` in `app/sitemap.ts` matches your production domain.
+
+## Scripts
+
+```json
+{
+  "dev": "next dev --turbopack",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint"
+}
+```
+
+## Notes
+
+- TypeScript and ESLint errors are configured to be ignored during production builds in `next.config.ts`. Adjust to your preference for stricter CI.
