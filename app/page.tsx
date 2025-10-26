@@ -54,6 +54,24 @@ export default function Page() {
         <WorkExperience
           experiences={[
             {
+              id: "Skillion",
+              companyName: "Skillion",
+              companyLogo: "./Skillion.png",
+              isCurrentEmployer: true,
+              positions: [
+                {
+                  id: "Skillion-Full-Stack-Developer",
+                  title: "Full Stack Developer",
+                  employmentPeriod: "October 2025 - Present",
+                  employmentType: "Full-Time",
+                  icon: "code",
+                  isExpanded: true,
+                  description:
+                    "- Working on several AI projects, \n - Building a trading platform with AI Insights using various testing strategies",
+                },
+              ],
+            },
+            {
               id: "JoyJunction",
               companyName: "The Joy Junction",
               companyLogo: "./JJ.png",
@@ -65,7 +83,7 @@ export default function Page() {
                   employmentPeriod: "Apr 2025 - Present",
                   employmentType: "Part-Time",
                   icon: "code",
-                  isExpanded: true,
+                  isExpanded: false,
                   description:
                     "- Developed an end-to-end e-commerce platform using Next.js for the frontend and a headless MedusaJS backend.\n- Integrated Google Auth, Razorpay payments, and PostHog analytics to create a feature-rich user experience.\n- Established a complete CI/CD pipeline with GitHub Actions for seamless deployments to Vercel and AWS Lightsail.\n- Utilized Supabase for PostgreSQL database management and object storage, with Redis for caching.",
                 },
@@ -82,7 +100,7 @@ export default function Page() {
                   employmentPeriod: "Feb 2025 – Apr 2025",
                   employmentType: "Internship",
                   icon: "code",
-                  isExpanded: true,
+                  isExpanded: false,
                   description:
                     "- Migrated from MongoDB to PostgreSQL with Prisma ORM, enforcing strict schema validation.\n- Reduced API latency by 70% through caching hot data and optimizing SQL queries.\n- Built a Redis-backed BullMQ queue that processed over 10,000 async tasks and emails daily.\n- Refactored REST APIs, resulting in a 50% reduction in error rates and a 30% improvement in response times.",
                 },
@@ -93,6 +111,7 @@ export default function Page() {
       </FadeIn>
 
       <FadeIn className="mt-8" delay={0.05}>
+        <div className="text-2xl pb-6">Blogs</div>
         <BlogPosts />
       </FadeIn>
       {/* <LanyardRPC /> // TODO */}
