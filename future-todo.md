@@ -35,12 +35,6 @@ This document tracks potential improvements that can be implemented in the futur
 - **Impact**: Cleaner HTML output
 - **File**: `components/footer.tsx:96`
 
-### 18. Remove TODO comment (page.tsx:117)
-- **Issue**: Commented out LanyardRPC component with TODO
-- **Solution**: Either implement LanyardRPC or remove the comment
-- **Impact**: Cleaner code
-- **File**: `app/page.tsx:117`
-
 ## Style & UI Improvements
 
 ### 13. Standardize spacing

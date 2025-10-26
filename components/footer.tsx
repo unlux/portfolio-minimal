@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { FaGithub, FaLinkedin, FaFileAlt } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaFileAlt, FaDiscord } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import {
   Popover,
@@ -43,6 +43,16 @@ export default function Footer() {
             href="https://dub.sh/lux-linkedin"
           >
             <FaLinkedin size={20} />
+          </a>
+        </li>
+        <li>
+          <a
+            className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://discord.com/users/un.lux"
+          >
+            <FaDiscord size={20} />
           </a>
         </li>
         <li className="relative">

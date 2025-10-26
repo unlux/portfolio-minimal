@@ -7,6 +7,7 @@ import {
   BlogPostsSkeleton,
   WorkExperienceSkeleton,
 } from "@/components/ui/loading-skeleton";
+import LanyardRPC from "@/components/LanyardRPC";
 
 export default function Page() {
   return (
@@ -122,7 +123,10 @@ export default function Page() {
           <BlogPosts />
         </Suspense>
       </FadeIn>
-      {/* <LanyardRPC /> // TODO */}
+
+      <FadeIn className="mt-8" delay={0.1}>
+        <LanyardRPC />
+      </FadeIn>
     </section>
   );
 }
