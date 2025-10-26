@@ -275,8 +275,9 @@ table {
   }
 }
 
-/* Lenis base styles */
-html.lenis {
+/* Lenis smooth scroll optimizations */
+html.lenis,
+html.lenis body {
   height: auto;
 }
 
@@ -294,4 +295,37 @@ html.lenis {
 
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
+}
+
+/* Performance optimizations for smooth scrolling */
+body {
+  overscroll-behavior-y: none;
+}
+
+/* Prevent scroll anchoring during smooth scrolls */
+* {
+  overflow-anchor: none;
+}
+
+/* Smooth scroll for hash links */
+:target {
+  scroll-margin-top: 80px; /* Offset for fixed headers */
+}
+
+/* Optimize rendering during scroll */
+.lenis-scrolling {
+  pointer-events: none;
+  user-select: none;
+}
+
+.lenis-scrolling * {
+  cursor: default !important;
+}
+
+/* Better mobile touch scrolling */
+@media (pointer: coarse) {
+  html.lenis {
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+  }
 }
