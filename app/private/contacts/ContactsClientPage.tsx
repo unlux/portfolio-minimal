@@ -19,12 +19,13 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import FadeIn from "@/components/animation/FadeIn";
+import Reveal from "@/components/animation/Reveal";
 import { type Contact } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { TrashIcon } from "@radix-ui/react-icons";
-import { AutoAnimate } from "@/components/animation/AutoAnimate";
+import { motion } from "framer-motion";
+import { staggerContainer, fadeInUp } from "@/lib/animation-presets";
 
 export default function ContactsClientPage({
   isVerified,
@@ -84,7 +85,7 @@ export default function ContactsClientPage({
   if (!verified) {
     return (
       <section className="flex items-center justify-center min-h-[60vh]">
-        <FadeIn>
+        <Reveal animation="scale">
           <Card className="w-full max-w-sm">
             <CardHeader>
               <CardTitle className="font-semibold tracking-tighter">
@@ -117,21 +118,26 @@ export default function ContactsClientPage({
               </CardFooter>
             </form>
           </Card>
-        </FadeIn>
+        </Reveal>
       </section>
     );
   }
 
   return (
     <section>
-      <FadeIn>
+      <Reveal animation="fadeUp">
         <h1 className="mb-8 text-4xl font-semibold tracking-tighter">
           Contacts
         </h1>
-      </FadeIn>
-      <AutoAnimate className="grid grid-cols-1 gap-4 my-4 sm:grid-cols-2">
-        {fetchedContacts.map((contact, i) => (
-          <FadeIn delay={0.1 + i * 0.05} key={contact.id}>
+      </Reveal>
+      <motion.div
+        className="grid grid-cols-1 gap-4 my-4 sm:grid-cols-2"
+        variants={staggerContainer}
+        initial="hidden"
+        animate="visible"
+      >
+        {fetchedContacts.map((contact) => (
+          <motion.div key={contact.id} variants={fadeInUp}>
             <Card className="h-full">
               <CardHeader>
                 <CardTitle className="font-semibold tracking-tighter">
@@ -152,10 +158,10 @@ export default function ContactsClientPage({
                 </Button>
               </CardFooter>
             </Card>
-          </FadeIn>
+          </motion.div>
         ))}
         {AddContactDialog}
-      </AutoAnimate>
+      </motion.div>
       <Dialog
         open={!!contactToDelete}
         onOpenChange={(isOpen) => !isOpen && setContactToDelete(null)}

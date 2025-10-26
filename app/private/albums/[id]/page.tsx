@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import FadeIn from "@/components/animation/FadeIn";
+import Reveal from "@/components/animation/Reveal";
 
 export default function AlbumPage({ params }: { params: { id: string } }) {
   const [password, setPassword] = useState("");
@@ -37,7 +37,7 @@ export default function AlbumPage({ params }: { params: { id: string } }) {
 
   return (
     <section>
-      <FadeIn>
+      <Reveal animation="scale">
         <Card className="max-w-md mx-auto ">
           <CardHeader>
             <CardTitle>Album Locked</CardTitle>
@@ -69,7 +69,7 @@ export default function AlbumPage({ params }: { params: { id: string } }) {
             </CardFooter>
           </form>
         </Card>
-      </FadeIn>
+      </Reveal>
     </section>
   );
 }

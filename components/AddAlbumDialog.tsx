@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
-import FadeIn from "./animation/FadeIn";
+import Reveal from "./animation/Reveal";
 
 export function AddAlbumDialog() {
   const [name, setName] = useState("");
@@ -47,11 +47,11 @@ export function AddAlbumDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <FadeIn>
+        <Reveal animation="scale">
           <Card className="flex items-center justify-center w-full h-full transition-transform duration-200 cursor-pointer hover:scale-105">
             <span className="text-5xl font-thin text-muted-foreground">+</span>
           </Card>
-        </FadeIn>
+        </Reveal>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

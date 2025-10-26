@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { BlogPosts } from "@/components/posts";
-import FadeIn from "@/components/animation/FadeIn";
+import Reveal from "@/components/animation/Reveal";
 import { BlogPostsSkeleton } from "@/components/ui/loading-skeleton";
 
 export const metadata = {
@@ -11,16 +11,16 @@ export const metadata = {
 export default function Page() {
   return (
     <section>
-      <FadeIn>
+      <Reveal animation="fadeUp">
         <h1 className="font-semibold text-2xl mb-8 tracking-tighter italic">
           My Blogs
         </h1>
-      </FadeIn>
-      <FadeIn delay={0.05}>
+      </Reveal>
+      <Reveal animation="fadeUp" delay={0.1}>
         <Suspense fallback={<BlogPostsSkeleton />}>
           <BlogPosts />
         </Suspense>
-      </FadeIn>
+      </Reveal>
     </section>
   );
 }

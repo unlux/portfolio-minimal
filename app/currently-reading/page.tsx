@@ -1,7 +1,7 @@
 import { NotionRenderer } from "@/components/NotionRenderer";
 
 import { NotionAPI } from "notion-client";
-import FadeIn from "@/components/animation/FadeIn";
+import Reveal from "@/components/animation/Reveal";
 
 export default async function CurrentlyReadingPage() {
   const notion = new NotionAPI();
@@ -9,10 +9,10 @@ export default async function CurrentlyReadingPage() {
 
   return (
     <main className="max-w-3xl mx-auto py-8 px-4">
-      <FadeIn>
+      <Reveal animation="fadeUp">
         <h1 className="text-3xl font-bold mb-6">WIP</h1>
-      </FadeIn>
-      <FadeIn delay={0.05}>
+      </Reveal>
+      <Reveal animation="fadeUp" delay={0.1}>
         <div className="mb-4 text-blue-600 underline break-all">
           <a
             href="https://www.notion.so/Reading-Tracker-System-1e4ca11c6d658078b2a6ccf2fcaa6471?source=copy_link"
@@ -22,10 +22,10 @@ export default async function CurrentlyReadingPage() {
             View this page on Notion
           </a>
         </div>
-      </FadeIn>
-      <FadeIn delay={0.1}>
+      </Reveal>
+      <Reveal animation="fadeUp" delay={0.15}>
         <NotionRenderer recordMap={recordMap} />
-      </FadeIn>
+      </Reveal>
     </main>
   );
 }
