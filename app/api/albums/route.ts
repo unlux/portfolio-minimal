@@ -1,13 +1,22 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import {
+  handleApiError,
+  validateRequiredFields,
+  validationError,
+} from "@/lib/api-utils";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
     const { name, url, password } = body;
 
-    if (!name || !url) {
-      return new NextResponse("Missing name or url", { status: 400 });
+    const validation = validateRequiredFields(body, ["name", "url"]);
+    if (!validation.valid) {
+      return validationError(
+        "Missing required fields",
+        `Required: ${validation.missing?.join(", ")}`
+      );
     }
 
     const isProtected = !!password;
@@ -21,9 +30,8 @@ export async function POST(request: Request) {
       },
     });
 
-    return NextResponse.json(album);
+    return NextResponse.json(album, { status: 201 });
   } catch (error) {
-    console.error("[ALBUMS_POST]", error);
-    return new NextResponse("Internal error", { status: 500 });
+    return handleApiError(error, "ALBUMS_POST");
   }
 }

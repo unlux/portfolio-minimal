@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Inter } from "@/app/lib/fonts";
 import { FaGithub, FaLinkedin, FaFileAlt } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import {
@@ -14,11 +13,11 @@ import InteractiveLink from "./ui/InteractiveLink";
 
 export default function Footer() {
   return (
-    <footer className={`mb-16 ${Inter.className}`}>
+    <footer className="mb-16 font-[family-name:var(--font-inter)]">
       <ul className="font-sm mt-8 flex flex-row flex-wrap items-center gap-6 text-neutral-600 dark:text-neutral-300">
         <li>
           <a
-            className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
+            className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
             rel="noopener noreferrer"
             target="_blank"
             href="https://dub.sh/luxhub"
@@ -28,7 +27,7 @@ export default function Footer() {
         </li>
         <li>
           <a
-            className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
+            className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
             rel="noopener noreferrer"
             target="_blank"
             href="https://x.com/whyunlux"
@@ -38,7 +37,7 @@ export default function Footer() {
         </li>
         <li>
           <a
-            className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
+            className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
             rel="noopener noreferrer"
             target="_blank"
             href="https://dub.sh/lux-linkedin"
@@ -52,7 +51,7 @@ export default function Footer() {
               <button
                 type="button"
                 aria-haspopup="menu"
-                className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
+                className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
               >
                 <FaFileAlt size={20} />
                 <span>cv</span>
@@ -74,7 +73,8 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center text-sm px-3 py-1.5 rounded-md border
                              border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900
-                             hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-100 shadow-sm"
+                             hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-100 shadow-sm
+                             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2"
                 >
                   Web dev
                 </a>
@@ -85,7 +85,8 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center text-sm px-3 py-1.5 rounded-md border
                              border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900
-                             hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-100 shadow-sm"
+                             hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-100 shadow-sm
+                             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2"
                 >
                   DevOps
                 </a>

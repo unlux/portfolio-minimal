@@ -2,6 +2,7 @@ import "./global.css";
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import { Inter } from "@/app/lib/fonts";
 import { Navbar } from "@/components/nav";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -56,7 +57,7 @@ export default function RootLayout({
     <LenisProvider>
       <ClickSpark>
         <main className=" antialiased max-w-xl mx-4 mt-8 lg:mx-auto flex-auto min-w-0 flex flex-col px-2 md:px-0">
-          <Navbar />
+          <Navbar hasClerk={!!clerkPublishableKey} />
           {children}
           <Footer />
           <Analytics />
@@ -72,7 +73,8 @@ export default function RootLayout({
       className={cx(
         "dark dark:bg-black",
         GeistSans.variable,
-        GeistMono.variable
+        GeistMono.variable,
+        Inter.variable
       )}
     >
       <body className={cx("bg-white dark:bg-black vsc-initialized")}>

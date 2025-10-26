@@ -37,9 +37,8 @@ const itemVariants = {
   },
 } as const;
 
-export function Navbar() {
+export function Navbar({ hasClerk = false }: { hasClerk?: boolean }) {
   const pathname = usePathname();
-  const hasClerk = Boolean(process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY);
   return (
     <aside className="mb-10 tracking-tight">
       <div className="lg:sticky lg:top-20">
@@ -62,13 +61,12 @@ export function Navbar() {
                   key={path}
                   href={path}
                   aria-current={isActive ? "page" : undefined}
-                  className={`relative px-3 py-1 rounded-full font-normal transition-colors duration-150 outline-none focus-visible:ring-1 focus-visible:ring-blue-400 focus-visible:ring-offset-1 focus-visible:ring-offset-background
+                  className={`relative px-3 py-1 rounded-full font-normal text-base transition-colors duration-150 outline-none focus-visible:ring-1 focus-visible:ring-blue-400 focus-visible:ring-offset-1 focus-visible:ring-offset-background
                     ${
                       isActive
                         ? "text-neutral-900 dark:text-neutral-100 underline underline-offset-4 decoration-2 decoration-blue-400"
                         : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
                     }`}
-                  style={{ fontSize: "1rem" }}
                 >
                   {/* Animated label */}
                   <motion.span

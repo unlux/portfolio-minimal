@@ -1,15 +1,20 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import {
+  handleApiError,
+  parseIntId,
+  validationError,
+} from "@/lib/api-utils";
 
 export async function DELETE(
   req: Request,
   { params }: { params: { id: string } }
 ) {
   try {
-    const id = parseInt(params.id, 10);
+    const id = parseIntId(params.id);
 
-    if (isNaN(id)) {
-      return new NextResponse("Invalid ID", { status: 400 });
+    if (id === null) {
+      return validationError("Invalid ID format", "ID must be a valid integer");
     }
 
     await prisma.contact.delete({
@@ -18,7 +23,6 @@ export async function DELETE(
 
     return new NextResponse(null, { status: 204 });
   } catch (error) {
-    console.error("[CONTACT_DELETE]", error);
-    return new NextResponse("Internal error", { status: 500 });
+    return handleApiError(error, "CONTACT_DELETE");
   }
 }

@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import { BlogPosts } from "@/components/posts";
 import FadeIn from "@/components/animation/FadeIn";
+import { BlogPostsSkeleton } from "@/components/ui/loading-skeleton";
 
 export const metadata = {
   title: "Blog",
@@ -15,7 +17,9 @@ export default function Page() {
         </h1>
       </FadeIn>
       <FadeIn delay={0.05}>
-        <BlogPosts />
+        <Suspense fallback={<BlogPostsSkeleton />}>
+          <BlogPosts />
+        </Suspense>
       </FadeIn>
     </section>
   );

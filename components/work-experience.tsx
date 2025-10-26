@@ -97,9 +97,7 @@ export function ExperienceItem({
               alt={experience.companyName}
               width={24}
               height={24}
-              quality={100}
               className="rounded-full"
-              unoptimized
             />
           ) : (
             <span className="flex size-2 rounded-full bg-zinc-300 dark:bg-zinc-600" />

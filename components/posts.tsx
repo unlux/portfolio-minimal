@@ -6,18 +6,11 @@ import BlogPostsClient from "./animation/BlogPostsClient";
 export function BlogPosts() {
   const allBlogs = getBlogPosts();
 
-  const posts = allBlogs
-    .sort((a, b) => {
-      if (new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)) {
-        return -1;
-      }
-      return 1;
-    })
-    .map((post) => ({
-      slug: post.slug,
-      title: post.metadata.title,
-      publishedAt: post.metadata.publishedAt,
-    }));
+  const posts = allBlogs.map((post) => ({
+    slug: post.slug,
+    title: post.metadata.title,
+    publishedAt: post.metadata.publishedAt,
+  }));
 
   return (
     <div className={BitcountGridDouble.className}>

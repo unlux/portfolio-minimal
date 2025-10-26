@@ -1,8 +1,12 @@
+import { Suspense } from "react";
 import { BlogPosts } from "@/components/posts";
-import { Inter } from "./lib/fonts";
 import BlurText from "@/components/ui/BlurText";
 import { WorkExperience } from "@/components/work-experience";
 import FadeIn from "@/components/animation/FadeIn";
+import {
+  BlogPostsSkeleton,
+  WorkExperienceSkeleton,
+} from "@/components/ui/loading-skeleton";
 
 export default function Page() {
   return (
@@ -16,7 +20,7 @@ export default function Page() {
         />
       </h1>
 
-      <FadeIn className={`mb-4 ${Inter.className}`}>
+      <FadeIn className="mb-4 font-[family-name:var(--font-inter)]">
         a full-stack and cloud developer with a love for solving complex
         problems and building efficient, reliable systems. I thrive on creating
         solutions that work seamlessly and enjoy diving deep into the technical
@@ -51,12 +55,13 @@ export default function Page() {
       {/* Work Experience */}
       <FadeIn className="mt-10">
         <div className="text-2xl">Experience</div>
-        <WorkExperience
-          experiences={[
+        <Suspense fallback={<WorkExperienceSkeleton />}>
+          <WorkExperience
+            experiences={[
             {
               id: "Skillion",
               companyName: "Skillion",
-              companyLogo: "./Skillion.png",
+              companyLogo: "/Skillion.png",
               isCurrentEmployer: true,
               positions: [
                 {
@@ -74,7 +79,7 @@ export default function Page() {
             {
               id: "JoyJunction",
               companyName: "The Joy Junction",
-              companyLogo: "./JJ.png",
+              companyLogo: "/JJ.png",
               isCurrentEmployer: true,
               positions: [
                 {
@@ -92,7 +97,7 @@ export default function Page() {
             {
               id: "printsaathi",
               companyName: "PrintSaathi",
-              companyLogo: "./PrintSaathi.png",
+              companyLogo: "/PrintSaathi.png",
               positions: [
                 {
                   id: "printsaathi-backend-intern",
@@ -107,12 +112,15 @@ export default function Page() {
               ],
             },
           ]}
-        />
+          />
+        </Suspense>
       </FadeIn>
 
       <FadeIn className="mt-8" delay={0.05}>
         <div className="text-2xl pb-6">Blogs</div>
-        <BlogPosts />
+        <Suspense fallback={<BlogPostsSkeleton />}>
+          <BlogPosts />
+        </Suspense>
       </FadeIn>
       {/* <LanyardRPC /> // TODO */}
     </section>

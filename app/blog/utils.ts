@@ -54,7 +54,14 @@ function getMDXData(dir) {
 }
 
 export function getBlogPosts() {
-  return getMDXData(path.join(process.cwd(), "app", "blog", "posts"));
+  const posts = getMDXData(path.join(process.cwd(), "app", "blog", "posts"));
+  // Sort by publishedAt descending (newest first)
+  return posts.sort((a, b) => {
+    if (new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)) {
+      return -1;
+    }
+    return 1;
+  });
 }
 
 export function formatDate(date: string, includeRelative = false) {
@@ -64,20 +71,25 @@ export function formatDate(date: string, includeRelative = false) {
   }
   const targetDate = new Date(date);
 
-  const yearsAgo = currentDate.getFullYear() - targetDate.getFullYear();
-  const monthsAgo = currentDate.getMonth() - targetDate.getMonth();
-  const daysAgo = currentDate.getDate() - targetDate.getDate();
+  // Calculate the difference in milliseconds
+  const diffInMs = currentDate.getTime() - targetDate.getTime();
+  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
 
   let formattedDate = "";
 
-  if (yearsAgo > 0) {
-    formattedDate = `${yearsAgo}y ago`;
-  } else if (monthsAgo > 0) {
-    formattedDate = `${monthsAgo}mo ago`;
-  } else if (daysAgo > 0) {
-    formattedDate = `${daysAgo}d ago`;
-  } else {
+  if (diffInDays < 0) {
+    // Future date
+    formattedDate = "Future";
+  } else if (diffInDays === 0) {
     formattedDate = "Today";
+  } else if (diffInDays < 30) {
+    formattedDate = `${diffInDays}d ago`;
+  } else if (diffInDays < 365) {
+    const monthsAgo = Math.floor(diffInDays / 30);
+    formattedDate = `${monthsAgo}mo ago`;
+  } else {
+    const yearsAgo = Math.floor(diffInDays / 365);
+    formattedDate = `${yearsAgo}y ago`;
   }
 
   const fullDate = targetDate.toLocaleString("en-us", {
