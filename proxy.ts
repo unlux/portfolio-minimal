@@ -1,14 +1,15 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
+import { NextResponse, type NextMiddleware } from "next/server";
 
 const hasClerk =
   Boolean(process.env.CLERK_SECRET_KEY) &&
   Boolean(process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY);
 
-const noop = () => {
-  /* no-op middleware when Clerk is not configured */
-};
+const clerkProxy = clerkMiddleware();
 
-export default hasClerk ? clerkMiddleware() : (noop as any);
+export const proxy: NextMiddleware = hasClerk
+  ? clerkProxy
+  : () => NextResponse.next();
 
 export const config = {
   matcher: [

@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { FaGithub, FaLinkedin, FaFileAlt, FaDiscord } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import {
@@ -8,7 +7,6 @@ import {
   PopoverTrigger,
   PopoverContent,
 } from "@/components/ui/popover";
-import { ArrowIcon } from "./ui/ArrowIcon";
 import InteractiveLink from "./ui/InteractiveLink";
 
 export default function Footer() {

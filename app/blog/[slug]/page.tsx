@@ -3,6 +3,10 @@ import { CustomMDX } from "@/components/mdx";
 import { formatDate, getBlogPosts } from "@/app/blog/utils";
 import { baseUrl } from "@/app/sitemap";
 
+type BlogPageProps = {
+  params: Promise<{ slug: string }>;
+};
+
 export async function generateStaticParams() {
   const posts = getBlogPosts();
 
@@ -11,7 +15,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata(props: { params: any }) {
+export async function generateMetadata(props: BlogPageProps) {
   const params = await props.params;
   const post = getBlogPosts().find((post) => post.slug === params.slug);
   if (!post) {
@@ -54,7 +58,7 @@ export async function generateMetadata(props: { params: any }) {
   };
 }
 
-export default async function Blog(props: { params: any }) {
+export default async function Blog(props: BlogPageProps) {
   const params = await props.params;
   const post = getBlogPosts().find((post) => post.slug === params.slug);
 

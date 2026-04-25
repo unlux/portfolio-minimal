@@ -1,13 +1,14 @@
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 import { NotionRenderer } from "@/components/NotionRenderer";
 import { NotionAPI } from "notion-client";
 import Reveal from "@/components/animation/Reveal";
+import type { ExtendedRecordMap } from "notion-types";
 
 export default async function TodoPage() {
   const notion = new NotionAPI();
-  let recordMap = null;
-  let error = null;
+  let recordMap: ExtendedRecordMap | null = null;
+  let error: unknown = null;
   try {
     recordMap = await notion.getPage("22cca11c6d65808b8453ca55e4032397");
   } catch (e) {
@@ -16,7 +17,7 @@ export default async function TodoPage() {
   return (
     <section>
       <Reveal animation="fadeUp" className="prose prose-neutral dark:prose-invert">
-        {error ? (
+        {error || !recordMap ? (
           <div className="text-red-500">Failed to load Notion data.</div>
         ) : (
           <NotionRenderer recordMap={recordMap} />

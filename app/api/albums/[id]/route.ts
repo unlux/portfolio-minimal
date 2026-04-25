@@ -10,10 +10,11 @@ import {
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseIntId(params.id);
+    const { id: rawId } = await params;
+    const id = parseIntId(rawId);
 
     if (id === null) {
       return validationError("Invalid ID format", "ID must be a valid integer");

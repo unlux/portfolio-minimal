@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { hoverLift, tapScale } from "@/lib/animation-presets";
+import { tapScale } from "@/lib/animation-presets";
 
 type AnimatedCardProps = {
   children: React.ReactNode;

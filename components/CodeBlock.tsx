@@ -18,9 +18,21 @@ import "prismjs/components/prism-yaml";
 
 import { CopyToClipboard } from "./CopyToClipboard";
 
-const CodeBlock = ({ block }: { block: any }) => {
-  const code = block.properties.title[0][0];
-  const language = block.properties.language[0][0].toLowerCase();
+type NotionRichTextValue = [[string]];
+
+type NotionCodeBlock = {
+  properties: {
+    title?: NotionRichTextValue;
+    language?: NotionRichTextValue;
+  };
+};
+
+const getNotionText = (value: NotionRichTextValue | undefined) =>
+  value?.[0]?.[0] ?? "";
+
+const CodeBlock = ({ block }: { block: NotionCodeBlock }) => {
+  const code = getNotionText(block.properties.title);
+  const language = getNotionText(block.properties.language).toLowerCase();
   const supportedLanguage = languages[language] ? language : "javascript";
   const highlightedCode = highlight(
     code,

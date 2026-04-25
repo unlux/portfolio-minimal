@@ -2,8 +2,9 @@
 import { NotionRenderer as NotionRendererLib } from "react-notion-x";
 import { useTheme } from "next-themes";
 import { Collection } from "react-notion-x/build/third-party/collection";
+import type { ExtendedRecordMap } from "notion-types";
 
-export const NotionRenderer = ({ recordMap }: { recordMap: any }) => {
+export const NotionRenderer = ({ recordMap }: { recordMap: ExtendedRecordMap }) => {
   const { resolvedTheme } = useTheme();
   const isDarkMode = resolvedTheme === "dark";
 

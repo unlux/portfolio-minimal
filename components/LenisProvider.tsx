@@ -4,9 +4,12 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 
+type ScrollTarget = string | number | HTMLElement;
+type ScrollToOptions = Parameters<Lenis["scrollTo"]>[1];
+
 type LenisContextType = {
   lenis: Lenis | null;
-  scrollTo: (target: string | number | HTMLElement, options?: any) => void;
+  scrollTo: (target: ScrollTarget, options?: ScrollToOptions) => void;
   scrollDirection: "up" | "down" | null;
 };
 
@@ -24,6 +27,7 @@ type LenisProviderProps = {
 
 export default function LenisProvider({ children }: LenisProviderProps) {
   const lenisRef = useRef<Lenis | null>(null);
+  const [lenisInstance, setLenisInstance] = useState<Lenis | null>(null);
   const [scrollDirection, setScrollDirection] = useState<"up" | "down" | null>(
     null
   );
@@ -38,7 +42,6 @@ export default function LenisProvider({ children }: LenisProviderProps) {
       gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 1,
-      smoothTouch: false, // Better for mobile - native touch is smoother
       touchMultiplier: 2,
       infinite: false,
       autoResize: true,
@@ -46,23 +49,25 @@ export default function LenisProvider({ children }: LenisProviderProps) {
     });
 
     lenisRef.current = lenis;
+    setLenisInstance(lenis);
 
     // Track scroll direction
     let lastScrollY = 0;
     lenis.on("scroll", ({ scroll }: { scroll: number }) => {
       const direction = scroll > lastScrollY ? "down" : "up";
-      if (direction !== scrollDirection) {
-        setScrollDirection(direction);
-      }
+      setScrollDirection((current) =>
+        current === direction ? current : direction
+      );
       lastScrollY = scroll;
     });
 
     // Sync with Framer Motion and other animation libraries
+    let rafId = 0;
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     // Handle anchor links
     const handleAnchorClick = (e: MouseEvent) => {
@@ -73,7 +78,7 @@ export default function LenisProvider({ children }: LenisProviderProps) {
         const href = anchor.getAttribute("href");
         if (href && href !== "#") {
           const element = document.querySelector(href);
-          if (element) {
+          if (element instanceof HTMLElement) {
             lenis.scrollTo(element, {
               offset: -80, // Offset for fixed headers
               duration: 1.5,
@@ -86,8 +91,10 @@ export default function LenisProvider({ children }: LenisProviderProps) {
     document.addEventListener("click", handleAnchorClick);
 
     return () => {
+      cancelAnimationFrame(rafId);
       lenis.destroy();
       lenisRef.current = null;
+      setLenisInstance(null);
       document.removeEventListener("click", handleAnchorClick);
     };
   }, []);
@@ -99,10 +106,7 @@ export default function LenisProvider({ children }: LenisProviderProps) {
     }
   }, [pathname]);
 
-  const scrollTo = (
-    target: string | number | HTMLElement,
-    options?: any
-  ) => {
+  const scrollTo = (target: ScrollTarget, options?: ScrollToOptions) => {
     if (lenisRef.current) {
       lenisRef.current.scrollTo(target, options);
     }
@@ -110,7 +114,7 @@ export default function LenisProvider({ children }: LenisProviderProps) {
 
   return (
     <LenisContext.Provider
-      value={{ lenis: lenisRef.current, scrollTo, scrollDirection }}
+      value={{ lenis: lenisInstance, scrollTo, scrollDirection }}
     >
       {children}
     </LenisContext.Provider>

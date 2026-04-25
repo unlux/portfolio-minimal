@@ -10,6 +10,8 @@ import {
 import { AlbumsGrid } from "@/components/AlbumsGrid";
 import Reveal from "@/components/animation/Reveal";
 
+export const dynamic = "force-dynamic";
+
 export default async function AlbumsPage() {
   const albums = await prisma.photoAlbum.findMany();
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import type { HTMLMotionProps } from "framer-motion";
 import { useRef, MouseEvent } from "react";
 
 type MagneticButtonProps = {
@@ -8,7 +9,7 @@ type MagneticButtonProps = {
   className?: string;
   strength?: number; // Magnetic pull strength (0-1)
 } & Omit<
-  React.ComponentPropsWithoutRef<"button">,
+  HTMLMotionProps<"button">,
   "onMouseMove" | "onMouseLeave"
 >;
 

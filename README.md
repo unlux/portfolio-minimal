@@ -28,16 +28,10 @@ A minimal, fast personal portfolio with a built-in MDX blog, SEO-ready routes (O
 
 ### Install
 
-Use your preferred package manager:
+Use npm. The repository keeps a single npm lockfile for reproducible installs.
 
 ```bash
 npm install
-# or
-yarn
-# or
-pnpm install
-# or
-bun install
 ```
 
 ### Develop
@@ -59,13 +53,17 @@ npm run start
 
 ```bash
 npm run lint
+npm run typecheck
 ```
 
-## Environment variables (optional auth)
+## Environment variables
 
-If you want to enable Clerk authentication, copy `.env.example` to `.env.local` and fill the values:
+Copy `env.example` to `.env.local` and fill the values you need:
 
 ```bash
+DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DATABASE
+CONTACTS_PASSWORD=change-me
+
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_XXXXXXXXXXXXXXXXXXXXXXXX
 CLERK_SECRET_KEY=sk_test_XXXXXXXXXXXXXXXXXXXXXXXX
 
@@ -73,7 +71,7 @@ NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
 NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 ```
 
-- If these are not set, middleware and providers automatically no-op and the app works without auth.
+- If Clerk keys are not set, auth proxy/providers automatically no-op and the public app still runs.
 
 ## Content authoring (Blog)
 
@@ -106,7 +104,7 @@ What happens automatically:
 - Global metadata and fonts live in `app/layout.tsx`.
 - Robots and sitemap are generated from `app/robots.ts` and `app/sitemap.ts`.
 - Open Graph image route: `app/og/route.tsx` (customize styles as needed).
-- Middleware for auth: `middleware.ts` (acts as no-op without Clerk env set).
+- Auth proxy: `proxy.ts` (acts as no-op without Clerk env set).
 
 ## Project structure
 
@@ -137,11 +135,14 @@ components/               # UI components (nav, footer, mdx, animations, etc.)
 {
   "dev": "next dev --turbopack",
   "build": "next build",
+  "build:deploy": "prisma migrate deploy && next build",
+  "db:migrate:deploy": "prisma migrate deploy",
   "start": "next start",
-  "lint": "next lint"
+  "lint": "eslint .",
+  "typecheck": "tsc --noEmit"
 }
 ```
 
 ## Notes
 
-- TypeScript and ESLint errors are configured to be ignored during production builds in `next.config.ts`. Adjust to your preference for stricter CI.
+- Production builds run TypeScript checks. Database migrations are explicit so local builds do not require a live database.

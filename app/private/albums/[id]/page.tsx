@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,7 +15,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Reveal from "@/components/animation/Reveal";
 
-export default function AlbumPage({ params }: { params: { id: string } }) {
+export default function AlbumPage() {
+  const params = useParams<{ id: string }>();
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 

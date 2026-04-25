@@ -50,11 +50,6 @@ export interface SpotifyData {
   album_art_url: string;
 }
 
-interface LanyardResponse {
-  success: boolean;
-  data: LanyardData;
-}
-
 export function useLanyard(userId: string | undefined) {
   const [data, setData] = useState<LanyardData | null>(null);
   const [loading, setLoading] = useState(true);

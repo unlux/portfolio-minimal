@@ -6,11 +6,13 @@
 
 import { Variants, Transition } from "framer-motion";
 
+type CubicBezier = [number, number, number, number];
+
 // ============================================================================
 // EASING CURVES
 // ============================================================================
 
-export const easings = {
+export const easings: Record<string, CubicBezier> = {
   // Apple's standard easing
   ease: [0.25, 0.1, 0.25, 1],
 
@@ -34,7 +36,7 @@ export const easings = {
 
   // Elastic
   elastic: [0.68, -0.6, 0.32, 1.6],
-} as const;
+};
 
 // ============================================================================
 // DURATIONS (in seconds)
@@ -360,12 +362,12 @@ export function createFadeIn(delay: number = 0, y: number = 0): Variants {
  */
 export function createTransition(
   duration: number,
-  ease: number[] | string = easings.smooth,
+  ease: Transition["ease"] = easings.smooth,
   delay: number = 0
 ): Transition {
   return {
     duration,
-    ease: ease as any,
+    ease,
     delay,
   };
 }

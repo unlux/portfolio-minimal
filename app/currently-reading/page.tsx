@@ -3,6 +3,8 @@ import { NotionRenderer } from "@/components/NotionRenderer";
 import { NotionAPI } from "notion-client";
 import Reveal from "@/components/animation/Reveal";
 
+export const dynamic = "force-dynamic";
+
 export default async function CurrentlyReadingPage() {
   const notion = new NotionAPI();
   const recordMap = await notion.getPage("1e4ca11c6d658078b2a6ccf2fcaa6471");

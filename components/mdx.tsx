@@ -3,20 +3,22 @@ import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { highlight } from "sugar-high";
-import React from "react";
+import React, { type ComponentPropsWithoutRef, type ReactNode } from "react";
 
-function Table({ children }) {
+function Table({ children, ...props }: ComponentPropsWithoutRef<"table">) {
   return (
     <div className="overflow-x-auto my-6">
-      <table className="w-full border-collapse text-sm">{children}</table>
+      <table {...props} className="w-full border-collapse text-sm">
+        {children}
+      </table>
     </div>
   );
 }
 
-function CustomLink(props) {
+function CustomLink(props: ComponentPropsWithoutRef<"a">) {
   const href = props.href;
 
-  if (href.startsWith("/")) {
+  if (href?.startsWith("/")) {
     return (
       <Link href={href} {...props}>
         {props.children}
@@ -24,25 +26,34 @@ function CustomLink(props) {
     );
   }
 
-  if (href.startsWith("#")) {
+  if (href?.startsWith("#")) {
     return <a {...props} />;
   }
 
   return <a target="_blank" rel="noopener noreferrer" {...props} />;
 }
 
-function RoundedImage(props) {
-  return <Image alt={props.alt} className="rounded-lg" {...props} />;
+function RoundedImage({
+  alt,
+  className,
+  ...props
+}: React.ComponentProps<typeof Image>) {
+  return (
+    <Image
+      {...props}
+      alt={alt}
+      className={`rounded-lg ${className ?? ""}`}
+    />
+  );
 }
 
-function Code({ children, ...props }) {
-  const codeHTML = highlight(children);
+function Code({ children, ...props }: ComponentPropsWithoutRef<"code">) {
+  const codeHTML = highlight(String(children ?? ""));
   return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
 }
 
-function slugify(str) {
-  return str
-    .toString()
+function slugify(value: ReactNode) {
+  return String(value)
     .toLowerCase()
     .trim() // Remove whitespace from both ends of a string
     .replace(/\s+/g, "-") // Replace spaces with -
@@ -51,8 +62,8 @@ function slugify(str) {
     .replace(/\-\-+/g, "-"); // Replace multiple - with single -
 }
 
-function createHeading(level) {
-  const Heading = ({ children }) => {
+function createHeading(level: 1 | 2 | 3 | 4 | 5 | 6) {
+  const Heading = ({ children }: { children: ReactNode }) => {
     const slug = slugify(children);
     return React.createElement(
       `h${level}`,
@@ -84,11 +95,11 @@ const components = {
   a: CustomLink,
   code: Code,
   table: Table,
-  thead: (props) => (
+  thead: (props: ComponentPropsWithoutRef<"thead">) => (
     <thead {...props} className="bg-neutral-200 dark:bg-neutral-800" />
   ),
-  tbody: (props) => <tbody {...props} />,
-  tr: (props) => (
+  tbody: (props: ComponentPropsWithoutRef<"tbody">) => <tbody {...props} />,
+  tr: (props: ComponentPropsWithoutRef<"tr">) => (
     <tr
       {...props}
       className={
@@ -97,7 +108,7 @@ const components = {
       }
     />
   ),
-  th: (props) => (
+  th: (props: ComponentPropsWithoutRef<"th">) => (
     <th
       {...props}
       className={
@@ -106,7 +117,7 @@ const components = {
       }
     />
   ),
-  td: (props) => (
+  td: (props: ComponentPropsWithoutRef<"td">) => (
     <td
       {...props}
       className={
@@ -115,11 +126,17 @@ const components = {
       }
     />
   ),
-  details: (props) => <details {...props} />,
-  summary: (props) => <summary {...props} />,
+  details: (props: ComponentPropsWithoutRef<"details">) => (
+    <details {...props} />
+  ),
+  summary: (props: ComponentPropsWithoutRef<"summary">) => (
+    <summary {...props} />
+  ),
 };
 
-export function CustomMDX(props) {
+type CustomMDXProps = React.ComponentProps<typeof MDXRemote>;
+
+export function CustomMDX(props: CustomMDXProps) {
   return (
     <MDXRemote
       {...props}
