@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic";
 import { NotionRenderer } from "@/components/NotionRenderer";
 import { NotionAPI } from "notion-client";
 import Reveal from "@/components/animation/Reveal";
+import { normalizeNotionRecordMap } from "@/lib/notion";
 import type { ExtendedRecordMap } from "notion-types";
 
 export default async function TodoPage() {
@@ -10,7 +11,9 @@ export default async function TodoPage() {
   let recordMap: ExtendedRecordMap | null = null;
   let error: unknown = null;
   try {
-    recordMap = await notion.getPage("22cca11c6d65808b8453ca55e4032397");
+    recordMap = normalizeNotionRecordMap(
+      await notion.getPage("22cca11c6d65808b8453ca55e4032397")
+    );
   } catch (e) {
     error = e;
   }
