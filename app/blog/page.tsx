@@ -4,8 +4,8 @@ import Reveal from "@/components/animation/Reveal";
 import { BlogPostsSkeleton } from "@/components/ui/loading-skeleton";
 
 export const metadata = {
-  title: "Blog",
-  description: "Read my blog.",
+  title: "Writing",
+  description: "Notes on backend systems, tooling, and personal experiments.",
 };
 
 export default function Page() {
@@ -13,7 +13,7 @@ export default function Page() {
     <section>
       <Reveal animation="fadeUp">
         <h1 className="font-semibold text-2xl mb-8 tracking-tight italic text-neutral-100">
-          My Blogs
+          Writing
         </h1>
       </Reveal>
       <Reveal animation="fadeUp" delay={0.1}>

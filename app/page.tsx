@@ -54,7 +54,7 @@ export default function Page() {
                   icon: "code",
                   isExpanded: true,
                   description:
-                    "- Working on several AI projects, \n - Building a trading platform with AI Insights using various testing strategies",
+                    "- Building AI-backed product workflows across full-stack surfaces.\n- Working on a trading platform with AI insights, backend integrations, and test coverage around critical flows.",
                 },
               ],
             },
@@ -72,7 +72,7 @@ export default function Page() {
                   icon: "code",
                   isExpanded: false,
                   description:
-                    "- Developed an end-to-end e-commerce platform using Next.js for the frontend and a headless MedusaJS backend.\n- Integrated Google Auth, Razorpay payments, and PostHog analytics to create a feature-rich user experience.\n- Established a complete CI/CD pipeline with GitHub Actions for seamless deployments to Vercel and AWS Lightsail.\n- Utilized Supabase for PostgreSQL database management and object storage, with Redis for caching.",
+                    "- Built an end-to-end ecommerce platform with Next.js and a headless MedusaJS backend.\n- Integrated Google Auth, Razorpay payments, PostHog analytics, Supabase storage, and Redis caching.\n- Set up CI/CD with GitHub Actions for deployments across Vercel and AWS Lightsail.",
                 },
               ],
             },
@@ -89,7 +89,7 @@ export default function Page() {
                   icon: "code",
                   isExpanded: false,
                   description:
-                    "- Migrated from MongoDB to PostgreSQL with Prisma ORM, enforcing strict schema validation.\n- Reduced API latency by 70% through caching hot data and optimizing SQL queries.\n- Built a Redis-backed BullMQ queue that processed over 10,000 async tasks and emails daily.\n- Refactored REST APIs, resulting in a 50% reduction in error rates and a 30% improvement in response times.",
+                    "- Migrated core data from MongoDB to PostgreSQL with Prisma and stricter schema validation.\n- Reduced API latency by 70% by caching hot paths and tightening SQL queries.\n- Built Redis/BullMQ workers for async jobs and transactional email processing.\n- Refactored REST APIs to reduce error rates and improve response times.",
                 },
               ],
             },
@@ -99,7 +99,7 @@ export default function Page() {
       </Reveal>
 
       <Reveal animation="fadeUp" delay={0.4} className="mt-8">
-        <div className="text-2xl pb-6">Blogs</div>
+        <div className="text-2xl pb-6">Writing</div>
         <Suspense fallback={<BlogPostsSkeleton />}>
           <BlogPosts />
         </Suspense>

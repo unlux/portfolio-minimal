@@ -37,6 +37,12 @@ This document tracks potential improvements that can be implemented in the futur
 
 ## Style & UI Improvements
 
+### Portfolio roadmap from design review
+- Add a compact projects/work proof section after the intro.
+- Reframe the public Notion pages so `todo` and `currently-reading` feel intentional.
+- Run a full accessibility pass for nav wrapping, accordion labels, focus states, and mobile spacing.
+- Clean up dependencies and investigate the Prisma/Turbopack tracing warning.
+
 ### 13. Standardize spacing
 - **Issue**: Inconsistent margins throughout (mb-8, mt-8, mt-10)
 - **Solution**: Use consistent spacing scale throughout the application

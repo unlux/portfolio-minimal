@@ -9,6 +9,9 @@ export function BlogPosts() {
     slug: post.slug,
     title: post.metadata.title,
     publishedAt: post.metadata.publishedAt,
+    summary: post.metadata.summary,
+    tags: post.metadata.tags ?? [],
+    readingTime: post.readingTime,
   }));
 
   return (
