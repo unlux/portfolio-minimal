@@ -134,70 +134,71 @@ export function ExperiencePositionItem({
   const ExperienceIcon = iconMap[position.icon || "business"];
 
   return (
-    <Collapsible defaultOpen={position.isExpanded} asChild>
-      <div className="relative last:before:absolute last:before:h-full last:before:w-4 last:before:bg-background">
-        <CollapsibleTrigger className="group/experience not-prose block w-full text-left select-none">
-          <div className="relative z-1 mb-1 flex items-center gap-3 bg-background">
-            <div
-              className="flex size-6 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground"
-              aria-hidden
-            >
-              <ExperienceIcon className="size-4" />
-            </div>
-
-            <h4 className="flex-1 text-base font-medium text-balance">
-              {position.title}
-            </h4>
-
-            <div
-              className="shrink-0 text-muted-foreground [&_svg]:size-4"
-              aria-hidden
-            >
-              <ChevronsDownUpIcon className="hidden group-data-[state=open]/experience:block" />
-              <ChevronsUpDownIcon className="hidden group-data-[state=closed]/experience:block" />
-            </div>
+    <Collapsible
+      defaultOpen={position.isExpanded}
+      className="relative last:before:absolute last:before:h-full last:before:w-4 last:before:bg-background"
+    >
+      <CollapsibleTrigger className="group/experience not-prose block w-full text-left select-none">
+        <div className="relative z-1 mb-1 flex items-center gap-3 bg-background">
+          <div
+            className="flex size-6 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground"
+            aria-hidden
+          >
+            <ExperienceIcon className="size-4" />
           </div>
 
-          <div className="flex items-center gap-2 pl-9 text-sm text-muted-foreground">
-            {position.employmentType && (
-              <>
-                <dl>
-                  <dt className="sr-only">Employment Type</dt>
-                  <dd>{position.employmentType}</dd>
-                </dl>
+          <h4 className="flex-1 text-base font-medium text-balance">
+            {position.title}
+          </h4>
 
-                <Separator
-                  className="data-[orientation=vertical]:h-4"
-                  orientation="vertical"
-                />
-              </>
-            )}
-
-            <dl>
-              <dt className="sr-only">Employment Period</dt>
-              <dd>{position.employmentPeriod}</dd>
-            </dl>
+          <div
+            className="shrink-0 text-muted-foreground [&_svg]:size-4"
+            aria-hidden
+          >
+            <ChevronsDownUpIcon className="hidden group-data-[state=open]/experience:block" />
+            <ChevronsUpDownIcon className="hidden group-data-[state=closed]/experience:block" />
           </div>
-        </CollapsibleTrigger>
+        </div>
 
-        <CollapsibleContent className="overflow-hidden duration-300 data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
-          {position.description && (
-            <Prose className="pt-2 pl-9">
-              <ReactMarkdown>{position.description}</ReactMarkdown>
-            </Prose>
+        <div className="flex items-center gap-2 pl-9 text-sm text-muted-foreground">
+          {position.employmentType && (
+            <>
+              <dl>
+                <dt className="sr-only">Employment Type</dt>
+                <dd>{position.employmentType}</dd>
+              </dl>
+
+              <Separator
+                className="data-[orientation=vertical]:h-4"
+                orientation="vertical"
+              />
+            </>
           )}
 
-          {Array.isArray(position.skills) && position.skills.length > 0 && (
-            <ul className="not-prose flex flex-wrap gap-1.5 pt-2 pl-9">
-              {position.skills.map((skill, index) => (
-                <li key={index} className="flex">
-                  <Skill>{skill}</Skill>
-                </li>
-              ))}
-            </ul>
-          )}
-        </CollapsibleContent>
-      </div>
+          <dl>
+            <dt className="sr-only">Employment Period</dt>
+            <dd>{position.employmentPeriod}</dd>
+          </dl>
+        </div>
+      </CollapsibleTrigger>
+
+      <CollapsibleContent className="overflow-hidden duration-300 data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
+        {position.description && (
+          <Prose className="pt-2 pl-9">
+            <ReactMarkdown>{position.description}</ReactMarkdown>
+          </Prose>
+        )}
+
+        {Array.isArray(position.skills) && position.skills.length > 0 && (
+          <ul className="not-prose flex flex-wrap gap-1.5 pt-2 pl-9">
+            {position.skills.map((skill, index) => (
+              <li key={index} className="flex">
+                <Skill>{skill}</Skill>
+              </li>
+            ))}
+          </ul>
+        )}
+      </CollapsibleContent>
     </Collapsible>
   );
 }

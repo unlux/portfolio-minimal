@@ -12,7 +12,7 @@ export default function Page() {
   return (
     <section>
       <Reveal animation="fadeUp">
-        <h1 className="font-semibold text-2xl mb-8 tracking-tighter italic">
+        <h1 className="font-semibold text-2xl mb-8 tracking-tight italic text-neutral-100">
           My Blogs
         </h1>
       </Reveal>
