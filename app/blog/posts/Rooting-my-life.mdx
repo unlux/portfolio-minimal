@@ -67,14 +67,7 @@ Step 2: Flash necessary files
   - now you reboot to the recovery,
   - continue, to adb sideload ( we will load the actual ROM now,)
   - type `adb sideload /path/to/lineage-22.1-20250405-nightly-bluejay-signed.zip`
-  - <details>
-      <summary>Some Insider Info</summary>
-      <p>
-        All my life, the flashing would complete at ~47% progress it always
-        gives an error like `"Total Xfer: 0.00X"` if you get the same error, it
-        means that the ROM has been flashed successfully. Do not worry about it.
-      </p>
-    </details>
+  - Note: all my life, the flashing would complete at ~47% progress and then show an error like `"Total Xfer: 0.00X"`. If you get the same error, it usually means the ROM has been flashed successfully. Do not worry about it.
   - after that you will see a message to flash additional packages before rebooting, select that because we still have to flash the GApps package.
   - type `adb sideload /path/to/NikGapps-core-gms.zip`
   - you can check the logs to see the apps getting skipped and installed one by one.
