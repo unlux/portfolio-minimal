@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { AlbumPasswordDialog } from "@/components/AlbumPasswordDialog";
 import { AddAlbumDialog } from "@/components/AddAlbumDialog";
-import type { PhotoAlbum } from "@/lib/generated/prisma";
+import type { PhotoAlbum } from "@prisma/client";
 
 export function AlbumsGrid({ albums }: { albums: PhotoAlbum[] }) {
   return (

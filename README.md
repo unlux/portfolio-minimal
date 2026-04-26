@@ -1,10 +1,10 @@
-## Portfolio Minimal (Next.js 15 + React 19)
+## Portfolio Minimal (Next.js 16 + React 19)
 
 A minimal, fast personal portfolio with a built-in MDX blog, SEO-ready routes (OG images, RSS, sitemap, robots), optional authentication, and tasteful animations.
 
 ### Tech stack
 
-- **Next.js 15** (App Router) + **TypeScript**
+- **Next.js 16** (App Router) + **TypeScript**
 - **React 19**
 - **Tailwind CSS v4**
 - **MDX** for blog content
@@ -76,7 +76,7 @@ NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 ## Content authoring (Blog)
 
 - Add posts to `app/blog/posts` as `.mdx` files. The slug is the filename.
-- Supported frontmatter keys: `title`, `publishedAt` (YYYY-MM-DD), `summary`, `image` (absolute URL or local path).
+- Supported frontmatter keys: `title`, `publishedAt` (YYYY-MM-DD), `summary`, `tags`, `image` (absolute URL or local path).
 
 Frontmatter example:
 

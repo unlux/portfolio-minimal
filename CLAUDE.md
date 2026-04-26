@@ -39,10 +39,10 @@ npx prisma studio          # Open Prisma Studio GUI
 ## Architecture Overview
 
 ### Tech Stack
-- **Next.js 15** with App Router and **React 19**
+- **Next.js 16** with App Router and **React 19**
 - **TypeScript** with path alias `@/*` pointing to project root
 - **Tailwind CSS v4** for styling
-- **Prisma ORM** with PostgreSQL (custom output: `lib/generated/prisma`)
+- **Prisma ORM** with PostgreSQL (`@prisma/client`)
 - **Clerk** for authentication (optional, auto-disabled without env vars)
 - **MDX** for blog content
 - **Radix UI** primitives for accessible components
@@ -57,7 +57,7 @@ The app gracefully handles missing Clerk credentials:
 - `app/layout.tsx`: Conditionally wraps app in `ClerkProvider` only if `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` exists
 
 #### Prisma Client Setup
-Prisma client is generated to a custom location (`lib/generated/prisma`) and imported via `lib/prisma.ts`, which implements singleton pattern for development hot-reloading.
+Prisma client is generated through `@prisma/client` and imported via `lib/prisma.ts`, which implements a singleton pattern for development hot-reloading.
 
 #### MDX Blog System
 - Blog posts live in `app/blog/posts/*.mdx`
@@ -109,7 +109,6 @@ components/
 lib/
   prisma.ts                 # Prisma client singleton
   utils.ts                  # Utility functions (likely cn() for classnames)
-  generated/prisma/         # Generated Prisma client
 
 prisma/
   schema.prisma             # Database schema (PhotoAlbum, Contact models)
@@ -139,7 +138,7 @@ prisma/
 
 ### SEO & Metadata
 - Base URL configured in `app/sitemap.ts` (update `baseUrl` for production)
-- Dynamic metadata per route using Next.js 15 metadata API
+- Dynamic metadata per route using the Next.js metadata API
 - OG image generation at `/og?title=...`
 - RSS feed at `/rss` (auto-generated from blog posts)
 - Sitemap includes homepage, blog index, and all blog posts
@@ -165,6 +164,5 @@ DATABASE_URL=postgresql://...
 - Build script runs `prisma migrate deploy` before `next build` - migrations are auto-applied
 - `postinstall` script runs `prisma generate` to ensure client is generated after npm install
 - Path imports use `@/` alias (points to project root)
-- TypeScript errors are ignored in production builds (`ignoreBuildErrors: true`)
 - The app is designed to work without Clerk - middleware becomes a no-op if credentials are missing
-- Custom Prisma client output location: `lib/generated/prisma` (not default `node_modules`)
+- Prisma Client is generated into the default `@prisma/client` package location.

@@ -5,7 +5,7 @@ const eslintConfig = [
   ...nextVitals,
   ...nextTypescript,
   {
-    ignores: ["lib/generated/prisma/**", "test-notion.js"],
+    ignores: ["test-notion.js"],
   },
   {
     rules: {
