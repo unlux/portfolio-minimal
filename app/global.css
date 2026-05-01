@@ -355,26 +355,38 @@ table {
 }
 
 .notion-portfolio .notion-to-do-item {
-  @apply flex min-h-8 items-start gap-2 border-b border-neutral-900 py-1.5 text-[0.98rem] leading-6;
+  @apply grid min-h-8 grid-cols-[1rem_minmax(0,1fr)] gap-x-2.5 border-b border-neutral-900 py-1.5 text-[0.98rem] leading-6;
 }
 
 .notion-portfolio .notion-to-do-children {
-  @apply ml-4 border-l border-neutral-900 pl-4;
+  @apply ml-6 pl-0;
 }
 
 .notion-portfolio .notion-to-do-body {
-  @apply text-neutral-200;
+  @apply min-w-0 text-neutral-200;
 }
 
 .notion-portfolio .notion-to-do-checked {
   @apply text-neutral-500 line-through decoration-neutral-600;
 }
 
-.notion-portfolio .notion-checkbox {
-  @apply mt-1 size-4 shrink-0 border-neutral-700;
+.notion-portfolio .notion-to-do-item .notion-property-checkbox {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 1rem !important;
+  height: 1.5rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 0 !important;
 }
 
-.notion-portfolio .notion-checkbox-checked {
+.notion-portfolio .notion-property-checkbox-checked,
+.notion-portfolio .notion-property-checkbox-unchecked {
+  @apply size-4 shrink-0 border-neutral-700;
+}
+
+.notion-portfolio .notion-property-checkbox-checked {
   @apply bg-sky-500;
 }
 
