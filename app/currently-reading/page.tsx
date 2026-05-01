@@ -5,7 +5,7 @@ import { NotionAPI } from "notion-client";
 import { getNormalizedNotionPage, getNotionPageCover } from "@/lib/notion";
 import type { ExtendedRecordMap } from "notion-types";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 21600;
 
 export const metadata = {
   title: "Reading",
