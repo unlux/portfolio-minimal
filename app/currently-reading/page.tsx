@@ -2,7 +2,7 @@ import { NotionRenderer } from "@/components/NotionRenderer";
 import { NotionPageShell } from "@/components/NotionPageShell";
 
 import { NotionAPI } from "notion-client";
-import { normalizeNotionRecordMap } from "@/lib/notion";
+import { getNormalizedNotionPage } from "@/lib/notion";
 import type { ExtendedRecordMap } from "notion-types";
 
 export const dynamic = "force-dynamic";
@@ -18,8 +18,9 @@ export default async function CurrentlyReadingPage() {
   let error: unknown = null;
 
   try {
-    recordMap = normalizeNotionRecordMap(
-      await notion.getPage("1e4ca11c6d658078b2a6ccf2fcaa6471")
+    recordMap = await getNormalizedNotionPage(
+      notion,
+      "1e4ca11c6d658078b2a6ccf2fcaa6471"
     );
   } catch (e) {
     error = e;

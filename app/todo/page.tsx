@@ -8,7 +8,7 @@ export const metadata = {
 import { NotionRenderer } from "@/components/NotionRenderer";
 import { NotionPageShell } from "@/components/NotionPageShell";
 import { NotionAPI } from "notion-client";
-import { normalizeNotionRecordMap } from "@/lib/notion";
+import { getNormalizedNotionPage } from "@/lib/notion";
 import type { ExtendedRecordMap } from "notion-types";
 
 export default async function TodoPage() {
@@ -16,8 +16,9 @@ export default async function TodoPage() {
   let recordMap: ExtendedRecordMap | null = null;
   let error: unknown = null;
   try {
-    recordMap = normalizeNotionRecordMap(
-      await notion.getPage("22cca11c6d65808b8453ca55e4032397")
+    recordMap = await getNormalizedNotionPage(
+      notion,
+      "22cca11c6d65808b8453ca55e4032397"
     );
   } catch (e) {
     error = e;

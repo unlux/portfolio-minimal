@@ -255,6 +255,12 @@ table {
   @apply mb-8 max-h-56 rounded-md border border-neutral-800 object-cover opacity-90;
 }
 
+.notion-shell .notion-page-cover,
+.notion-shell .notion-page-icon-hero,
+.notion-shell .notion-title {
+  display: none !important;
+}
+
 .notion-portfolio .notion-page-icon {
   @apply rounded-md;
 }
@@ -278,16 +284,102 @@ table {
   @apply text-neutral-300;
 }
 
+.notion-portfolio .notion-text {
+  @apply my-3 text-sm leading-6 text-neutral-400;
+}
+
 .notion-portfolio .notion-page-link {
-  @apply rounded-sm underline decoration-neutral-700 underline-offset-4 transition-colors hover:bg-neutral-900 hover:text-neutral-100;
+  @apply my-2 block rounded-md border border-neutral-800 bg-neutral-950/50 px-3 py-2 text-sm no-underline transition-colors hover:border-neutral-700 hover:bg-neutral-900 hover:text-neutral-100;
+}
+
+.notion-portfolio .notion-collection,
+.notion-portfolio .notion-board,
+.notion-portfolio .notion-table {
+  @apply w-full max-w-full self-stretch overflow-x-auto;
+}
+
+.notion-portfolio .notion-board-view,
+.notion-portfolio .notion-table-view,
+.notion-portfolio .notion-gallery-view,
+.notion-portfolio .notion-list-view {
+  @apply float-none max-w-full;
+  padding-left: 0 !important;
+}
+
+.notion-portfolio .notion-collection-header {
+  @apply mb-2 h-auto gap-3 overflow-visible px-0 text-sm;
+}
+
+.notion-portfolio .notion-collection-header-title {
+  @apply text-base text-neutral-100;
+}
+
+.notion-portfolio .notion-collection-view-type-title {
+  @apply text-neutral-300;
+}
+
+.notion-portfolio .notion-board-header {
+  @apply min-w-full;
+}
+
+.notion-portfolio .notion-board-header-inner,
+.notion-portfolio .notion-gallery-grid,
+.notion-portfolio .notion-list-body,
+.notion-portfolio .notion-table-header-inner {
+  @apply border-neutral-800;
+}
+
+.notion-portfolio .notion-board-view-size-small .notion-board-th,
+.notion-portfolio .notion-board-view-size-small .notion-board-group {
+  @apply w-56;
+}
+
+.notion-portfolio .notion-collection-card {
+  @apply rounded-md border border-neutral-800 bg-neutral-950/70 shadow-none transition-colors hover:border-neutral-700 hover:bg-neutral-900;
+}
+
+.notion-portfolio .notion-collection-card-body {
+  @apply px-3 py-2;
+}
+
+.notion-portfolio .notion-collection-card-property:first-child {
+  @apply text-sm font-medium text-neutral-100;
+}
+
+.notion-portfolio .notion-collection-card-property:not(:first-child) {
+  @apply text-xs text-neutral-400;
+}
+
+.notion-portfolio .notion-to-do {
+  @apply my-0;
+}
+
+.notion-portfolio .notion-to-do-item {
+  @apply flex min-h-8 items-start gap-2 border-b border-neutral-900 py-1.5 text-[0.98rem] leading-6;
+}
+
+.notion-portfolio .notion-to-do-children {
+  @apply ml-4 border-l border-neutral-900 pl-4;
+}
+
+.notion-portfolio .notion-to-do-body {
+  @apply text-neutral-200;
+}
+
+.notion-portfolio .notion-to-do-checked {
+  @apply text-neutral-500 line-through decoration-neutral-600;
 }
 
 .notion-portfolio .notion-checkbox {
-  @apply border-neutral-700;
+  @apply mt-1 size-4 shrink-0 border-neutral-700;
 }
 
 .notion-portfolio .notion-checkbox-checked {
   @apply bg-sky-500;
+}
+
+.notion-portfolio .notion-property-checkbox-unchecked {
+  @apply bg-transparent;
 }
 
 .notion-portfolio .notion-code {
