@@ -14,36 +14,24 @@ export default function Page() {
     <section>
       <AnimatedTitle text="Hi, I'm Lakshay Choudhary" />
 
-      <Reveal animation="fadeUp" delay={0.2} className="mb-4 font-[family-name:var(--font-inter)]">
-        a full-stack and cloud developer with a love for solving complex
-        problems and building efficient, reliable systems. I thrive on creating
-        solutions that work seamlessly and enjoy diving deep into the technical
-        side of things. My approach is practical and detail-oriented, always
-        focused on delivering results that matter.
-        <br />
-        <br />
-        When it comes to web development, I specialize in building modern,
-        scalable applications that get the job done. I enjoy working with
-        frameworks like Next.js and leveraging tools like Prisma to create
-        robust backends. For me, web development isn't about flashy designs-it's
-        about functionality, performance, and creating systems that make life
-        easier for users.
-        <br />
-        <br />
-        On the cloud side, I'm passionate about designing and optimizing
-        infrastructure. I've worked extensively with platforms like AWS and GCP,
-        streamlining workflows and deploying scalable solutions. Whether it's
-        automating processes, running containerized applications, or cutting
-        operational costs, I'm always looking for ways to make systems more
-        efficient.
-        <br />
-        <br />
-        I'm also a big fan of NixOS. Running it on my laptop and my VPS has
-        taught me to configure, customize, and manage systems at a deep level.
-        From managing packages to setting up advanced tools like Disko with
-        Btrfs, NixOS has been central to my development journey.
-        <br />
-        <br />
+      <Reveal
+        animation="fadeUp"
+        delay={0.2}
+        className="mb-4 space-y-5 font-[family-name:var(--font-inter)] text-[1.02rem] leading-7 text-neutral-300"
+      >
+        <p>
+          I&apos;m Lakshay Choudhary, a full-stack developer focused on
+          backend-heavy products, cloud infrastructure, and systems that stay
+          maintainable after the first version ships.
+        </p>
+
+        <p>
+          I work mostly with Next.js, TypeScript, Prisma, Redis, AWS, GCP, and
+          Linux/NixOS. Lately, I&apos;ve been building AI-backed product
+          workflows, trading tools, ecommerce systems, and infrastructure setups
+          that are boring in the best way: reliable, observable, and easy to
+          change.
+        </p>
       </Reveal>
 
       {/* Work Experience */}
@@ -66,7 +54,7 @@ export default function Page() {
                   icon: "code",
                   isExpanded: true,
                   description:
-                    "- Working on several AI projects, \n - Building a trading platform with AI Insights using various testing strategies",
+                    "- Building AI-backed product workflows across full-stack surfaces.\n- Working on a trading platform with AI insights, backend integrations, and test coverage around critical flows.",
                 },
               ],
             },
@@ -84,7 +72,7 @@ export default function Page() {
                   icon: "code",
                   isExpanded: false,
                   description:
-                    "- Developed an end-to-end e-commerce platform using Next.js for the frontend and a headless MedusaJS backend.\n- Integrated Google Auth, Razorpay payments, and PostHog analytics to create a feature-rich user experience.\n- Established a complete CI/CD pipeline with GitHub Actions for seamless deployments to Vercel and AWS Lightsail.\n- Utilized Supabase for PostgreSQL database management and object storage, with Redis for caching.",
+                    "- Built an end-to-end ecommerce platform with Next.js and a headless MedusaJS backend.\n- Integrated Google Auth, Razorpay payments, PostHog analytics, Supabase storage, and Redis caching.\n- Set up CI/CD with GitHub Actions for deployments across Vercel and AWS Lightsail.",
                 },
               ],
             },
@@ -101,7 +89,7 @@ export default function Page() {
                   icon: "code",
                   isExpanded: false,
                   description:
-                    "- Migrated from MongoDB to PostgreSQL with Prisma ORM, enforcing strict schema validation.\n- Reduced API latency by 70% through caching hot data and optimizing SQL queries.\n- Built a Redis-backed BullMQ queue that processed over 10,000 async tasks and emails daily.\n- Refactored REST APIs, resulting in a 50% reduction in error rates and a 30% improvement in response times.",
+                    "- Migrated core data from MongoDB to PostgreSQL with Prisma and stricter schema validation.\n- Reduced API latency by 70% by caching hot paths and tightening SQL queries.\n- Built Redis/BullMQ workers for async jobs and transactional email processing.\n- Refactored REST APIs to reduce error rates and improve response times.",
                 },
               ],
             },
@@ -111,7 +99,7 @@ export default function Page() {
       </Reveal>
 
       <Reveal animation="fadeUp" delay={0.4} className="mt-8">
-        <div className="text-2xl pb-6">Blogs</div>
+        <div className="text-2xl pb-6">Writing</div>
         <Suspense fallback={<BlogPostsSkeleton />}>
           <BlogPosts />
         </Suspense>

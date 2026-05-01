@@ -1,6 +1,11 @@
 "use client";
 
-import { motion, Variants, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  Variants,
+  useReducedMotion,
+  type TargetAndTransition,
+} from "framer-motion";
 import { useScrollReveal } from "@/lib/hooks/useScrollAnimation";
 import {
   fadeInUp,
@@ -51,7 +56,7 @@ export default function Reveal({
 }: RevealProps) {
   const prefersReducedMotion = useReducedMotion();
 
-  const { ref, isInView } = useScrollReveal({
+  const { ref, isInView } = useScrollReveal<HTMLDivElement>({
     threshold,
     rootMargin: "0px 0px -50px 0px",
   });
@@ -64,12 +69,13 @@ export default function Reveal({
   const finalVariants = withReducedMotion(variants, !!prefersReducedMotion);
 
   // Add delay to transition
+  const visibleVariant = (finalVariants.visible ?? {}) as TargetAndTransition;
   const variantsWithDelay = {
     ...finalVariants,
     visible: {
-      ...finalVariants.visible,
+      ...visibleVariant,
       transition: {
-        ...(finalVariants.visible as any).transition,
+        ...visibleVariant.transition,
         delay,
       },
     },
@@ -77,7 +83,7 @@ export default function Reveal({
 
   return (
     <motion.div
-      ref={ref as any}
+      ref={ref}
       className={className}
       initial="hidden"
       animate={isInView ? "visible" : once ? "hidden" : undefined}

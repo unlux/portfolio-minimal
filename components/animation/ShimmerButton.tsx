@@ -1,12 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
+import type { HTMLMotionProps } from "framer-motion";
 import { tapScale } from "@/lib/animation-presets";
 
 type ShimmerButtonProps = {
   children: React.ReactNode;
   className?: string;
-} & React.ComponentPropsWithoutRef<"button">;
+} & HTMLMotionProps<"button">;
 
 export default function ShimmerButton({
   children,

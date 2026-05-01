@@ -1,31 +1,41 @@
-import { NotionRenderer } from "@/components/NotionRenderer";
+import { NotionPageShell } from "@/components/NotionPageShell";
+import { ReadingCollection } from "@/components/ReadingCollection";
 
 import { NotionAPI } from "notion-client";
-import Reveal from "@/components/animation/Reveal";
+import { getNormalizedNotionPage, getNotionPageCover } from "@/lib/notion";
+import type { ExtendedRecordMap } from "notion-types";
+
+export const revalidate = 21600;
+
+export const metadata = {
+  title: "Reading",
+  description: "Books, articles, and technical rabbit holes I am tracking.",
+};
 
 export default async function CurrentlyReadingPage() {
   const notion = new NotionAPI();
-  const recordMap = await notion.getPage("1e4ca11c6d658078b2a6ccf2fcaa6471");
+  let recordMap: ExtendedRecordMap | null = null;
+  let error: unknown = null;
+  const pageId = "1e4ca11c6d658078b2a6ccf2fcaa6471";
+
+  try {
+    recordMap = await getNormalizedNotionPage(notion, pageId);
+  } catch (e) {
+    error = e;
+  }
 
   return (
-    <main className="max-w-3xl mx-auto py-8 px-4">
-      <Reveal animation="fadeUp">
-        <h1 className="text-3xl font-bold mb-6">WIP</h1>
-      </Reveal>
-      <Reveal animation="fadeUp" delay={0.1}>
-        <div className="mb-4 text-blue-600 underline break-all">
-          <a
-            href="https://www.notion.so/Reading-Tracker-System-1e4ca11c6d658078b2a6ccf2fcaa6471?source=copy_link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View this page on Notion
-          </a>
-        </div>
-      </Reveal>
-      <Reveal animation="fadeUp" delay={0.15}>
-        <NotionRenderer recordMap={recordMap} />
-      </Reveal>
-    </main>
+    <NotionPageShell
+      title="Reading"
+      description="The books, articles, and technical rabbit holes I am tracking outside the blog."
+      notionUrl="https://www.notion.so/Reading-Tracker-System-1e4ca11c6d658078b2a6ccf2fcaa6471?source=copy_link"
+      cover={recordMap ? getNotionPageCover(recordMap, pageId) : null}
+    >
+      {error || !recordMap ? (
+        <div className="text-red-500">Failed to load Notion data.</div>
+      ) : (
+        <ReadingCollection recordMap={recordMap} />
+      )}
+    </NotionPageShell>
   );
 }

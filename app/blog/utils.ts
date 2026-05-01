@@ -6,9 +6,20 @@ type Metadata = {
   publishedAt: string;
   summary: string;
   image?: string;
+  tags?: string[];
 };
 
-function parseFrontmatter(fileContent: string) {
+type BlogPost = {
+  metadata: Metadata;
+  slug: string;
+  content: string;
+  readingTime: string;
+};
+
+function parseFrontmatter(fileContent: string): {
+  metadata: Metadata;
+  content: string;
+} {
   const frontmatterRegex = /---\s*([\s\S]*?)\s*---/;
   const match = frontmatterRegex.exec(fileContent);
   if (!match) {
@@ -24,22 +35,47 @@ function parseFrontmatter(fileContent: string) {
     const [key, ...valueArr] = line.split(": ");
     let value = valueArr.join(": ").trim();
     value = value.replace(/^['"](.*)['"]$/, "$1"); // Remove quotes
-    metadata[key.trim() as keyof Metadata] = value;
+    const metadataKey = key.trim() as keyof Metadata;
+
+    if (metadataKey === "tags") {
+      metadata.tags = value
+        .split(",")
+        .map((tag) => tag.trim())
+        .filter(Boolean);
+      return;
+    }
+
+    metadata[metadataKey] = value;
   });
 
   return { metadata: metadata as Metadata, content };
 }
 
-function getMDXFiles(dir) {
+function getReadingTime(content: string) {
+  const words = content
+    .replace(/```[\s\S]*?```/g, "")
+    .replace(/<[^>]*>/g, "")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
+  const minutes = Math.max(1, Math.ceil(words / 220));
+
+  return `${minutes} min read`;
+}
+
+function getMDXFiles(dir: string): string[] {
   return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
 }
 
-function readMDXFile(filePath) {
+function readMDXFile(filePath: string): {
+  metadata: Metadata;
+  content: string;
+} {
   const rawContent = fs.readFileSync(filePath, "utf-8");
   return parseFrontmatter(rawContent);
 }
 
-function getMDXData(dir) {
+function getMDXData(dir: string): BlogPost[] {
   const mdxFiles = getMDXFiles(dir);
   return mdxFiles.map((file) => {
     const { metadata, content } = readMDXFile(path.join(dir, file));
@@ -49,6 +85,7 @@ function getMDXData(dir) {
       metadata,
       slug,
       content,
+      readingTime: getReadingTime(content),
     };
   });
 }

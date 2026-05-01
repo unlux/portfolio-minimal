@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 
 const navItems = {
   "/": {
@@ -15,7 +15,7 @@ const navItems = {
     name: "todo",
   },
   "/currently-reading": {
-    name: "currently-reading",
+    name: "reading",
   },
 };
 
@@ -39,6 +39,7 @@ const itemVariants = {
 
 export function Navbar({ hasClerk = false }: { hasClerk?: boolean }) {
   const pathname = usePathname();
+
   return (
     <aside className="mb-10 tracking-tight">
       <div className="lg:sticky lg:top-20">
@@ -83,30 +84,37 @@ export function Navbar({ hasClerk = false }: { hasClerk?: boolean }) {
           </motion.div>
 
           {hasClerk && (
-            <div className="ml-auto flex items-center gap-2">
-              <SignedIn>
-                <UserButton afterSignOutUrl="/" />
-              </SignedIn>
-              <SignedOut>
-                <SignInButton
-                  mode="modal"
-                  forceRedirectUrl="/gotcha"
-                  fallbackRedirectUrl="/gotcha"
-                  signUpForceRedirectUrl="/gotcha"
-                  signUpFallbackRedirectUrl="/gotcha"
-                >
-                  <button
-                    className="px-3 py-1 rounded-full text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 outline-none focus-visible:ring-1 focus-visible:ring-blue-400 focus-visible:ring-offset-1 focus-visible:ring-offset-background"
-                    aria-label="Sign in"
-                  >
-                    Sign in
-                  </button>
-                </SignInButton>
-              </SignedOut>
-            </div>
+            <AuthControls />
           )}
         </nav>
       </div>
     </aside>
+  );
+}
+
+function AuthControls() {
+  const { isLoaded, isSignedIn } = useUser();
+
+  return (
+    <div className="ml-auto flex items-center gap-2">
+      {isLoaded && isSignedIn ? (
+        <UserButton />
+      ) : (
+        <SignInButton
+          mode="modal"
+          forceRedirectUrl="/gotcha"
+          fallbackRedirectUrl="/gotcha"
+          signUpForceRedirectUrl="/gotcha"
+          signUpFallbackRedirectUrl="/gotcha"
+        >
+          <button
+            className="px-3 py-1 rounded-full text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 outline-none focus-visible:ring-1 focus-visible:ring-blue-400 focus-visible:ring-offset-1 focus-visible:ring-offset-background"
+            aria-label="Sign in"
+          >
+            Sign in
+          </button>
+        </SignInButton>
+      )}
+    </div>
   );
 }

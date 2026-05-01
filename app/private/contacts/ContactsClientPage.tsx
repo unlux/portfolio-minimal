@@ -20,7 +20,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Reveal from "@/components/animation/Reveal";
-import { type Contact } from "@prisma/client";
+import type { Contact } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { TrashIcon } from "@radix-ui/react-icons";

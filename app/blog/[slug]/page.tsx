@@ -3,6 +3,10 @@ import { CustomMDX } from "@/components/mdx";
 import { formatDate, getBlogPosts } from "@/app/blog/utils";
 import { baseUrl } from "@/app/sitemap";
 
+type BlogPageProps = {
+  params: Promise<{ slug: string }>;
+};
+
 export async function generateStaticParams() {
   const posts = getBlogPosts();
 
@@ -11,7 +15,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata(props: { params: any }) {
+export async function generateMetadata(props: BlogPageProps) {
   const params = await props.params;
   const post = getBlogPosts().find((post) => post.slug === params.slug);
   if (!post) {
@@ -54,7 +58,7 @@ export async function generateMetadata(props: { params: any }) {
   };
 }
 
-export default async function Blog(props: { params: any }) {
+export default async function Blog(props: BlogPageProps) {
   const params = await props.params;
   const post = getBlogPosts().find((post) => post.slug === params.slug);
 
@@ -86,11 +90,11 @@ export default async function Blog(props: { params: any }) {
           }),
         }}
       />
-      <h1 className="title font-semibold text-2xl tracking-tighter">
+      <h1 className="title font-semibold text-3xl leading-tight tracking-tight text-neutral-100">
         {post.metadata.title}
       </h1>
       <div className="flex justify-between items-center mt-2 mb-8 text-sm">
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
+        <p className="text-sm text-neutral-500">
           {formatDate(post.metadata.publishedAt)}
         </p>
       </div>

@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/breadcrumb";
 
 export default async function ContactsPage() {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const password = cookieStore.get("contacts_password");
 
   const isVerified =

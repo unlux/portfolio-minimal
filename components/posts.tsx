@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { formatDate, getBlogPosts } from "@/app/blog/utils";
+import { getBlogPosts } from "@/app/blog/utils";
 import { BitcountGridDouble } from "@/app/lib/fonts";
 import BlogPostsClient from "./animation/BlogPostsClient";
 
@@ -10,6 +9,9 @@ export function BlogPosts() {
     slug: post.slug,
     title: post.metadata.title,
     publishedAt: post.metadata.publishedAt,
+    summary: post.metadata.summary,
+    tags: post.metadata.tags ?? [],
+    readingTime: post.readingTime,
   }));
 
   return (

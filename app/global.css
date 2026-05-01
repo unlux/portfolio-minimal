@@ -86,7 +86,7 @@ html {
 }
 
 .prose a {
-  @apply underline transition-all decoration-neutral-400 dark:decoration-neutral-600 underline-offset-2 decoration-[0.1em];
+  @apply text-sky-300 underline transition-all decoration-sky-500/50 underline-offset-2 decoration-[0.1em] hover:text-sky-200;
 }
 
 .prose .anchor:after {
@@ -98,18 +98,29 @@ html {
   @apply visible;
 }
 
+.prose {
+  @apply max-w-none text-[1rem] leading-7 text-neutral-200;
+
+  --tw-prose-bold: #f5f5f5;
+  --tw-prose-links: #7dd3fc;
+  --tw-prose-invert-bold: #f5f5f5;
+  --tw-prose-invert-links: #7dd3fc;
+}
+
 .prose pre {
-  @apply bg-neutral-50 dark:bg-neutral-900 rounded-lg overflow-x-auto border border-neutral-200 dark:border-neutral-900 py-2 px-3 text-sm;
+  @apply my-6 overflow-x-auto rounded-md border border-neutral-800 bg-neutral-950 px-4 py-4 text-[0.9rem] leading-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)];
 }
 
 .prose code {
-  @apply px-1 py-0.5 rounded-lg;
+  @apply rounded-md bg-neutral-900 px-1.5 py-0.5 text-[0.92em] text-neutral-100;
 }
 
 .prose pre code {
   @apply p-0;
+  background: transparent;
   border: initial;
-  line-height: 1.5;
+  color: inherit;
+  line-height: inherit;
 }
 
 .prose code span {
@@ -122,11 +133,11 @@ html {
 }
 
 .prose p {
-  @apply my-4 text-neutral-800 dark:text-neutral-200;
+  @apply my-5 text-neutral-200;
 }
 
 .prose h1 {
-  @apply text-4xl font-medium tracking-tight mt-6 mb-2;
+  @apply text-4xl font-medium tracking-tight mt-8 mb-3;
 
   color: #101828;
 }
@@ -137,27 +148,49 @@ html {
 }
 
 .prose h2 {
-  @apply text-xl font-medium tracking-tight mt-6 mb-2;
+  @apply text-2xl font-semibold tracking-tight mt-10 mb-3 text-neutral-100;
 }
 
 .prose h3 {
-  @apply text-xl font-medium tracking-tight mt-6 mb-2;
+  @apply text-xl font-semibold tracking-tight mt-8 mb-3 text-neutral-100;
 }
 
 .prose h4 {
-  @apply text-lg font-medium tracking-tight mt-6 mb-2;
+  @apply text-lg font-semibold tracking-tight mt-7 mb-3 text-neutral-100;
+}
+
+.prose h5,
+.prose h6 {
+  @apply text-base font-semibold tracking-tight mt-7 mb-3 text-neutral-100;
 }
 
 .prose strong {
   @apply font-medium;
+  color: #f5f5f5 !important;
+}
+
+.prose a {
+  color: #7dd3fc !important;
 }
 
 .prose ul {
-  @apply list-disc pl-6;
+  @apply my-5 list-disc pl-6 text-neutral-200;
 }
 
 .prose ol {
-  @apply list-decimal pl-6;
+  @apply my-5 list-decimal pl-6 text-neutral-200;
+}
+
+.prose li {
+  @apply my-2 pl-1;
+}
+
+.prose hr {
+  @apply my-10 border-neutral-700;
+}
+
+.prose blockquote {
+  @apply my-6 border-l-2 border-neutral-300 pl-5 text-neutral-100;
 }
 
 .prose > :first-child {
@@ -167,12 +200,12 @@ html {
 }
 
 pre::-webkit-scrollbar {
-  display: none;
+  height: 8px;
 }
 
 pre {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  scrollbar-color: #525252 transparent;
+  scrollbar-width: thin;
 }
 
 /* Remove Safari input shadow on mobile */
@@ -188,6 +221,185 @@ table {
   max-width: fit-content;
   overflow-x: auto;
   white-space: nowrap;
+}
+
+.notion-shell {
+  @apply font-[family-name:var(--font-inter)];
+}
+
+.notion-portfolio .notion {
+  @apply bg-transparent text-neutral-300;
+}
+
+.notion-portfolio.notion-full-page {
+  @apply min-h-0;
+}
+
+.notion-portfolio .notion-page-scroller {
+  @apply overflow-visible;
+}
+
+.notion-portfolio .notion-page {
+  @apply w-full px-0 pb-0;
+}
+
+.notion-portfolio .notion-page-content {
+  @apply px-0;
+}
+
+.notion-portfolio .notion-page-content-inner {
+  @apply mx-0 max-w-none;
+}
+
+.notion-portfolio .notion-page-cover {
+  @apply mb-8 max-h-56 rounded-md border border-neutral-800 object-cover opacity-90;
+}
+
+.notion-shell .notion-page-cover,
+.notion-shell .notion-page-icon-hero,
+.notion-shell .notion-title {
+  display: none !important;
+}
+
+.notion-portfolio .notion-page-icon {
+  @apply rounded-md;
+}
+
+.notion-portfolio .notion-page-title-icon {
+  display: none !important;
+}
+
+.notion-portfolio .notion-title {
+  @apply mt-0 text-3xl font-semibold tracking-tight text-neutral-100;
+}
+
+.notion-portfolio .notion-h,
+.notion-portfolio .notion-toggle {
+  @apply text-neutral-100;
+}
+
+.notion-portfolio .notion-text,
+.notion-portfolio .notion-collection-page-properties,
+.notion-portfolio .notion-page-link {
+  @apply text-neutral-300;
+}
+
+.notion-portfolio .notion-text {
+  @apply my-3 text-sm leading-6 text-neutral-400;
+}
+
+.notion-portfolio .notion-page-link {
+  @apply my-2 block rounded-md border border-neutral-800 bg-neutral-950/50 px-3 py-2 text-sm no-underline transition-colors hover:border-neutral-700 hover:bg-neutral-900 hover:text-neutral-100;
+}
+
+.notion-portfolio .notion-collection,
+.notion-portfolio .notion-board,
+.notion-portfolio .notion-table {
+  @apply w-full max-w-full self-stretch overflow-x-auto;
+}
+
+.notion-portfolio .notion-board-view,
+.notion-portfolio .notion-table-view,
+.notion-portfolio .notion-gallery-view,
+.notion-portfolio .notion-list-view {
+  @apply float-none max-w-full;
+  padding-left: 0 !important;
+}
+
+.notion-portfolio .notion-collection-header {
+  @apply mb-2 h-auto gap-3 overflow-visible px-0 text-sm;
+}
+
+.notion-portfolio .notion-collection-header-title {
+  @apply text-base text-neutral-100;
+}
+
+.notion-portfolio .notion-collection-view-type-title {
+  @apply text-neutral-300;
+}
+
+.notion-portfolio .notion-board-header {
+  @apply min-w-full;
+}
+
+.notion-portfolio .notion-board-header-inner,
+.notion-portfolio .notion-gallery-grid,
+.notion-portfolio .notion-list-body,
+.notion-portfolio .notion-table-header-inner {
+  @apply border-neutral-800;
+}
+
+.notion-portfolio .notion-board-view-size-small .notion-board-th,
+.notion-portfolio .notion-board-view-size-small .notion-board-group {
+  @apply w-56;
+}
+
+.notion-portfolio .notion-collection-card {
+  @apply rounded-md border border-neutral-800 bg-neutral-950/70 shadow-none transition-colors hover:border-neutral-700 hover:bg-neutral-900;
+}
+
+.notion-portfolio .notion-collection-card-body {
+  @apply px-3 py-2;
+}
+
+.notion-portfolio .notion-collection-card-property:first-child {
+  @apply text-sm font-medium text-neutral-100;
+}
+
+.notion-portfolio .notion-collection-card-property:not(:first-child) {
+  @apply text-xs text-neutral-400;
+}
+
+.notion-portfolio .notion-to-do {
+  @apply my-0;
+}
+
+.notion-portfolio .notion-to-do-item {
+  @apply grid min-h-8 grid-cols-[1rem_minmax(0,1fr)] gap-x-2.5 border-b border-neutral-900 py-1.5 text-[0.98rem] leading-6;
+}
+
+.notion-portfolio .notion-to-do-children {
+  @apply ml-6 pl-0;
+}
+
+.notion-portfolio .notion-to-do-body {
+  @apply min-w-0 text-neutral-200;
+}
+
+.notion-portfolio .notion-to-do-checked {
+  @apply text-neutral-500 line-through decoration-neutral-600;
+}
+
+.notion-portfolio .notion-to-do-item .notion-property-checkbox {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 1rem !important;
+  height: 1.5rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 0 !important;
+}
+
+.notion-portfolio .notion-property-checkbox-checked,
+.notion-portfolio .notion-property-checkbox-unchecked {
+  @apply size-4 shrink-0 border-neutral-700;
+}
+
+.notion-portfolio .notion-property-checkbox-checked {
+  @apply bg-sky-500;
+}
+
+.notion-portfolio .notion-property-checkbox-unchecked {
+  @apply bg-transparent;
+}
+
+.notion-portfolio .notion-code {
+  @apply my-5 rounded-md border border-neutral-800 bg-neutral-950 text-sm leading-6;
+}
+
+.notion-portfolio .notion-hr {
+  @apply border-neutral-800;
 }
 
 .title {

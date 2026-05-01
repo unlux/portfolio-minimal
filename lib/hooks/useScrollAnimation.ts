@@ -1,15 +1,17 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useScroll, useTransform, MotionValue, useSpring } from "framer-motion";
+import { useScroll, useTransform, useSpring } from "framer-motion";
 
 /**
  * Hook for scroll-triggered reveal animations
  * Uses Intersection Observer for performance
  */
-export function useScrollReveal(options?: IntersectionObserverInit) {
+export function useScrollReveal<T extends HTMLElement = HTMLElement>(
+  options?: IntersectionObserverInit
+) {
   const [isInView, setIsInView] = useState(false);
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<T>(null);
 
   useEffect(() => {
     const element = ref.current;
@@ -160,16 +162,17 @@ export function useScrollHorizontal(distance: number = 100) {
  */
 export function useScrollCounter(
   end: number,
-  duration: number = 2000
+  duration: number = 2000,
+  start: number = 0
 ) {
-  const [count, setCount] = useState(0);
-  const { ref, isInView } = useScrollReveal();
+  const [count, setCount] = useState(start);
+  const { ref, isInView } = useScrollReveal<HTMLSpanElement>();
 
   useEffect(() => {
     if (!isInView) return;
 
     let startTime: number | null = null;
-    const startValue = 0;
+    const startValue = start;
 
     const animate = (currentTime: number) => {
       if (startTime === null) startTime = currentTime;
@@ -188,7 +191,7 @@ export function useScrollCounter(
     };
 
     requestAnimationFrame(animate);
-  }, [isInView, end, duration]);
+  }, [isInView, end, duration, start]);
 
   return { ref, count };
 }

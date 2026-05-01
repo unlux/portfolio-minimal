@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { FaGithub, FaLinkedin, FaFileAlt, FaDiscord } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import {
@@ -8,7 +7,6 @@ import {
   PopoverTrigger,
   PopoverContent,
 } from "@/components/ui/popover";
-import { ArrowIcon } from "./ui/ArrowIcon";
 import InteractiveLink from "./ui/InteractiveLink";
 
 export default function Footer() {
@@ -17,6 +15,7 @@ export default function Footer() {
       <ul className="font-sm mt-8 flex flex-row flex-wrap items-center gap-6 text-neutral-600 dark:text-neutral-300">
         <li>
           <a
+            aria-label="GitHub"
             className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
             rel="noopener noreferrer"
             target="_blank"
@@ -27,6 +26,7 @@ export default function Footer() {
         </li>
         <li>
           <a
+            aria-label="X"
             className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
             rel="noopener noreferrer"
             target="_blank"
@@ -37,6 +37,7 @@ export default function Footer() {
         </li>
         <li>
           <a
+            aria-label="LinkedIn"
             className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
             rel="noopener noreferrer"
             target="_blank"
@@ -47,6 +48,7 @@ export default function Footer() {
         </li>
         <li>
           <a
+            aria-label="Discord"
             className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
             rel="noopener noreferrer"
             target="_blank"
@@ -60,6 +62,7 @@ export default function Footer() {
             <PopoverTrigger asChild>
               <button
                 type="button"
+                aria-label="Open CV links"
                 aria-haspopup="menu"
                 className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
               >

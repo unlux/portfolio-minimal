@@ -1,6 +1,7 @@
 "use client";
 
 import { useLanyard } from "@/lib/hooks/useLanyard";
+import type { Activity } from "@/lib/hooks/useLanyard";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -45,7 +46,7 @@ function SpotifyCard({
   start: number;
   end: number;
 }) {
-  const [elapsed, setElapsed] = useState(Date.now() - start);
+  const [elapsed, setElapsed] = useState(() => Date.now() - start);
   const duration = end - start;
   const progress = Math.min((elapsed / duration) * 100, 100);
 
@@ -106,7 +107,7 @@ function SpotifyCard({
   );
 }
 
-function ActivityCard({ activity }: { activity: any }) {
+function ActivityCard({ activity }: { activity: Activity }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}

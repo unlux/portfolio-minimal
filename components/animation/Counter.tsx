@@ -23,7 +23,7 @@ export default function Counter({
   decimals = 0,
   separator = ",",
 }: CounterProps) {
-  const { ref, count } = useScrollCounter(end, duration);
+  const { ref, count } = useScrollCounter(end, duration, start);
 
   // Format the number with thousands separator
   const formatNumber = (num: number) => {
@@ -34,7 +34,7 @@ export default function Counter({
   };
 
   return (
-    <span ref={ref as any} className={className}>
+    <span ref={ref} className={className}>
       {prefix}
       {formatNumber(count)}
       {suffix}
