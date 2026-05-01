@@ -1,11 +1,16 @@
 import Reveal from "@/components/animation/Reveal";
 import InteractiveLink from "@/components/ui/InteractiveLink";
+import Image from "next/image";
 import type { ReactNode } from "react";
 
 type NotionPageShellProps = {
   title: string;
   description: string;
   notionUrl?: string;
+  cover?: {
+    url: string;
+    position: number;
+  } | null;
   children: ReactNode;
 };
 
@@ -13,6 +18,7 @@ export function NotionPageShell({
   title,
   description,
   notionUrl,
+  cover,
   children,
 }: NotionPageShellProps) {
   return (
@@ -38,6 +44,24 @@ export function NotionPageShell({
           )}
         </div>
       </Reveal>
+
+      {cover && (
+        <Reveal animation="fadeUp" delay={0.05}>
+          <div className="relative mb-8 h-48 overflow-hidden rounded-md border border-neutral-800 bg-neutral-950 sm:h-60">
+            <Image
+              alt=""
+              className="object-cover opacity-90"
+              fill
+              priority
+              sizes="(min-width: 768px) 640px, 100vw"
+              src={cover.url}
+              style={{
+                objectPosition: `center ${cover.position * 100}%`,
+              }}
+            />
+          </div>
+        </Reveal>
+      )}
 
       <Reveal animation="fadeUp" delay={0.1}>
         {children}
