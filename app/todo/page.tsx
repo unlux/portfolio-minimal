@@ -1,8 +1,13 @@
 export const dynamic = "force-dynamic";
 
+export const metadata = {
+  title: "Todo",
+  description: "A public slice of my working queue.",
+};
+
 import { NotionRenderer } from "@/components/NotionRenderer";
+import { NotionPageShell } from "@/components/NotionPageShell";
 import { NotionAPI } from "notion-client";
-import Reveal from "@/components/animation/Reveal";
 import { normalizeNotionRecordMap } from "@/lib/notion";
 import type { ExtendedRecordMap } from "notion-types";
 
@@ -18,14 +23,15 @@ export default async function TodoPage() {
     error = e;
   }
   return (
-    <section>
-      <Reveal animation="fadeUp" className="prose prose-neutral dark:prose-invert">
-        {error || !recordMap ? (
-          <div className="text-red-500">Failed to load Notion data.</div>
-        ) : (
-          <NotionRenderer recordMap={recordMap} />
-        )}
-      </Reveal>
-    </section>
+    <NotionPageShell
+      title="Todo"
+      description="A public slice of my working queue: things I am learning, shipping, breaking, and coming back to."
+    >
+      {error || !recordMap ? (
+        <div className="text-red-500">Failed to load Notion data.</div>
+      ) : (
+        <NotionRenderer recordMap={recordMap} />
+      )}
+    </NotionPageShell>
   );
 }

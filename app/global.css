@@ -223,16 +223,36 @@ table {
   white-space: nowrap;
 }
 
+.notion-shell {
+  @apply font-[family-name:var(--font-inter)];
+}
+
 .notion-portfolio .notion {
   @apply bg-transparent text-neutral-300;
 }
 
+.notion-portfolio.notion-full-page {
+  @apply min-h-0;
+}
+
+.notion-portfolio .notion-page-scroller {
+  @apply overflow-visible;
+}
+
 .notion-portfolio .notion-page {
-  @apply w-full px-0;
+  @apply w-full px-0 pb-0;
+}
+
+.notion-portfolio .notion-page-content {
+  @apply px-0;
+}
+
+.notion-portfolio .notion-page-content-inner {
+  @apply mx-0 max-w-none;
 }
 
 .notion-portfolio .notion-page-cover {
-  @apply mb-8 max-h-64 rounded-md object-cover opacity-90;
+  @apply mb-8 max-h-56 rounded-md border border-neutral-800 object-cover opacity-90;
 }
 
 .notion-portfolio .notion-page-icon {
@@ -244,7 +264,12 @@ table {
 }
 
 .notion-portfolio .notion-title {
-  @apply text-3xl font-semibold tracking-tight text-neutral-100;
+  @apply mt-0 text-3xl font-semibold tracking-tight text-neutral-100;
+}
+
+.notion-portfolio .notion-h,
+.notion-portfolio .notion-toggle {
+  @apply text-neutral-100;
 }
 
 .notion-portfolio .notion-text,
@@ -254,15 +279,23 @@ table {
 }
 
 .notion-portfolio .notion-page-link {
-  @apply rounded-sm transition-colors hover:bg-neutral-900 hover:text-neutral-100;
+  @apply rounded-sm underline decoration-neutral-700 underline-offset-4 transition-colors hover:bg-neutral-900 hover:text-neutral-100;
 }
 
 .notion-portfolio .notion-checkbox {
   @apply border-neutral-700;
 }
 
+.notion-portfolio .notion-checkbox-checked {
+  @apply bg-sky-500;
+}
+
 .notion-portfolio .notion-code {
   @apply my-5 rounded-md border border-neutral-800 bg-neutral-950 text-sm leading-6;
+}
+
+.notion-portfolio .notion-hr {
+  @apply border-neutral-800;
 }
 
 .title {

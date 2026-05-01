@@ -15,7 +15,7 @@ const navItems = {
     name: "todo",
   },
   "/currently-reading": {
-    name: "currently-reading",
+    name: "reading",
   },
 };
 
