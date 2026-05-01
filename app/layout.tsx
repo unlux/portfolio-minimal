@@ -11,6 +11,7 @@ import { baseUrl } from "./sitemap";
 import ClickSpark from "@/components/ui/ClickSpark";
 import LenisProvider from "@/components/LenisProvider";
 import { ClerkProvider } from "@clerk/nextjs";
+import { getValidClerkPublishableKey } from "@/lib/clerk";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -51,7 +52,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const clerkPublishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+  const clerkPublishableKey = getValidClerkPublishableKey();
 
   const AppShell = (
     <LenisProvider>

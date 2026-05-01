@@ -1,13 +1,10 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
 import { NextResponse, type NextMiddleware } from "next/server";
-
-const hasClerk =
-  Boolean(process.env.CLERK_SECRET_KEY) &&
-  Boolean(process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY);
+import { hasValidClerkConfig } from "@/lib/clerk";
 
 const clerkProxy = clerkMiddleware();
 
-export const proxy: NextMiddleware = hasClerk
+export const proxy: NextMiddleware = hasValidClerkConfig()
   ? clerkProxy
   : () => NextResponse.next();
 
