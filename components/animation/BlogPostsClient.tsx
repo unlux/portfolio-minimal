@@ -1,6 +1,7 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 
 type Post = {
   slug: string;
@@ -28,11 +29,54 @@ const itemVariants = {
   },
 } as const;
 
+type BackdropRect = { top: number; height: number };
+
 export default function BlogPostsClient({ posts }: { posts: Post[] }) {
+  const [backdrop, setBackdrop] = useState<BackdropRect | null>(null);
+
   return (
-    <motion.div variants={containerVariants} initial="hidden" animate="show">
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="show"
+      className="relative"
+      onMouseLeave={() => setBackdrop(null)}
+    >
+      {/* One persistent backdrop that slides between rows — two crossfading
+          elements (the layoutId approach) dip in opacity mid-transition. */}
+      <AnimatePresence>
+        {backdrop && (
+          <motion.span
+            initial={{
+              opacity: 0,
+              top: backdrop.top,
+              height: backdrop.height,
+            }}
+            animate={{
+              opacity: 1,
+              top: backdrop.top,
+              height: backdrop.height,
+            }}
+            exit={{ opacity: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 350,
+              damping: 32,
+              opacity: { duration: 0.15 },
+            }}
+            className="pointer-events-none absolute -inset-x-4 -z-10 block rounded-xl bg-neutral-100 dark:bg-neutral-900"
+          />
+        )}
+      </AnimatePresence>
       {posts.map((post) => (
-        <motion.article key={post.slug} variants={itemVariants}>
+        <motion.article
+          key={post.slug}
+          variants={itemVariants}
+          onMouseEnter={(e) => {
+            const el = e.currentTarget;
+            setBackdrop({ top: el.offsetTop - 12, height: el.offsetHeight + 24 });
+          }}
+        >
           <Link
             className="group mb-8 block rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             href={`/blog/${post.slug}`}
@@ -48,10 +92,10 @@ export default function BlogPostsClient({ posts }: { posts: Post[] }) {
                 </p>
 
                 <div>
-                  <h2 className="text-xl leading-tight tracking-tight text-neutral-100 transition-colors group-hover:text-white">
+                  <h2 className="text-xl leading-tight tracking-tight text-neutral-900 dark:text-neutral-100 transition-colors group-hover:text-black dark:group-hover:text-white">
                     {post.title}
                   </h2>
-                  <p className="mt-2 font-[family-name:var(--font-inter)] text-sm leading-6 text-neutral-400">
+                  <p className="mt-2 font-[family-name:var(--font-inter)] text-sm leading-6 text-neutral-600 dark:text-neutral-400">
                     {post.summary}
                   </p>
                   <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 font-[family-name:var(--font-inter)] text-xs uppercase tracking-[0.08em] text-neutral-500">

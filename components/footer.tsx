@@ -8,54 +8,63 @@ import {
   PopoverContent,
 } from "@/components/ui/popover";
 import InteractiveLink from "./ui/InteractiveLink";
+import { IconTooltip } from "./ui/IconTooltip";
 
 export default function Footer() {
   return (
     <footer className="mb-16 font-[family-name:var(--font-inter)]">
       <ul className="font-sm mt-8 flex flex-row flex-wrap items-center gap-6 text-neutral-600 dark:text-neutral-300">
         <li>
-          <a
-            aria-label="GitHub"
-            className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://dub.sh/luxhub"
-          >
-            <FaGithub size={20} />
-          </a>
+          <IconTooltip label="GitHub">
+            <a
+              aria-label="GitHub"
+              className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+              rel="noopener noreferrer"
+              target="_blank"
+              href="https://dub.sh/luxhub"
+            >
+              <FaGithub size={20} />
+            </a>
+          </IconTooltip>
         </li>
         <li>
-          <a
-            aria-label="X"
-            className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://x.com/whyunlux"
-          >
-            <FaXTwitter size={20} />
-          </a>
+          <IconTooltip label="X / Twitter">
+            <a
+              aria-label="X"
+              className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+              rel="noopener noreferrer"
+              target="_blank"
+              href="https://x.com/whyunlux"
+            >
+              <FaXTwitter size={20} />
+            </a>
+          </IconTooltip>
         </li>
         <li>
-          <a
-            aria-label="LinkedIn"
-            className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://dub.sh/lux-linkedin"
-          >
-            <FaLinkedin size={20} />
-          </a>
+          <IconTooltip label="LinkedIn">
+            <a
+              aria-label="LinkedIn"
+              className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+              rel="noopener noreferrer"
+              target="_blank"
+              href="https://dub.sh/lux-linkedin"
+            >
+              <FaLinkedin size={20} />
+            </a>
+          </IconTooltip>
         </li>
         <li>
-          <a
-            aria-label="Discord"
-            className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://discord.com/users/un.lux"
-          >
-            <FaDiscord size={20} />
-          </a>
+          <IconTooltip label="Discord">
+            <a
+              aria-label="Discord"
+              className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+              rel="noopener noreferrer"
+              target="_blank"
+              href="https://discord.com/users/un.lux"
+            >
+              <FaDiscord size={20} />
+            </a>
+          </IconTooltip>
         </li>
         <li className="relative">
           <Popover>
