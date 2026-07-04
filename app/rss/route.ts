@@ -36,7 +36,7 @@ export async function GET() {
   const rssFeed = `<?xml version="1.0" encoding="UTF-8" ?>
   <rss version="2.0">
     <channel>
-        <title>unlux — Lakshay Choudhary</title>
+        <title>unlux · Lakshay Choudhary</title>
         <link>${baseUrl}</link>
         <description>Notes on backend systems, tooling, and personal experiments.</description>
         ${itemsXml}

@@ -1,4 +1,4 @@
-# unlux — Lakshay Choudhary
+# unlux · Lakshay Choudhary
 
 > Personal site of Lakshay Choudhary (unlux), a full-stack developer focused on backend-heavy products, cloud infrastructure, and systems that stay maintainable after v1 ships. Works mostly with Next.js, TypeScript, Prisma, Redis, AWS, GCP, and Linux/NixOS.
 

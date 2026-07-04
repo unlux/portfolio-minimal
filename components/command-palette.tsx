@@ -49,8 +49,8 @@ const socials = [
 ];
 
 const resumes = [
-  { label: "Résumé — Web dev", href: "/resume.pdf", icon: FileTextIcon },
-  { label: "Résumé — DevOps", href: "/devops.pdf", icon: TerminalIcon },
+  { label: "Résumé: Web dev", href: "/resume.pdf", icon: FileTextIcon },
+  { label: "Résumé: DevOps", href: "/devops.pdf", icon: TerminalIcon },
 ];
 
 export function CommandPalette() {

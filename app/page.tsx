@@ -93,7 +93,7 @@ export default function Page() {
                   icon: <CodeXmlIcon />,
                   isExpanded: true,
                   description:
-                    "- Building AI-backed product workflows across full-stack surfaces.\n- Working on a trading platform with AI insights, backend integrations, and test coverage around critical flows.\n- Ship company marketing sites end to end — Next.js 16, Tailwind v4, statically generated from a headless Strapi CMS, deployed to Cloudflare Workers via OpenNext.\n- Built the content platform behind them: Strapi Cloud CMS with a Cloudflare R2 media pipeline, publish-triggered rebuild webhooks, and GitHub Actions deploys.",
+                    "- Building AI-backed product workflows across full-stack surfaces.\n- Working on a trading platform with AI insights, backend integrations, and test coverage around critical flows.\n- Ship company marketing sites end to end with Next.js 16, Tailwind v4, statically generated from a headless Strapi CMS, deployed to Cloudflare Workers via OpenNext.\n- Built the content platform behind them: Strapi Cloud CMS with a Cloudflare R2 media pipeline, publish-triggered rebuild webhooks, and GitHub Actions deploys.",
                   skills: [
                     "Next.js",
                     "TypeScript",
@@ -183,7 +183,7 @@ export default function Page() {
               tagline: "headless commerce platform",
               liveUrl: "https://tjj.unlux.dev",
               description:
-                "An end-to-end ecommerce platform for a toy-and-games brand — a Next.js 15 storefront on a headless MedusaJS backend, with Google auth, Razorpay payments, Supabase storage, and Redis caching, deployed across Vercel and AWS Lightsail.",
+                "An end-to-end ecommerce platform for a toy-and-games brand: a Next.js 15 storefront on a headless MedusaJS backend, with Google auth, Razorpay payments, Supabase storage, and Redis caching, deployed across Vercel and AWS Lightsail.",
               skills: [
                 "Next.js",
                 "MedusaJS",
@@ -199,7 +199,7 @@ export default function Page() {
               tagline: "cost-aware AWS pipeline",
               repoUrl: "https://github.com/unlux/video-transcoding-pipeline",
               description:
-                "A video transcoding pipeline built for cost, not convenience — SQS-driven jobs running containers directly on the EC2 instance instead of ECS to avoid the orchestration overhead, reading from and writing back to S3.",
+                "A video transcoding pipeline built for cost, not convenience: SQS-driven jobs running containers directly on the EC2 instance instead of ECS to avoid the orchestration overhead, reading from and writing back to S3.",
               skills: ["AWS SQS", "EC2", "S3", "Docker", "TypeScript"],
             },
             {
@@ -209,7 +209,7 @@ export default function Page() {
               liveUrl: "https://object-easy.vercel.app",
               repoUrl: "https://github.com/unlux/ObjectEasy",
               description:
-                "A browser-only S3 uploader — credentials live in local storage and go straight to AWS, never touching a server. Direct-to-S3 uploads with live progress, cancellation, and a copyable link history.",
+                "A browser-only S3 uploader: credentials live in local storage and go straight to AWS, never touching a server. Direct-to-S3 uploads with live progress, cancellation, and a copyable link history.",
               skills: ["Next.js", "AWS SDK v3", "S3", "shadcn/ui", "TypeScript"],
             },
           ]}

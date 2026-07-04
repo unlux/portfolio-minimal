@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useTheme } from "next-themes";
 
 /**
- * Keeps the browser-chrome color in step with the class-based theme toggle —
+ * Keeps the browser-chrome color in step with the class-based theme toggle;
  * a static <meta name="theme-color"> can only follow the OS preference.
  */
 export function ThemeColorSync() {

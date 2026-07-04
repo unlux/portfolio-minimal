@@ -24,7 +24,7 @@ export function verifyPassword(password: unknown): boolean {
 }
 
 /**
- * Deterministic session token derived from the secret — never the password
+ * Deterministic session token derived from the secret, never the password
  * itself, and not reversible to it. Rotating CONTACTS_PASSWORD invalidates
  * all sessions.
  */
@@ -46,7 +46,7 @@ export function isAuthorized(req: NextRequest): boolean {
   return isValidSession(req.cookies.get(SESSION_COOKIE)?.value);
 }
 
-// Naive in-memory limiter — fine for a single-instance deployment.
+// Naive in-memory limiter; fine for a single-instance deployment.
 const attempts = new Map<string, { count: number; resetAt: number }>();
 
 export function rateLimit(

@@ -23,7 +23,7 @@ export const viewport: Viewport = {
 };
 
 const siteDescription =
-  "Lakshay Choudhary — full-stack developer focused on backend-heavy products, cloud infrastructure, and systems that stay maintainable after v1 ships.";
+  "Lakshay Choudhary is a full-stack developer focused on backend-heavy products, cloud infrastructure, and systems that stay maintainable after v1 ships.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),

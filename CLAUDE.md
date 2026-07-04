@@ -47,7 +47,7 @@ npx prisma studio          # Open Prisma Studio GUI
 - **Clerk** for authentication (optional, auto-disabled without env vars)
 - **MDX** for blog content
 - **Radix UI** primitives for accessible components (shadcn new-york style, `components.json`)
-- **Motion** (`motion/react`) for animations — framer-motion was removed; never reintroduce it (same library, duplicate bundle)
+- **Motion** (`motion/react`) for animations; framer-motion was removed, never reintroduce it (same library, duplicate bundle)
 - **next-themes** for light/dark (class-based, dark default) with a View Transitions circle-blur toggle effect
 - **Lenis** for smooth scrolling
 - Several components come from **Chanh Dai's registry** (`npx shadcn@latest add "https://chanhdai.com/r/<name>.json"`): work-experience, toc-minimap, shimmering-text, scroll-fade utilities, theme-toggle-effect
@@ -71,19 +71,19 @@ Prisma client is generated through `@prisma/client` and imported via `lib/prisma
 
 #### Password-Protected Sections
 The app implements custom password protection (separate from Clerk), centered on `lib/private-auth.ts`:
-- `POST /api/contacts/verify` checks `CONTACTS_PASSWORD` (constant-time) and sets a `private_session` cookie containing an HMAC-derived token — never the raw password. Rotating the env var invalidates sessions.
+- `POST /api/contacts/verify` checks `CONTACTS_PASSWORD` (constant-time) and sets a `private_session` cookie containing an HMAC-derived token, never the raw password. Rotating the env var invalidates sessions.
 - All mutating routes (`POST /api/contacts`, `DELETE /api/contacts/[id]`, `POST /api/albums`) require that session via `isAuthorized()`.
 - Password endpoints are rate-limited in-memory (fine for single-instance deploys; revisit if horizontally scaled).
 - Photo albums can be individually password-protected via database field (plaintext in DB; album unlock at `POST /api/albums/[id]` is public but rate-limited).
 
 #### Theme System
 - `ThemeProvider` (next-themes) in `app/layout.tsx`: `attribute="class"`, `defaultTheme="dark"`, system enabled.
-- Toggle is `components/theme-toggle.tsx` — a single sun/moon button wrapping `setTheme` in `document.startViewTransition` for the circle-blur effect (CSS in `global.css` `@layer base`). The user explicitly rejected a 3-button segmented switcher.
+- Toggle is `components/theme-toggle.tsx`, a single sun/moon button wrapping `setTheme` in `document.startViewTransition` for the circle-blur effect (CSS in `global.css` `@layer base`). The user explicitly rejected a 3-button segmented switcher.
 - `ThemeColorSync` keeps `<meta name="theme-color">` in step with the toggle.
 - Code blocks (blog + notion) intentionally stay DARK in both themes; sugar-high vars are fixed to the dark palette.
 
 #### LCP Rule
-Above-the-fold homepage content (hero words, intro) animates via CSS keyframes (`.hero-word`, `.animate-fade-up` in `global.css`), NOT motion variants with `initial="hidden"` — those leave content invisible until hydration and wreck LCP. Keep it that way.
+Above-the-fold homepage content (hero words, intro) animates via CSS keyframes (`.hero-word`, `.animate-fade-up` in `global.css`), NOT motion variants with `initial="hidden"`, which leave content invisible until hydration and wreck LCP. Keep it that way.
 
 ### Directory Structure
 
@@ -149,7 +149,7 @@ prisma/
 #### Animation Components
 - `Reveal` (`components/animation/Reveal.tsx`): scroll-triggered reveal wrapper, respects reduced motion
 - All animation imports use `motion/react`
-- Blog list hover backdrop is ONE persistent element that springs between rows (a shared-layoutId crossfade flickers mid-transition — don't regress)
+- Blog list hover backdrop is ONE persistent element that springs between rows (a shared-layoutId crossfade flickers mid-transition, don't regress)
 
 ### Database Schema (Prisma)
 
@@ -186,7 +186,7 @@ DATABASE_URL=postgresql://...
 
 - `npm run build` is plain `next build`; `npm run build:deploy` also applies Prisma migrations
 - `postinstall` script runs `prisma generate` to ensure client is generated after npm install
-- Content rule: NEVER name or link Skillion's websites in portfolio copy — describe that work generically
+- Content rule: NEVER name or link Skillion's websites in portfolio copy; describe that work generically
 - PostHog initializes in `instrumentation-client.ts` only when `NEXT_PUBLIC_POSTHOG_KEY`/`HOST` are set
 - Path imports use `@/` alias (points to project root)
 - The app is designed to work without Clerk - middleware becomes a no-op if credentials are missing
