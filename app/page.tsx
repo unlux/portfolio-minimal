@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { CodeXmlIcon } from "lucide-react";
 import { BlogPosts } from "@/components/posts";
 import { WorkExperience } from "@/components/work-experience";
+import { Projects } from "@/components/projects";
 import Reveal from "@/components/animation/Reveal";
 import {
   BlogPostsSkeleton,
@@ -151,6 +152,68 @@ export default function Page() {
           ]}
           />
         </Suspense>
+      </Reveal>
+
+      {/* Projects */}
+      <Reveal animation="fadeUp" delay={0.35} className="mt-10">
+        <div className="text-2xl">Projects</div>
+        <Projects
+          className="px-0 pt-2"
+          projects={[
+            {
+              id: "joy-junction-commerce",
+              name: "Joy Junction storefront",
+              tagline: "headless commerce platform",
+              liveUrl: "https://tjj.unlux.dev",
+              description:
+                "An end-to-end ecommerce platform for a toy-and-games brand — a Next.js 15 storefront on a headless MedusaJS backend, with Google auth, Razorpay payments, Supabase storage, and Redis caching, deployed across Vercel and AWS Lightsail.",
+              skills: [
+                "Next.js",
+                "MedusaJS",
+                "Razorpay",
+                "Supabase",
+                "Redis",
+                "AWS Lightsail",
+              ],
+            },
+            {
+              id: "sla-ticketing",
+              name: "SLAWARE",
+              tagline: "SLA-aware support portal",
+              liveUrl: "https://sl-aware.vercel.app",
+              repoUrl: "https://github.com/unlux/sl-aware",
+              description:
+                "A full-stack ticketing system with role-based workflows for users, agents, and admins. SLA deadlines with breach detection, a full event timeline, optimistic locking that returns 409 on stale writes, plus per-user rate limiting and idempotent ticket creation.",
+              skills: [
+                "Next.js",
+                "React 19",
+                "Prisma",
+                "PostgreSQL",
+                "TanStack Query",
+                "Zod",
+              ],
+            },
+            {
+              id: "video-transcoding-pipeline",
+              name: "Video transcoding pipeline",
+              tagline: "cost-aware AWS pipeline",
+              repoUrl: "https://github.com/unlux/video-transcoding-pipeline",
+              description:
+                "A video transcoding pipeline built for cost, not convenience — SQS-driven jobs running containers directly on the EC2 instance instead of ECS to avoid the orchestration overhead, reading from and writing back to S3.",
+              skills: ["AWS SQS", "EC2", "S3", "Docker", "TypeScript"],
+            },
+            {
+              id: "objecteasy",
+              name: "ObjectEasy",
+              tagline: "client-side S3 uploader",
+              liveUrl: "https://object-easy.vercel.app",
+              repoUrl: "https://github.com/unlux/ObjectEasy",
+              description:
+                "A browser-only S3 uploader — credentials live in local storage and go straight to AWS, never touching a server. Direct-to-S3 uploads with live progress, cancellation, and a copyable link history.",
+              skills: ["Next.js", "AWS SDK v3", "S3", "shadcn/ui", "TypeScript"],
+            },
+          ]}
+        />
       </Reveal>
 
       <Reveal animation="fadeUp" delay={0.4} className="mt-8">
