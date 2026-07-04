@@ -24,11 +24,11 @@ export function NotionPageShell({
   return (
     <section className="notion-shell">
       <Reveal animation="fadeUp">
-        <div className="mb-8 border-b border-neutral-800 pb-6">
-          <h1 className="text-3xl font-semibold tracking-tight text-neutral-100">
+        <div className="mb-8 border-b border-neutral-200 dark:border-neutral-800 pb-6">
+          <h1 className="text-3xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
             {title}
           </h1>
-          <p className="mt-3 text-sm leading-6 text-neutral-400">
+          <p className="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
             {description}
           </p>
           {notionUrl && (
@@ -47,7 +47,7 @@ export function NotionPageShell({
 
       {cover && (
         <Reveal animation="fadeUp" delay={0.05}>
-          <div className="relative mb-8 h-48 overflow-hidden rounded-md border border-neutral-800 bg-neutral-950 sm:h-60">
+          <div className="relative mb-8 h-48 overflow-hidden rounded-md border border-neutral-200 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-950 sm:h-60">
             <Image
               alt=""
               className="object-cover opacity-90"

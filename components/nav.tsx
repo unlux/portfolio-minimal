@@ -1,8 +1,9 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const navItems = {
   "/": {
@@ -44,12 +45,12 @@ export function Navbar({ hasClerk = false }: { hasClerk?: boolean }) {
     <aside className="mb-10 tracking-tight">
       <div className="lg:sticky lg:top-20">
         <nav
-          className="flex flex-row items-center px-0 pb-0 md:overflow-auto scroll-pr-6 md:relative"
+          className="flex flex-row items-center px-0 pb-0 md:relative"
           id="nav"
         >
           {/* Animated nav items */}
           <motion.div
-            className="flex flex-row gap-1 pr-6"
+            className="flex min-w-0 flex-row gap-1 overflow-x-auto pr-2"
             variants={containerVariants}
             initial="hidden"
             animate="show"
@@ -83,9 +84,10 @@ export function Navbar({ hasClerk = false }: { hasClerk?: boolean }) {
             })}
           </motion.div>
 
-          {hasClerk && (
-            <AuthControls />
-          )}
+          <div className="ml-auto flex shrink-0 items-center gap-2">
+            <ThemeToggle />
+            {hasClerk && <AuthControls />}
+          </div>
         </nav>
       </div>
     </aside>
@@ -96,7 +98,7 @@ function AuthControls() {
   const { isLoaded, isSignedIn } = useUser();
 
   return (
-    <div className="ml-auto flex items-center gap-2">
+    <div className="flex items-center gap-2">
       {isLoaded && isSignedIn ? (
         <UserButton />
       ) : (

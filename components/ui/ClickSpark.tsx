@@ -1,5 +1,6 @@
 "use client";
 import React, { useRef, useEffect, useCallback } from "react";
+import { useTheme } from "next-themes";
 
 interface ClickSparkProps {
   sparkColor?: string;
@@ -20,7 +21,7 @@ interface Spark {
 }
 
 const ClickSpark: React.FC<ClickSparkProps> = ({
-  sparkColor = "#fff",
+  sparkColor,
   sparkSize = 10,
   sparkRadius = 15,
   sparkCount = 8,
@@ -32,6 +33,10 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sparksRef = useRef<Spark[]>([]);
   const startTimeRef = useRef<number | null>(null);
+
+  const { resolvedTheme } = useTheme();
+  const resolvedSparkColor =
+    sparkColor ?? (resolvedTheme === "light" ? "#171717" : "#fff");
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -113,7 +118,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
         const x2 = spark.x + (distance + lineLength) * Math.cos(spark.angle);
         const y2 = spark.y + (distance + lineLength) * Math.sin(spark.angle);
 
-        ctx.strokeStyle = sparkColor;
+        ctx.strokeStyle = resolvedSparkColor;
         ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.moveTo(x1, y1);
@@ -132,7 +137,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
       cancelAnimationFrame(animationId);
     };
   }, [
-    sparkColor,
+    resolvedSparkColor,
     sparkSize,
     sparkRadius,
     sparkCount,

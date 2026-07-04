@@ -1,6 +1,4 @@
 @import "tailwindcss";
-@import "react-notion-x/src/styles.css";
-@import "prismjs/themes/prism-tomorrow.css";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 
@@ -11,12 +9,56 @@
   color: #fefefe;
 }
 
+/* Above-the-fold entrances are CSS-driven so the hero paints before hydration
+   (motion variants leave content hidden until JS loads). */
+@keyframes hero-word-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.hero-word {
+  display: inline-block;
+  margin-right: 0.25em;
+  animation: hero-word-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes fade-up-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-word,
+  .animate-fade-up {
+    animation: none;
+  }
+}
+
 :root {
-  --sh-class: #2d5e9d;
-  --sh-identifier: #354150;
+  /* Code blocks stay dark in both themes, so sugar-high always uses the dark palette. */
+  --sh-class: #4c97f8;
+  --sh-identifier: white;
   --sh-sign: #8996a3;
-  --sh-string: #007f7a;
-  --sh-keyword: #e02518;
+  --sh-string: #0fa295;
+  --sh-keyword: #f47067;
   --sh-comment: #a19595;
   --sh-jsxliterals: #6266d1;
   --sh-property: #e25a1c;
@@ -55,20 +97,13 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --sh-class: #4c97f8;
-    --sh-identifier: white;
-    --sh-keyword: #f47067;
-    --sh-string: #0fa295;
-  }
-  html {
-    color-scheme: dark;
-  }
-}
-
 html {
   min-width: 360px;
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
 }
 
 .prose .anchor {
@@ -86,7 +121,7 @@ html {
 }
 
 .prose a {
-  @apply text-sky-300 underline transition-all decoration-sky-500/50 underline-offset-2 decoration-[0.1em] hover:text-sky-200;
+  @apply text-sky-600 underline transition-all decoration-sky-600/40 underline-offset-2 decoration-[0.1em] hover:text-sky-700 dark:text-sky-300 dark:decoration-sky-500/50 dark:hover:text-sky-200;
 }
 
 .prose .anchor:after {
@@ -99,12 +134,7 @@ html {
 }
 
 .prose {
-  @apply max-w-none text-[1rem] leading-7 text-neutral-200;
-
-  --tw-prose-bold: #f5f5f5;
-  --tw-prose-links: #7dd3fc;
-  --tw-prose-invert-bold: #f5f5f5;
-  --tw-prose-invert-links: #7dd3fc;
+  @apply max-w-none text-[1rem] leading-7 text-neutral-800 dark:text-neutral-200;
 }
 
 .prose pre {
@@ -133,52 +163,40 @@ html {
 }
 
 .prose p {
-  @apply my-5 text-neutral-200;
+  @apply my-5 text-neutral-800 dark:text-neutral-200;
 }
 
 .prose h1 {
-  @apply text-4xl font-medium tracking-tight mt-8 mb-3;
-
-  color: #101828;
-}
-@media (prefers-color-scheme: dark) {
-  .prose h1 {
-    color: #e5e5e5;
-  }
+  @apply text-4xl font-medium tracking-tight mt-8 mb-3 text-neutral-900 dark:text-neutral-200;
 }
 
 .prose h2 {
-  @apply text-2xl font-semibold tracking-tight mt-10 mb-3 text-neutral-100;
+  @apply text-2xl font-semibold tracking-tight mt-10 mb-3 text-neutral-900 dark:text-neutral-100;
 }
 
 .prose h3 {
-  @apply text-xl font-semibold tracking-tight mt-8 mb-3 text-neutral-100;
+  @apply text-xl font-semibold tracking-tight mt-8 mb-3 text-neutral-900 dark:text-neutral-100;
 }
 
 .prose h4 {
-  @apply text-lg font-semibold tracking-tight mt-7 mb-3 text-neutral-100;
+  @apply text-lg font-semibold tracking-tight mt-7 mb-3 text-neutral-900 dark:text-neutral-100;
 }
 
 .prose h5,
 .prose h6 {
-  @apply text-base font-semibold tracking-tight mt-7 mb-3 text-neutral-100;
+  @apply text-base font-semibold tracking-tight mt-7 mb-3 text-neutral-900 dark:text-neutral-100;
 }
 
 .prose strong {
-  @apply font-medium;
-  color: #f5f5f5 !important;
-}
-
-.prose a {
-  color: #7dd3fc !important;
+  @apply font-medium text-neutral-900 dark:text-neutral-100;
 }
 
 .prose ul {
-  @apply my-5 list-disc pl-6 text-neutral-200;
+  @apply my-5 list-disc pl-6 text-neutral-800 dark:text-neutral-200;
 }
 
 .prose ol {
-  @apply my-5 list-decimal pl-6 text-neutral-200;
+  @apply my-5 list-decimal pl-6 text-neutral-800 dark:text-neutral-200;
 }
 
 .prose li {
@@ -186,11 +204,11 @@ html {
 }
 
 .prose hr {
-  @apply my-10 border-neutral-700;
+  @apply my-10 border-neutral-200 dark:border-neutral-700;
 }
 
 .prose blockquote {
-  @apply my-6 border-l-2 border-neutral-300 pl-5 text-neutral-100;
+  @apply my-6 border-l-2 border-neutral-300 pl-5 text-neutral-700 dark:border-neutral-600 dark:text-neutral-100;
 }
 
 .prose > :first-child {
@@ -228,7 +246,7 @@ table {
 }
 
 .notion-portfolio .notion {
-  @apply bg-transparent text-neutral-300;
+  @apply bg-transparent text-neutral-700 dark:text-neutral-300;
 }
 
 .notion-portfolio.notion-full-page {
@@ -252,7 +270,7 @@ table {
 }
 
 .notion-portfolio .notion-page-cover {
-  @apply mb-8 max-h-56 rounded-md border border-neutral-800 object-cover opacity-90;
+  @apply mb-8 max-h-56 rounded-md border border-neutral-200 object-cover opacity-90 dark:border-neutral-800;
 }
 
 .notion-shell .notion-page-cover,
@@ -270,26 +288,26 @@ table {
 }
 
 .notion-portfolio .notion-title {
-  @apply mt-0 text-3xl font-semibold tracking-tight text-neutral-100;
+  @apply mt-0 text-3xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100;
 }
 
 .notion-portfolio .notion-h,
 .notion-portfolio .notion-toggle {
-  @apply text-neutral-100;
+  @apply text-neutral-900 dark:text-neutral-100;
 }
 
 .notion-portfolio .notion-text,
 .notion-portfolio .notion-collection-page-properties,
 .notion-portfolio .notion-page-link {
-  @apply text-neutral-300;
+  @apply text-neutral-700 dark:text-neutral-300;
 }
 
 .notion-portfolio .notion-text {
-  @apply my-3 text-sm leading-6 text-neutral-400;
+  @apply my-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400;
 }
 
 .notion-portfolio .notion-page-link {
-  @apply my-2 block rounded-md border border-neutral-800 bg-neutral-950/50 px-3 py-2 text-sm no-underline transition-colors hover:border-neutral-700 hover:bg-neutral-900 hover:text-neutral-100;
+  @apply my-2 block rounded-md border border-neutral-200 bg-neutral-50 px-3 py-2 text-sm no-underline transition-colors hover:border-neutral-300 hover:bg-neutral-100 hover:text-neutral-900 dark:border-neutral-800 dark:bg-neutral-950/50 dark:hover:border-neutral-700 dark:hover:bg-neutral-900 dark:hover:text-neutral-100;
 }
 
 .notion-portfolio .notion-collection,
@@ -311,11 +329,11 @@ table {
 }
 
 .notion-portfolio .notion-collection-header-title {
-  @apply text-base text-neutral-100;
+  @apply text-base text-neutral-900 dark:text-neutral-100;
 }
 
 .notion-portfolio .notion-collection-view-type-title {
-  @apply text-neutral-300;
+  @apply text-neutral-600 dark:text-neutral-300;
 }
 
 .notion-portfolio .notion-board-header {
@@ -326,7 +344,7 @@ table {
 .notion-portfolio .notion-gallery-grid,
 .notion-portfolio .notion-list-body,
 .notion-portfolio .notion-table-header-inner {
-  @apply border-neutral-800;
+  @apply border-neutral-200 dark:border-neutral-800;
 }
 
 .notion-portfolio .notion-board-view-size-small .notion-board-th,
@@ -335,7 +353,7 @@ table {
 }
 
 .notion-portfolio .notion-collection-card {
-  @apply rounded-md border border-neutral-800 bg-neutral-950/70 shadow-none transition-colors hover:border-neutral-700 hover:bg-neutral-900;
+  @apply rounded-md border border-neutral-200 bg-neutral-50 shadow-none transition-colors hover:border-neutral-300 hover:bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-950/70 dark:hover:border-neutral-700 dark:hover:bg-neutral-900;
 }
 
 .notion-portfolio .notion-collection-card-body {
@@ -343,11 +361,11 @@ table {
 }
 
 .notion-portfolio .notion-collection-card-property:first-child {
-  @apply text-sm font-medium text-neutral-100;
+  @apply text-sm font-medium text-neutral-900 dark:text-neutral-100;
 }
 
 .notion-portfolio .notion-collection-card-property:not(:first-child) {
-  @apply text-xs text-neutral-400;
+  @apply text-xs text-neutral-600 dark:text-neutral-400;
 }
 
 .notion-portfolio .notion-to-do {
@@ -355,7 +373,7 @@ table {
 }
 
 .notion-portfolio .notion-to-do-item {
-  @apply grid min-h-8 grid-cols-[1rem_minmax(0,1fr)] gap-x-2.5 border-b border-neutral-900 py-1.5 text-[0.98rem] leading-6;
+  @apply grid min-h-8 grid-cols-[1rem_minmax(0,1fr)] gap-x-2.5 border-b border-neutral-100 dark:border-neutral-900 py-1.5 text-[0.98rem] leading-6;
 }
 
 .notion-portfolio .notion-to-do-children {
@@ -363,11 +381,11 @@ table {
 }
 
 .notion-portfolio .notion-to-do-body {
-  @apply min-w-0 text-neutral-200;
+  @apply min-w-0 text-neutral-800 dark:text-neutral-200;
 }
 
 .notion-portfolio .notion-to-do-checked {
-  @apply text-neutral-500 line-through decoration-neutral-600;
+  @apply text-neutral-400 line-through decoration-neutral-400 dark:text-neutral-500 dark:decoration-neutral-600;
 }
 
 .notion-portfolio .notion-to-do-item .notion-property-checkbox {
@@ -383,7 +401,7 @@ table {
 
 .notion-portfolio .notion-property-checkbox-checked,
 .notion-portfolio .notion-property-checkbox-unchecked {
-  @apply size-4 shrink-0 border-neutral-700;
+  @apply size-4 shrink-0 border-neutral-300 dark:border-neutral-700;
 }
 
 .notion-portfolio .notion-property-checkbox-checked {
@@ -399,7 +417,7 @@ table {
 }
 
 .notion-portfolio .notion-hr {
-  @apply border-neutral-800;
+  @apply border-neutral-200 dark:border-neutral-800;
 }
 
 .title {

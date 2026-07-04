@@ -97,12 +97,12 @@ function getReadingItems(recordMap: ExtendedRecordMap) {
 function ReadingCard({ item }: { item: ReadingItem }) {
   return (
     <a
-      className="group block rounded-md border border-neutral-800 bg-neutral-950/60 p-3 no-underline transition-colors hover:border-neutral-700 hover:bg-neutral-900"
+      className="group block rounded-md border border-neutral-200 bg-neutral-50 p-3 no-underline transition-colors hover:border-neutral-300 hover:bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-950/60 dark:hover:border-neutral-700 dark:hover:bg-neutral-900"
       href={item.url}
       rel="noopener noreferrer"
       target="_blank"
     >
-      <div className="text-sm font-medium leading-5 text-neutral-100 group-hover:text-sky-200">
+      <div className="text-sm font-medium leading-5 text-neutral-900 group-hover:text-sky-700 dark:text-neutral-100 dark:group-hover:text-sky-200">
         {item.title}
       </div>
       <div className="mt-2 text-xs text-neutral-500">{item.domain}</div>
@@ -110,7 +110,7 @@ function ReadingCard({ item }: { item: ReadingItem }) {
         <div className="mt-3 flex flex-wrap gap-1.5">
           {item.tags.slice(0, 4).map((tag) => (
             <span
-              className="rounded-sm border border-neutral-800 px-1.5 py-0.5 text-[0.7rem] leading-4 text-neutral-400"
+              className="rounded-sm border border-neutral-200 px-1.5 py-0.5 text-[0.7rem] leading-4 text-neutral-600 dark:border-neutral-800 dark:text-neutral-400"
               key={tag}
             >
               {tag}
@@ -139,7 +139,7 @@ export function ReadingCollection({
 
   if (items.length === 0) {
     return (
-      <div className="rounded-md border border-neutral-800 bg-neutral-950/60 p-4 text-sm text-neutral-400">
+      <div className="rounded-md border border-neutral-200 bg-neutral-50 p-4 text-sm text-neutral-600 dark:border-neutral-800 dark:bg-neutral-950/60 dark:text-neutral-400">
         No reading links found in Notion.
       </div>
     );
@@ -147,21 +147,21 @@ export function ReadingCollection({
 
   return (
     <div className="space-y-8">
-      <div className="grid grid-cols-3 border-y border-neutral-800 py-4 text-sm">
+      <div className="grid grid-cols-3 border-y border-neutral-200 dark:border-neutral-800 py-4 text-sm">
         <div>
-          <div className="text-lg font-semibold text-neutral-100">
+          <div className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
             {items.length}
           </div>
           <div className="mt-1 text-xs text-neutral-500">tracked</div>
         </div>
         <div>
-          <div className="text-lg font-semibold text-neutral-100">
+          <div className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
             {toRead.length}
           </div>
           <div className="mt-1 text-xs text-neutral-500">queued</div>
         </div>
         <div>
-          <div className="text-lg font-semibold text-neutral-100">
+          <div className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
             {read.length}
           </div>
           <div className="mt-1 text-xs text-neutral-500">read</div>
@@ -170,8 +170,8 @@ export function ReadingCollection({
 
       {sections.map((section) => (
         <section key={section.title}>
-          <div className="mb-3 flex items-baseline justify-between border-b border-neutral-800 pb-2">
-            <h2 className="text-base font-semibold text-neutral-100">
+          <div className="mb-3 flex items-baseline justify-between border-b border-neutral-200 dark:border-neutral-800 pb-2">
+            <h2 className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
               {section.title}
             </h2>
             <span className="text-xs text-neutral-500">

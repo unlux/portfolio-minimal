@@ -12,6 +12,7 @@ import ClickSpark from "@/components/ui/ClickSpark";
 import LenisProvider from "@/components/LenisProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { getValidClerkPublishableKey } from "@/lib/clerk";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const siteDescription =
   "Lakshay Choudhary — full-stack developer focused on backend-heavy products, cloud infrastructure, and systems that stay maintainable after v1 ships.";
@@ -78,7 +79,13 @@ export default function RootLayout({
   const clerkPublishableKey = getValidClerkPublishableKey();
 
   const AppShell = (
-    <LenisProvider>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="dark"
+      enableSystem
+      disableTransitionOnChange
+    >
+      <LenisProvider>
       <ClickSpark>
         <main className=" antialiased max-w-xl mx-4 mt-8 lg:mx-auto flex-auto min-w-0 flex flex-col px-2 md:px-0">
           <Navbar hasClerk={!!clerkPublishableKey} />
@@ -88,14 +95,15 @@ export default function RootLayout({
           <SpeedInsights />
         </main>
       </ClickSpark>
-    </LenisProvider>
+      </LenisProvider>
+    </ThemeProvider>
   );
 
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={cx(
-        "dark dark:bg-black",
         GeistSans.variable,
         GeistMono.variable,
         Inter.variable
