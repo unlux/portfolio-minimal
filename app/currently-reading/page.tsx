@@ -10,6 +10,9 @@ export const revalidate = 21600;
 export const metadata = {
   title: "Reading",
   description: "Books, articles, and technical rabbit holes I am tracking.",
+  alternates: {
+    canonical: "/currently-reading",
+  },
 };
 
 export default async function CurrentlyReadingPage() {

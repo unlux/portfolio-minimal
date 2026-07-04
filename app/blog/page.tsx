@@ -6,13 +6,16 @@ import { BlogPostsSkeleton } from "@/components/ui/loading-skeleton";
 export const metadata = {
   title: "Writing",
   description: "Notes on backend systems, tooling, and personal experiments.",
+  alternates: {
+    canonical: "/blog",
+  },
 };
 
 export default function Page() {
   return (
     <section>
       <Reveal animation="fadeUp">
-        <h1 className="font-semibold text-2xl mb-8 tracking-tight italic text-neutral-100">
+        <h1 className="font-semibold text-2xl mb-8 tracking-tight italic text-neutral-900 dark:text-neutral-100">
           Writing
         </h1>
       </Reveal>

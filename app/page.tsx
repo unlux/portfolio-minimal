@@ -54,7 +54,7 @@ export default function Page() {
                   icon: "code",
                   isExpanded: true,
                   description:
-                    "- Building AI-backed product workflows across full-stack surfaces.\n- Working on a trading platform with AI insights, backend integrations, and test coverage around critical flows.",
+                    "- Building AI-backed product workflows across full-stack surfaces.\n- Working on a trading platform with AI insights, backend integrations, and test coverage around critical flows.\n- Ship company marketing sites end to end — Next.js 16, Tailwind v4, statically generated from a headless Strapi CMS, deployed to Cloudflare Workers via OpenNext.\n- Built the content platform behind them: Strapi Cloud CMS with a Cloudflare R2 media pipeline, publish-triggered rebuild webhooks, and GitHub Actions deploys.",
                 },
               ],
             },

@@ -3,6 +3,9 @@ export const revalidate = 21600;
 export const metadata = {
   title: "Todo",
   description: "A public slice of my working queue.",
+  alternates: {
+    canonical: "/todo",
+  },
 };
 
 import { NotionRenderer } from "@/components/NotionRenderer";

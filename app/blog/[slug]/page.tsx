@@ -37,6 +37,9 @@ export async function generateMetadata(props: BlogPageProps) {
   return {
     title,
     description,
+    alternates: {
+      canonical: `/blog/${post.slug}`,
+    },
     openGraph: {
       title,
       description,
@@ -81,16 +84,16 @@ export default async function Blog(props: BlogPageProps) {
             description: post.metadata.summary,
             image: post.metadata.image
               ? `${baseUrl}${post.metadata.image}`
-              : `/og?title=${encodeURIComponent(post.metadata.title)}`,
+              : `${baseUrl}/og?title=${encodeURIComponent(post.metadata.title)}`,
             url: `${baseUrl}/blog/${post.slug}`,
             author: {
               "@type": "Person",
-              name: "My Portfolio",
+              name: "Lakshay Choudhary",
             },
           }),
         }}
       />
-      <h1 className="title font-semibold text-3xl leading-tight tracking-tight text-neutral-100">
+      <h1 className="title font-semibold text-3xl leading-tight tracking-tight text-neutral-900 dark:text-neutral-100">
         {post.metadata.title}
       </h1>
       <div className="flex justify-between items-center mt-2 mb-8 text-sm">

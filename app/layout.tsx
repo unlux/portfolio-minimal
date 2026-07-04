@@ -13,23 +13,46 @@ import LenisProvider from "@/components/LenisProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { getValidClerkPublishableKey } from "@/lib/clerk";
 
+const siteDescription =
+  "Lakshay Choudhary — full-stack developer focused on backend-heavy products, cloud infrastructure, and systems that stay maintainable after v1 ships.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
     default: "unlux",
-    template: "%s | unlux ",
+    template: "%s | unlux",
   },
   icons: {
     icon: "/favicon.ico",
   },
-  description: "This is my portfolio.",
+  description: siteDescription,
+  alternates: {
+    canonical: "/",
+    types: {
+      "application/rss+xml": "/rss",
+    },
+  },
   openGraph: {
-    title: "My Portfolio",
-    description: "This is my portfolio.",
+    title: "unlux",
+    description: siteDescription,
     url: baseUrl,
-    siteName: "My Portfolio",
+    siteName: "unlux",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/og?title=Hi, I'm Lakshay Choudhary",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "unlux",
+    description: siteDescription,
+    creator: "@whyunlux",
+    images: ["/og?title=Hi, I'm Lakshay Choudhary"],
   },
   robots: {
     index: true,
