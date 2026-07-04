@@ -31,6 +31,7 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command";
+import { useLenis } from "@/components/LenisProvider";
 
 const EMAIL = "contact@unlux.dev";
 
@@ -58,6 +59,19 @@ export function CommandPalette() {
   const [copied, setCopied] = useState(false);
   const router = useRouter();
   const { resolvedTheme, setTheme } = useTheme();
+  const { lenis } = useLenis();
+
+  // Lenis intercepts wheel on the root and scrolls the page behind the palette.
+  // Stopping it while the palette is open hands wheel events back to the native
+  // command list (which also carries data-lenis-prevent as a belt-and-braces).
+  useEffect(() => {
+    if (!lenis) return;
+    if (open) lenis.stop();
+    else lenis.start();
+    return () => {
+      lenis.start();
+    };
+  }, [open, lenis]);
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -123,7 +137,7 @@ export function CommandPalette() {
       className="data-[state=open]:zoom-in-100 data-[state=open]:fade-in-0 data-[state=open]:duration-0"
     >
       <CommandInput placeholder="Type a command or search…" />
-      <CommandList>
+      <CommandList data-lenis-prevent>
         <CommandEmpty>No results found.</CommandEmpty>
 
         <CommandGroup heading="Go to">
