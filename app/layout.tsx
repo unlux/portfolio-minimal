@@ -15,6 +15,7 @@ import { getValidClerkPublishableKey } from "@/lib/clerk";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeColorSync } from "@/components/theme-color-sync";
 import { CommandPalette } from "@/components/command-palette";
+import { MotionConfig } from "motion/react";
 import type { Viewport } from "next";
 
 export const viewport: Viewport = {
@@ -98,18 +99,22 @@ export default function RootLayout({
       disableTransitionOnChange
     >
       <ThemeColorSync />
-      <CommandPalette />
-      <LenisProvider>
-      <ClickSpark>
-        <main className=" antialiased max-w-xl mx-4 mt-8 lg:mx-auto flex-auto min-w-0 flex flex-col px-2 md:px-0">
-          <Navbar hasClerk={!!clerkPublishableKey} />
-          {children}
-          <Footer />
-          <Analytics />
-          <SpeedInsights />
-        </main>
-      </ClickSpark>
-      </LenisProvider>
+      {/* reducedMotion="user" makes every motion/react component drop
+          transform/layout animations (keeping opacity) when the OS asks. */}
+      <MotionConfig reducedMotion="user">
+        <CommandPalette />
+        <LenisProvider>
+        <ClickSpark>
+          <main className=" antialiased max-w-xl mx-4 mt-8 lg:mx-auto flex-auto min-w-0 flex flex-col px-2 md:px-0">
+            <Navbar hasClerk={!!clerkPublishableKey} />
+            {children}
+            <Footer />
+            <Analytics />
+            <SpeedInsights />
+          </main>
+        </ClickSpark>
+        </LenisProvider>
+      </MotionConfig>
     </ThemeProvider>
   );
 

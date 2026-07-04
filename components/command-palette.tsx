@@ -115,7 +115,13 @@ export function CommandPalette() {
   }, []);
 
   return (
-    <CommandDialog open={open} onOpenChange={setOpen}>
+    <CommandDialog
+      open={open}
+      onOpenChange={setOpen}
+      // Keyboard-initiated actions should feel instant (Raycast-style):
+      // no enter zoom/fade. The exit animation is left intact.
+      className="data-[state=open]:zoom-in-100 data-[state=open]:fade-in-0 data-[state=open]:duration-0"
+    >
       <CommandInput placeholder="Type a command or search…" />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>

@@ -42,8 +42,8 @@ export default function BlogPostsClient({ posts }: { posts: Post[] }) {
       className="relative"
       onMouseLeave={() => setBackdrop(null)}
     >
-      {/* One persistent backdrop that slides between rows; two crossfading
-          elements (the layoutId approach) dip in opacity mid-transition. */}
+      {/* One persistent backdrop that springs between rows. A per-row crossfade
+          approach dips in opacity mid-transition, so we animate a single element. */}
       <AnimatePresence>
         {backdrop && (
           <motion.span

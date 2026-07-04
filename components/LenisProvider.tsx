@@ -34,6 +34,15 @@ export default function LenisProvider({ children }: LenisProviderProps) {
   const pathname = usePathname();
 
   useEffect(() => {
+    // Smooth scroll hijacks native scrolling, which can trigger motion sickness.
+    // Skip Lenis entirely for users who prefer reduced motion.
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+
     // Initialize Lenis with optimized settings
     const lenis = new Lenis({
       duration: 1.2,

@@ -4,7 +4,7 @@
  * Based on Apple's Human Interface Guidelines and Material Design
  */
 
-import { Variants, Transition } from "motion/react";
+import { Variants } from "motion/react";
 
 type CubicBezier = [number, number, number, number];
 
@@ -13,66 +13,28 @@ type CubicBezier = [number, number, number, number];
 // ============================================================================
 
 export const easings: Record<string, CubicBezier> = {
-  // Apple's standard easing
-  ease: [0.25, 0.1, 0.25, 1],
-
-  // Material Design standard easing
-  standard: [0.4, 0.0, 0.2, 1],
-
   // Emphasize easing (elements entering)
   emphasize: [0.0, 0.0, 0.2, 1],
 
-  // De-emphasize easing (elements leaving)
-  decelerate: [0.4, 0.0, 1, 1],
-
-  // Sharp easing (very quick)
-  sharp: [0.4, 0.0, 0.6, 1],
-
   // Smooth easing (very gentle)
   smooth: [0.22, 1, 0.36, 1],
-
-  // Bounce
-  bounce: [0.68, -0.55, 0.27, 1.55],
-
-  // Elastic
-  elastic: [0.68, -0.6, 0.32, 1.6],
 };
 
 // ============================================================================
 // DURATIONS (in seconds)
+// Kept short per the "great animations are fast" guideline (~<300ms for UI).
 // ============================================================================
 
 export const durations = {
-  instant: 0,
   fast: 0.15,
   quick: 0.25,
   normal: 0.35,
   smooth: 0.5,
-  slow: 0.75,
-  verySlow: 1,
 } as const;
 
 // ============================================================================
 // FADE ANIMATIONS
 // ============================================================================
-
-export const fadeVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: durations.normal,
-      ease: easings.smooth,
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: {
-      duration: durations.quick,
-      ease: easings.decelerate,
-    },
-  },
-};
 
 export const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -80,7 +42,7 @@ export const fadeInUp: Variants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: durations.smooth,
+      duration: durations.normal,
       ease: easings.smooth,
     },
   },
@@ -92,7 +54,7 @@ export const fadeInDown: Variants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: durations.smooth,
+      duration: durations.normal,
       ease: easings.smooth,
     },
   },
@@ -104,7 +66,7 @@ export const fadeInLeft: Variants = {
     opacity: 1,
     x: 0,
     transition: {
-      duration: durations.smooth,
+      duration: durations.normal,
       ease: easings.smooth,
     },
   },
@@ -116,7 +78,7 @@ export const fadeInRight: Variants = {
     opacity: 1,
     x: 0,
     transition: {
-      duration: durations.smooth,
+      duration: durations.normal,
       ease: easings.smooth,
     },
   },
@@ -126,18 +88,6 @@ export const fadeInRight: Variants = {
 // SCALE ANIMATIONS
 // ============================================================================
 
-export const scaleVariants: Variants = {
-  hidden: { scale: 0.8, opacity: 0 },
-  visible: {
-    scale: 1,
-    opacity: 1,
-    transition: {
-      duration: durations.smooth,
-      ease: easings.bounce,
-    },
-  },
-};
-
 export const scaleUp: Variants = {
   hidden: { scale: 0.95, opacity: 0 },
   visible: {
@@ -146,18 +96,6 @@ export const scaleUp: Variants = {
     transition: {
       duration: durations.normal,
       ease: easings.emphasize,
-    },
-  },
-};
-
-export const scaleDown: Variants = {
-  hidden: { scale: 1.05, opacity: 0 },
-  visible: {
-    scale: 1,
-    opacity: 1,
-    transition: {
-      duration: durations.normal,
-      ease: easings.decelerate,
     },
   },
 };
@@ -172,43 +110,7 @@ export const slideInUp: Variants = {
     y: 0,
     opacity: 1,
     transition: {
-      duration: durations.smooth,
-      ease: easings.emphasize,
-    },
-  },
-};
-
-export const slideInDown: Variants = {
-  hidden: { y: "-100%", opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: durations.smooth,
-      ease: easings.emphasize,
-    },
-  },
-};
-
-export const slideInLeft: Variants = {
-  hidden: { x: "-100%", opacity: 0 },
-  visible: {
-    x: 0,
-    opacity: 1,
-    transition: {
-      duration: durations.smooth,
-      ease: easings.emphasize,
-    },
-  },
-};
-
-export const slideInRight: Variants = {
-  hidden: { x: "100%", opacity: 0 },
-  visible: {
-    x: 0,
-    opacity: 1,
-    transition: {
-      duration: durations.smooth,
+      duration: durations.normal,
       ease: easings.emphasize,
     },
   },
@@ -218,18 +120,6 @@ export const slideInRight: Variants = {
 // BLUR ANIMATIONS
 // ============================================================================
 
-export const blurFadeIn: Variants = {
-  hidden: { opacity: 0, filter: "blur(10px)" },
-  visible: {
-    opacity: 1,
-    filter: "blur(0px)",
-    transition: {
-      duration: durations.slow,
-      ease: easings.smooth,
-    },
-  },
-};
-
 export const blurSlideUp: Variants = {
   hidden: { opacity: 0, y: 24, filter: "blur(10px)" },
   visible: {
@@ -237,7 +127,7 @@ export const blurSlideUp: Variants = {
     y: 0,
     filter: "blur(0px)",
     transition: {
-      duration: durations.slow,
+      duration: durations.smooth,
       ease: easings.smooth,
     },
   },
@@ -258,119 +148,9 @@ export const staggerContainer: Variants = {
   },
 };
 
-export const fastStaggerContainer: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.05,
-      delayChildren: 0,
-    },
-  },
-};
-
-export const slowStaggerContainer: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-// ============================================================================
-// HOVER/TAP/FOCUS ANIMATIONS
-// ============================================================================
-
-export const hoverScale = {
-  scale: 1.05,
-  transition: {
-    duration: durations.quick,
-    ease: easings.emphasize,
-  },
-};
-
-export const hoverLift = {
-  y: -4,
-  transition: {
-    duration: durations.quick,
-    ease: easings.emphasize,
-  },
-};
-
-export const tapScale = {
-  scale: 0.95,
-  transition: {
-    duration: durations.fast,
-    ease: easings.sharp,
-  },
-};
-
-export const focusRing = {
-  boxShadow: "0 0 0 2px rgba(59, 130, 246, 0.5)",
-  transition: {
-    duration: durations.quick,
-    ease: easings.standard,
-  },
-};
-
 // ============================================================================
 // UTILITY FUNCTIONS
 // ============================================================================
-
-/**
- * Create a custom stagger container with specific timing
- */
-export function createStaggerContainer(
-  staggerDelay: number = 0.1,
-  initialDelay: number = 0
-): Variants {
-  return {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: staggerDelay,
-        delayChildren: initialDelay,
-      },
-    },
-  };
-}
-
-/**
- * Create a fade animation with custom delay
- */
-export function createFadeIn(delay: number = 0, y: number = 0): Variants {
-  return {
-    hidden: { opacity: 0, y },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: durations.normal,
-        ease: easings.smooth,
-        delay,
-      },
-    },
-  };
-}
-
-/**
- * Create a custom transition
- */
-export function createTransition(
-  duration: number,
-  ease: Transition["ease"] = easings.smooth,
-  delay: number = 0
-): Transition {
-  return {
-    duration,
-    ease,
-    delay,
-  };
-}
 
 /**
  * Respect user's motion preferences

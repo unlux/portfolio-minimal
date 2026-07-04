@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import type { Variants } from "motion/react"
-import { motion } from "motion/react"
+import { motion, useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
 
@@ -29,6 +29,20 @@ export function ShimmeringText({
   className,
   ...props
 }: ShimmeringTextProps) {
+  const prefersReducedMotion = useReducedMotion()
+
+  // Pause the loop while the tab is hidden so we don't repaint color forever
+  // in the background, and freeze it entirely for reduced-motion users.
+  const [tabHidden, setTabHidden] = React.useState(false)
+  React.useEffect(() => {
+    const onVisibility = () => setTabHidden(document.hidden)
+    onVisibility()
+    document.addEventListener("visibilitychange", onVisibility)
+    return () => document.removeEventListener("visibilitychange", onVisibility)
+  }, [])
+
+  const stopped = isStopped || prefersReducedMotion || tabHidden
+
   const createCharVariants = React.useCallback(
     (charIndex: number): Variants => ({
       running: {
@@ -67,7 +81,7 @@ export function ShimmeringText({
           key={i}
           className="inline-block whitespace-pre"
           initial="stopped"
-          animate={isStopped ? "stopped" : "running"}
+          animate={stopped ? "stopped" : "running"}
           variants={createCharVariants(i)}
           aria-hidden
         >
