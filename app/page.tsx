@@ -161,22 +161,6 @@ export default function Page() {
           className="px-0 pt-2"
           projects={[
             {
-              id: "joy-junction-commerce",
-              name: "Joy Junction storefront",
-              tagline: "headless commerce platform",
-              liveUrl: "https://tjj.unlux.dev",
-              description:
-                "An end-to-end ecommerce platform for a toy-and-games brand — a Next.js 15 storefront on a headless MedusaJS backend, with Google auth, Razorpay payments, Supabase storage, and Redis caching, deployed across Vercel and AWS Lightsail.",
-              skills: [
-                "Next.js",
-                "MedusaJS",
-                "Razorpay",
-                "Supabase",
-                "Redis",
-                "AWS Lightsail",
-              ],
-            },
-            {
               id: "sla-ticketing",
               name: "SLAWARE",
               tagline: "SLA-aware support portal",
@@ -191,6 +175,22 @@ export default function Page() {
                 "PostgreSQL",
                 "TanStack Query",
                 "Zod",
+              ],
+            },
+            {
+              id: "joy-junction-commerce",
+              name: "Joy Junction storefront",
+              tagline: "headless commerce platform",
+              liveUrl: "https://tjj.unlux.dev",
+              description:
+                "An end-to-end ecommerce platform for a toy-and-games brand — a Next.js 15 storefront on a headless MedusaJS backend, with Google auth, Razorpay payments, Supabase storage, and Redis caching, deployed across Vercel and AWS Lightsail.",
+              skills: [
+                "Next.js",
+                "MedusaJS",
+                "Razorpay",
+                "Supabase",
+                "Redis",
+                "AWS Lightsail",
               ],
             },
             {

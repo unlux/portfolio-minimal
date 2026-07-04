@@ -85,12 +85,29 @@ export function Navbar({ hasClerk = false }: { hasClerk?: boolean }) {
           </motion.div>
 
           <div className="ml-auto flex shrink-0 items-center gap-2">
+            <CommandTrigger />
             <ThemeToggle />
             {hasClerk && <AuthControls />}
           </div>
         </nav>
       </div>
     </aside>
+  );
+}
+
+function CommandTrigger() {
+  return (
+    <button
+      type="button"
+      aria-label="Open command palette"
+      onClick={() =>
+        window.dispatchEvent(new Event("open-command-palette"))
+      }
+      className="hidden sm:flex items-center gap-1 rounded-md border border-border bg-muted/40 px-2 py-1 text-xs text-muted-foreground transition-colors hover:text-foreground hover:bg-muted outline-none focus-visible:ring-1 focus-visible:ring-blue-400 focus-visible:ring-offset-1 focus-visible:ring-offset-background"
+    >
+      <kbd className="font-sans">⌘</kbd>
+      <kbd className="font-sans">K</kbd>
+    </button>
   );
 }
 
