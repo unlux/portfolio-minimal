@@ -541,6 +541,9 @@ table {
   }
 
 @keyframes hide-bottom-mask {
+  from {
+    --bottom-mask-height: var(--mask-height);
+    }
   to {
     --bottom-mask-height: 0px;
     }
@@ -553,6 +556,9 @@ table {
   }
 
 @keyframes hide-right-mask {
+  from {
+    --right-mask-width: var(--mask-width);
+    }
   to {
     --right-mask-width: 0px;
     }
@@ -644,10 +650,13 @@ body {
     initial-value: 0px;
 }
 
+/* Masks default to 0 so a container that doesn't actually scroll (inactive
+   scroll timeline falls back to the base value) shows no fade; the keyframes'
+   explicit `from` restores the fade on scrollable containers. */
 @property --bottom-mask-height {
     syntax: "<length>";
     inherits: true;
-    initial-value: 64px;
+    initial-value: 0px;
 }
 
 @property --left-mask-width {
@@ -659,7 +668,7 @@ body {
 @property --right-mask-width {
     syntax: "<length>";
     inherits: true;
-    initial-value: 64px;
+    initial-value: 0px;
 }
 
 @utility scroll-fade-effect-y {
