@@ -9,6 +9,42 @@
   color: #fefefe;
 }
 
+/*
+ * Themed scrollbars everywhere. Firefox uses scrollbar-width/color; WebKit and
+ * Chromium use the pseudo-elements. Colors track the theme tokens so the bar
+ * stays subtle in both light and dark. shadcn's ScrollArea overlays this on the
+ * inner regions that use it; native-scroll areas (page, code blocks, cmdk list,
+ * dialog bodies, nav row) inherit this styling.
+ */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--border);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--muted-foreground);
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 /* Above-the-fold entrances are CSS-driven so the hero paints before hydration
    (motion variants leave content hidden until JS loads). */
 @keyframes hero-word-in {
@@ -218,13 +254,27 @@ html.dark {
   margin-bottom: 1.25em !important;
 }
 
-pre::-webkit-scrollbar {
-  height: 8px;
-}
-
+/* Code blocks stay dark in both themes, so their scrollbar keeps a fixed
+   mid-gray thumb that reads on the dark background. */
 pre {
   scrollbar-color: #525252 transparent;
   scrollbar-width: thin;
+}
+
+pre::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+pre::-webkit-scrollbar-thumb {
+  background-color: #525252;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+  background-color: #737373;
 }
 
 /* Remove Safari input shadow on mobile */

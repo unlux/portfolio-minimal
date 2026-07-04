@@ -10,6 +10,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 export type TOCItemType = {
   title: React.ReactNode
@@ -71,7 +72,7 @@ export function TOCMinimap({ items, className }: TOCMinimapProps) {
           side="left"
           sideOffset={-60}
         >
-          <div className="flex max-h-[50dvh] overflow-y-auto overscroll-contain">
+          <ScrollArea className="max-h-[50dvh] [&>[data-slot=scroll-area-viewport]]:max-h-[50dvh]">
             <ul className="flex size-full flex-col px-6 py-4 text-sm">
               {items.map((item) => (
                 <li key={item.url} className="flex py-1">
@@ -91,7 +92,7 @@ export function TOCMinimap({ items, className }: TOCMinimapProps) {
                 </li>
               ))}
             </ul>
-          </div>
+          </ScrollArea>
         </HoverCardContent>
       </HoverCard>
     </div>
