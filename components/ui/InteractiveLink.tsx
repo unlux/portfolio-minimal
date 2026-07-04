@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowIcon } from "./ArrowIcon";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export type InteractiveLinkProps = {
   href: string;

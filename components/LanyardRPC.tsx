@@ -2,7 +2,7 @@
 
 import { useLanyard } from "@/lib/hooks/useLanyard";
 import type { Activity } from "@/lib/hooks/useLanyard";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 

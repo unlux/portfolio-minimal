@@ -4,7 +4,7 @@
  * Based on Apple's Human Interface Guidelines and Material Design
  */
 
-import { Variants, Transition } from "framer-motion";
+import { Variants, Transition } from "motion/react";
 
 type CubicBezier = [number, number, number, number];
 

@@ -5,7 +5,7 @@ import {
   Variants,
   useReducedMotion,
   type TargetAndTransition,
-} from "framer-motion";
+} from "motion/react";
 import { useScrollReveal } from "@/lib/hooks/useScrollAnimation";
 import {
   fadeInUp,

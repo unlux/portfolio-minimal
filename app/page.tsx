@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { CodeXmlIcon } from "lucide-react";
 import { BlogPosts } from "@/components/posts";
 import { WorkExperience } from "@/components/work-experience";
 import Reveal from "@/components/animation/Reveal";
@@ -15,7 +16,7 @@ export default function Page() {
       <AnimatedTitle text="Hi, I'm Lakshay Choudhary" />
 
       <div
-        className="animate-fade-up mb-4 space-y-5 font-[family-name:var(--font-inter)] text-[1.02rem] leading-7 text-neutral-300"
+        className="animate-fade-up mb-4 space-y-5 font-[family-name:var(--font-inter)] text-[1.02rem] leading-7 text-neutral-700 dark:text-neutral-300"
         style={{ animationDelay: "0.2s" }}
       >
         <p>
@@ -38,6 +39,7 @@ export default function Page() {
         <div className="text-2xl">Experience</div>
         <Suspense fallback={<WorkExperienceSkeleton />}>
           <WorkExperience
+            className="px-0"
             experiences={[
             {
               id: "Skillion",
@@ -48,12 +50,20 @@ export default function Page() {
                 {
                   id: "Skillion-Full-Stack-Developer",
                   title: "Full Stack Developer",
-                  employmentPeriod: "October 2025 - Present",
+                  employmentPeriod: { start: "10.2025" },
                   employmentType: "Full-Time",
-                  icon: "code",
+                  icon: <CodeXmlIcon />,
                   isExpanded: true,
                   description:
                     "- Building AI-backed product workflows across full-stack surfaces.\n- Working on a trading platform with AI insights, backend integrations, and test coverage around critical flows.\n- Ship company marketing sites end to end — Next.js 16, Tailwind v4, statically generated from a headless Strapi CMS, deployed to Cloudflare Workers via OpenNext.\n- Built the content platform behind them: Strapi Cloud CMS with a Cloudflare R2 media pipeline, publish-triggered rebuild webhooks, and GitHub Actions deploys.",
+                  skills: [
+                    "Next.js",
+                    "TypeScript",
+                    "Tailwind CSS",
+                    "Strapi",
+                    "Cloudflare Workers",
+                    "PostgreSQL",
+                  ],
                 },
               ],
             },
@@ -66,12 +76,20 @@ export default function Page() {
                 {
                   id: "JoyJunction-Full-Stack-Developer",
                   title: "Full Stack Developer",
-                  employmentPeriod: "Apr 2025 - Present",
+                  employmentPeriod: { start: "04.2025" },
                   employmentType: "Part-Time",
-                  icon: "code",
+                  icon: <CodeXmlIcon />,
                   isExpanded: false,
                   description:
                     "- Built an end-to-end ecommerce platform with Next.js and a headless MedusaJS backend.\n- Integrated Google Auth, Razorpay payments, PostHog analytics, Supabase storage, and Redis caching.\n- Set up CI/CD with GitHub Actions for deployments across Vercel and AWS Lightsail.",
+                  skills: [
+                    "Next.js",
+                    "MedusaJS",
+                    "Razorpay",
+                    "Supabase",
+                    "Redis",
+                    "GitHub Actions",
+                  ],
                 },
               ],
             },
@@ -83,12 +101,13 @@ export default function Page() {
                 {
                   id: "printsaathi-backend-intern",
                   title: "Backend Development Intern",
-                  employmentPeriod: "Feb 2025 – Apr 2025",
+                  employmentPeriod: { start: "02.2025", end: "04.2025" },
                   employmentType: "Internship",
-                  icon: "code",
+                  icon: <CodeXmlIcon />,
                   isExpanded: false,
                   description:
                     "- Migrated core data from MongoDB to PostgreSQL with Prisma and stricter schema validation.\n- Reduced API latency by 70% by caching hot paths and tightening SQL queries.\n- Built Redis/BullMQ workers for async jobs and transactional email processing.\n- Refactored REST APIs to reduce error rates and improve response times.",
+                  skills: ["PostgreSQL", "Prisma", "Redis", "BullMQ", "MongoDB"],
                 },
               ],
             },

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useScroll, useTransform, useSpring } from "framer-motion";
+import { useScroll, useTransform, useSpring } from "motion/react";
 
 /**
  * Hook for scroll-triggered reveal animations

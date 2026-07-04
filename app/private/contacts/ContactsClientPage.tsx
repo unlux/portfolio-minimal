@@ -24,7 +24,7 @@ import type { Contact } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { TrashIcon } from "@radix-ui/react-icons";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { staggerContainer, fadeInUp } from "@/lib/animation-presets";
 
 export default function ContactsClientPage({
