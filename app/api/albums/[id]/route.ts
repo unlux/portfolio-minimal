@@ -7,12 +7,20 @@ import {
   unauthorizedError,
   validationError,
 } from "@/lib/api-utils";
+import { clientKey, rateLimit } from "@/lib/private-auth";
 
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    if (!rateLimit(`album-verify:${clientKey(req)}`, 10)) {
+      return NextResponse.json(
+        { error: "Too many attempts. Try again later." },
+        { status: 429 }
+      );
+    }
+
     const { id: rawId } = await params;
     const id = parseIntId(rawId);
 

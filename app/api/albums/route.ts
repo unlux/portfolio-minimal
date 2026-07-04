@@ -1,13 +1,19 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import {
   handleApiError,
+  unauthorizedError,
   validateRequiredFields,
   validationError,
 } from "@/lib/api-utils";
+import { isAuthorized } from "@/lib/private-auth";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
+    if (!isAuthorized(request)) {
+      return unauthorizedError();
+    }
+
     const body = await request.json();
     const { name, url, password } = body;
 

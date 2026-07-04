@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
+import { isValidSession, SESSION_COOKIE } from "@/lib/private-auth";
 import ContactsClientPage from "./ContactsClientPage";
 import { AddContactDialog } from "@/components/AddContactDialog";
 import {
@@ -13,10 +14,7 @@ import {
 
 export default async function ContactsPage() {
   const cookieStore = await cookies();
-  const password = cookieStore.get("contacts_password");
-
-  const isVerified =
-    !!password && password.value === process.env.CONTACTS_PASSWORD;
+  const isVerified = isValidSession(cookieStore.get(SESSION_COOKIE)?.value);
 
   const contacts = isVerified ? await prisma.contact.findMany() : [];
 
