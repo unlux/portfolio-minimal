@@ -1,7 +1,25 @@
 import { notFound } from "next/navigation";
-import { CustomMDX } from "@/components/mdx";
+import { CustomMDX, slugify } from "@/components/mdx";
+import { TOCMinimap } from "@/components/toc-minimap";
 import { formatDate, getBlogPosts } from "@/app/blog/utils";
 import { baseUrl } from "@/app/sitemap";
+
+function extractToc(content: string) {
+  let inFence = false;
+  const items: { title: string; url: string; depth: number }[] = [];
+  for (const line of content.split("\n")) {
+    if (/^\s*(```|~~~)/.test(line)) {
+      inFence = !inFence;
+      continue;
+    }
+    if (inFence) continue;
+    const match = /^(#{1,6})\s+(.+?)\s*$/.exec(line);
+    if (!match) continue;
+    const title = match[2].replace(/[*_`~]/g, "").trim();
+    items.push({ title, url: `#${slugify(title)}`, depth: match[1].length });
+  }
+  return items;
+}
 
 type BlogPageProps = {
   params: Promise<{ slug: string }>;
@@ -69,8 +87,13 @@ export default async function Blog(props: BlogPageProps) {
     notFound();
   }
 
+  const toc = extractToc(post.content).filter((item) => item.depth <= 4);
+
   return (
     <section>
+      <div className="fixed top-1/2 right-4 z-40 hidden -translate-y-1/2 lg:block xl:right-10">
+        <TOCMinimap items={toc} />
+      </div>
       <script
         type="application/ld+json"
         suppressHydrationWarning

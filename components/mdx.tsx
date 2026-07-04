@@ -52,7 +52,7 @@ function Code({ children, ...props }: ComponentPropsWithoutRef<"code">) {
   return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
 }
 
-function slugify(value: ReactNode) {
+export function slugify(value: ReactNode) {
   return String(value)
     .toLowerCase()
     .trim() // Remove whitespace from both ends of a string
