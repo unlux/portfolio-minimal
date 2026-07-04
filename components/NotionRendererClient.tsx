@@ -1,5 +1,8 @@
 "use client";
 
+import "react-notion-x/src/styles.css";
+import "prismjs/themes/prism-tomorrow.css";
+
 import Link from "next/link";
 import { NotionRenderer as NotionRendererLib } from "react-notion-x";
 import { Code } from "react-notion-x/build/third-party/code";

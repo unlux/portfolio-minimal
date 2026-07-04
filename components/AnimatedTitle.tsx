@@ -1,27 +1,17 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { staggerContainer, blurSlideUp } from "@/lib/animation-presets";
-
 export function AnimatedTitle({ text }: { text: string }) {
   const words = text.split(" ");
 
   return (
-    <motion.h1
-      className="mb-8 text-4xl font-semibold tracking-tighter"
-      variants={staggerContainer}
-      initial="hidden"
-      animate="visible"
-    >
+    <h1 className="mb-8 text-4xl font-semibold tracking-tighter">
       {words.map((word, i) => (
-        <motion.span
+        <span
           key={i}
-          variants={blurSlideUp}
-          style={{ display: "inline-block", marginRight: "0.25em" }}
+          className="hero-word"
+          style={{ animationDelay: `${i * 80}ms` }}
         >
           {word}
-        </motion.span>
+        </span>
       ))}
-    </motion.h1>
+    </h1>
   );
 }

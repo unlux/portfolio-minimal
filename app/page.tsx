@@ -14,10 +14,9 @@ export default function Page() {
     <section>
       <AnimatedTitle text="Hi, I'm Lakshay Choudhary" />
 
-      <Reveal
-        animation="fadeUp"
-        delay={0.2}
-        className="mb-4 space-y-5 font-[family-name:var(--font-inter)] text-[1.02rem] leading-7 text-neutral-300"
+      <div
+        className="animate-fade-up mb-4 space-y-5 font-[family-name:var(--font-inter)] text-[1.02rem] leading-7 text-neutral-300"
+        style={{ animationDelay: "0.2s" }}
       >
         <p>
           I&apos;m Lakshay Choudhary, a full-stack developer focused on
@@ -32,7 +31,7 @@ export default function Page() {
           that are boring in the best way: reliable, observable, and easy to
           change.
         </p>
-      </Reveal>
+      </div>
 
       {/* Work Experience */}
       <Reveal animation="fadeUp" delay={0.3} className="mt-10">
