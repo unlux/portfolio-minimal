@@ -9,10 +9,47 @@ import {
 } from "@/components/ui/loading-skeleton";
 import LanyardRPC from "@/components/LanyardRPC";
 import { AnimatedTitle } from "@/components/AnimatedTitle";
+import { baseUrl } from "@/app/sitemap";
 
 export default function Page() {
   return (
     <section>
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "Person",
+                "@id": `${baseUrl}/#person`,
+                name: "Lakshay Choudhary",
+                alternateName: "unlux",
+                url: baseUrl,
+                email: "mailto:contact@unlux.dev",
+                jobTitle: "Full Stack Developer",
+                worksFor: {
+                  "@type": "Organization",
+                  name: "Skillion",
+                },
+                sameAs: [
+                  "https://github.com/unlux",
+                  "https://x.com/whyunlux",
+                  "https://dub.sh/lux-linkedin",
+                ],
+              },
+              {
+                "@type": "WebSite",
+                "@id": `${baseUrl}/#website`,
+                name: "unlux",
+                url: baseUrl,
+                author: { "@id": `${baseUrl}/#person` },
+              },
+            ],
+          }),
+        }}
+      />
       <AnimatedTitle text="Hi, I'm Lakshay Choudhary" />
 
       <div

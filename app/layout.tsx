@@ -31,7 +31,10 @@ export const metadata: Metadata = {
     template: "%s | unlux",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "32x32" },
+    ],
     apple: "/apple-touch-icon.png",
   },
   description: siteDescription,

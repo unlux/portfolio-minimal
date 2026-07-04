@@ -1,0 +1,23 @@
+# unlux — Lakshay Choudhary
+
+> Personal site of Lakshay Choudhary (unlux), a full-stack developer focused on backend-heavy products, cloud infrastructure, and systems that stay maintainable after v1 ships. Works mostly with Next.js, TypeScript, Prisma, Redis, AWS, GCP, and Linux/NixOS.
+
+Currently a Full Stack Developer at Skillion (full-time) and The Joy Junction (part-time).
+
+## Pages
+
+- [Home](https://unlux.dev/): bio, work experience, and live Discord/Spotify status
+- [Writing](https://unlux.dev/blog): posts on backend systems, tooling, and personal experiments
+- [Todo](https://unlux.dev/todo): a public slice of the working queue, synced from Notion
+- [Reading](https://unlux.dev/currently-reading): books, articles, and technical rabbit holes
+
+## Feeds
+
+- [RSS](https://unlux.dev/rss)
+- [Sitemap](https://unlux.dev/sitemap.xml)
+
+## Contact
+
+- Email: contact@unlux.dev
+- GitHub: https://github.com/unlux
+- X: https://x.com/whyunlux
