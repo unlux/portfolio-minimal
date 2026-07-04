@@ -1,7 +1,15 @@
 import { SignUp } from "@clerk/nextjs";
 import { getValidClerkPublishableKey } from "@/lib/clerk";
+import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function Page() {
   const hasClerk = Boolean(getValidClerkPublishableKey());
