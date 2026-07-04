@@ -10,7 +10,8 @@ A minimal, fast personal portfolio with a built-in MDX blog, SEO-ready routes (O
 - **MDX** for blog content
 - **Vercel Analytics** and **Speed Insights**
 - **Clerk** (optional auth; auto-disabled if no env set)
-- **Radix UI** primitives, **Framer Motion**, **Lenis** scrolling, **Geist** fonts
+- **Radix UI** primitives (shadcn-style), **Motion** animations, **Lenis** scrolling, **Geist** fonts
+- **next-themes** light/dark with a View Transitions circle-blur toggle
 
 ### Features
 
@@ -18,7 +19,9 @@ A minimal, fast personal portfolio with a built-in MDX blog, SEO-ready routes (O
 - **SEO**: dynamic metadata, Open Graph images at `/og`, JSON-LD per post
 - **Syndication**: **RSS** at `/rss` and **sitemap** at `/sitemap.xml`, **robots** at `/robots.txt`
 - **Optional Auth**: sign-in/up routes included; middleware becomes a no-op without Clerk keys
-- **Performance**: Turbopack dev, optimized fonts, small footprint
+- **Performance**: Turbopack dev, CSS-driven above-the-fold animations (LCP-safe), optimized fonts, small footprint
+- **Blog niceties**: hoverable TOC minimap with scroll-spy on posts
+- **Private area**: password-gated contacts/albums behind a signed session cookie with rate-limited verification
 
 ## Getting started
 

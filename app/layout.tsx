@@ -13,6 +13,13 @@ import LenisProvider from "@/components/LenisProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { getValidClerkPublishableKey } from "@/lib/clerk";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeColorSync } from "@/components/theme-color-sync";
+import type { Viewport } from "next";
+
+export const viewport: Viewport = {
+  // Site defaults to dark; ThemeColorSync corrects this after hydration.
+  themeColor: "#000000",
+};
 
 const siteDescription =
   "Lakshay Choudhary — full-stack developer focused on backend-heavy products, cloud infrastructure, and systems that stay maintainable after v1 ships.";
@@ -25,6 +32,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
   description: siteDescription,
   alternates: {
@@ -85,6 +93,7 @@ export default function RootLayout({
       enableSystem
       disableTransitionOnChange
     >
+      <ThemeColorSync />
       <LenisProvider>
       <ClickSpark>
         <main className=" antialiased max-w-xl mx-4 mt-8 lg:mx-auto flex-auto min-w-0 flex flex-col px-2 md:px-0">
