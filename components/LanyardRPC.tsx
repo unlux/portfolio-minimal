@@ -2,6 +2,7 @@
 
 import { useLanyard } from "@/lib/hooks/useLanyard";
 import type { Activity } from "@/lib/hooks/useLanyard";
+import { ShimmeringText } from "@/components/shimmering-text";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -84,8 +85,12 @@ function SpotifyCard({
       </div>
 
       <div className="flex-1 min-w-0">
-        <div className="text-sm font-medium text-neutral-900 dark:text-neutral-100 truncate">
-          {song}
+        <div className="truncate text-sm font-medium">
+          <ShimmeringText
+            text={song}
+            duration={2.5}
+            className="[--color:#171717] [--shimmering-color:#1DB954] dark:[--color:#f5f5f5]"
+          />
         </div>
         <div className="text-xs text-neutral-600 dark:text-neutral-400 truncate">
           {artist}

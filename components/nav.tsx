@@ -50,7 +50,7 @@ export function Navbar({ hasClerk = false }: { hasClerk?: boolean }) {
         >
           {/* Animated nav items */}
           <motion.div
-            className="flex min-w-0 flex-row gap-1 overflow-x-auto pr-2"
+            className="scroll-fade-effect-x flex min-w-0 flex-row gap-1 overflow-x-auto pr-2"
             variants={containerVariants}
             initial="hidden"
             animate="show"

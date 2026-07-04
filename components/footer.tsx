@@ -1,7 +1,8 @@
 "use client";
 
-import { FaGithub, FaLinkedin, FaFileAlt, FaDiscord } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaFileAlt, FaDiscord, FaEnvelope } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import { FileTextIcon, TerminalIcon } from "lucide-react";
 import {
   Popover,
   PopoverTrigger,
@@ -66,6 +67,17 @@ export default function Footer() {
             </a>
           </IconTooltip>
         </li>
+        <li>
+          <IconTooltip label="contact@unlux.dev">
+            <a
+              aria-label="Email"
+              className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+              href="mailto:contact@unlux.dev"
+            >
+              <FaEnvelope size={20} />
+            </a>
+          </IconTooltip>
+        </li>
         <li className="relative">
           <Popover>
             <PopoverTrigger asChild>
@@ -83,21 +95,18 @@ export default function Footer() {
             <PopoverContent
               side="top"
               align="start"
-              className="w-[216px] p-2 rounded-lg border border-neutral-200 dark:border-neutral-700
-                         bg-white/90 dark:bg-neutral-900/90 backdrop-blur shadow-lg
-                         relative before:content-[''] before:absolute before:-bottom-2 before:left-0 before:w-full before:h-2"
+              sideOffset={8}
+              className="w-40 rounded-xl border-border bg-popover/95 p-1 shadow-lg backdrop-blur"
             >
-              <div className="grid grid-cols-2 gap-2">
+              <div className="flex flex-col" role="menu">
                 <a
                   role="menuitem"
                   href="resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center text-sm px-3 py-1.5 rounded-md border
-                             border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900
-                             hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-100 shadow-sm
-                             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2"
+                  className="flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm text-popover-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:bg-muted"
                 >
+                  <FileTextIcon className="size-4 text-muted-foreground" />
                   Web dev
                 </a>
                 <a
@@ -105,11 +114,9 @@ export default function Footer() {
                   href="devops.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center text-sm px-3 py-1.5 rounded-md border
-                             border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900
-                             hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-100 shadow-sm
-                             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2"
+                  className="flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm text-popover-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:bg-muted"
                 >
+                  <TerminalIcon className="size-4 text-muted-foreground" />
                   DevOps
                 </a>
               </div>
