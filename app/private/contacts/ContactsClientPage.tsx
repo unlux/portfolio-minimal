@@ -23,7 +23,7 @@ import Reveal from "@/components/animation/Reveal";
 import type { Contact } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { TrashIcon } from "@radix-ui/react-icons";
+import { Trash2Icon as TrashIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { staggerContainer, fadeInUp } from "@/lib/animation-presets";
 
@@ -95,7 +95,7 @@ export default function ContactsClientPage({
                 This section is password protected.
               </CardDescription>
             </CardHeader>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6">
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="password">Password</Label>

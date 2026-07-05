@@ -53,9 +53,9 @@ export function AlbumPasswordDialog({
   // If protected, render the dialog
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <div className="cursor-pointer">{children}</div>
-      </DialogTrigger>
+      <DialogTrigger
+        render={<div className="cursor-pointer">{children}</div>}
+      />
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="font-semibold tracking-tighter">

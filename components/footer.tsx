@@ -80,16 +80,13 @@ export default function Footer() {
         </li>
         <li className="relative">
           <Popover>
-            <PopoverTrigger asChild>
-              <button
-                type="button"
-                aria-label="Open CV links"
-                aria-haspopup="menu"
-                className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
-              >
-                <FaFileAlt size={20} />
-                <span>cv</span>
-              </button>
+            <PopoverTrigger
+              aria-label="Open CV links"
+              aria-haspopup="menu"
+              className="flex items-center gap-2 transition-all hover:text-neutral-800 dark:hover:text-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+            >
+              <FaFileAlt size={20} />
+              <span>cv</span>
             </PopoverTrigger>
 
             <PopoverContent

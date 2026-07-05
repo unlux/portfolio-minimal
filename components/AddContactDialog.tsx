@@ -46,13 +46,15 @@ export function AddContactDialog() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Reveal animation="scale">
-          <Card className="flex items-center justify-center w-full h-full transition-transform duration-200 cursor-pointer hover:scale-105">
-            <span className="text-5xl font-thin text-muted-foreground">+</span>
-          </Card>
-        </Reveal>
-      </DialogTrigger>
+      <DialogTrigger
+        render={
+          <Reveal animation="scale">
+            <Card className="flex items-center justify-center w-full h-full transition-transform duration-200 cursor-pointer hover:scale-105">
+              <span className="text-5xl font-thin text-muted-foreground">+</span>
+            </Card>
+          </Reveal>
+        }
+      />
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Add New Contact</DialogTitle>

@@ -167,9 +167,8 @@ export function ExperiencePositionItem({
       defaultOpen={position.isExpanded}
       onOpenChange={handleOpenChange}
       disabled={!position.description}
-      asChild
+      className="relative last:before:absolute last:before:h-full last:before:w-4 last:before:bg-background"
     >
-      <div className="relative last:before:absolute last:before:h-full last:before:w-4 last:before:bg-background">
         <CollapsibleTrigger
           className={cn(
             "group/experience-position not-prose block w-full text-left select-none",
@@ -244,7 +243,7 @@ export function ExperiencePositionItem({
           </dl>
         </CollapsibleTrigger>
 
-        <CollapsibleContent className="overflow-hidden">
+        <CollapsibleContent className="h-[var(--collapsible-panel-height)] overflow-hidden transition-[height] duration-200 ease-out data-[starting-style]:h-0 data-[ending-style]:h-0">
           {position.description && (
             <Prose className="pt-2 pl-9">
               <ReactMarkdown>{position.description}</ReactMarkdown>
@@ -261,7 +260,6 @@ export function ExperiencePositionItem({
             ))}
           </ul>
         )}
-      </div>
     </Collapsible>
   )
 }

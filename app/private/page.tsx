@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import Reveal from "@/components/animation/Reveal";
 
 export default function PrivatePage() {
@@ -12,12 +12,15 @@ export default function PrivatePage() {
       </Reveal>
       <Reveal animation="fadeUp" delay={0.15}>
         <div className="flex space-x-4">
-          <Button asChild size="lg">
-            <Link href="/private/albums">Photo Albums</Link>
-          </Button>
-          <Button asChild size="lg" variant="outline">
-            <Link href="/private/contacts">Contacts</Link>
-          </Button>
+          <Link href="/private/albums" className={buttonVariants({ size: "lg" })}>
+            Photo Albums
+          </Link>
+          <Link
+            href="/private/contacts"
+            className={buttonVariants({ size: "lg", variant: "outline" })}
+          >
+            Contacts
+          </Link>
         </div>
       </Reveal>
     </section>

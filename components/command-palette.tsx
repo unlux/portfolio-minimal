@@ -31,7 +31,6 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command";
-import { useLenis } from "@/components/LenisProvider";
 
 const EMAIL = "contact@unlux.dev";
 
@@ -59,19 +58,13 @@ export function CommandPalette() {
   const [copied, setCopied] = useState(false);
   const router = useRouter();
   const { resolvedTheme, setTheme } = useTheme();
-  const { lenis } = useLenis();
 
-  // Lenis intercepts wheel on the root and scrolls the page behind the palette.
-  // Stopping it while the palette is open hands wheel events back to the native
-  // command list (which also carries data-lenis-prevent as a belt-and-braces).
-  useEffect(() => {
-    if (!lenis) return;
-    if (open) lenis.stop();
-    else lenis.start();
-    return () => {
-      lenis.start();
-    };
-  }, [open, lenis]);
+  // NOTE: Lenis is intentionally NOT stopped here. lenis.stop() disables its
+  // wheel handler entirely, which also disables its data-lenis-prevent logic —
+  // so wheel events over the palette got swallowed instead of scrolling the
+  // list. Keeping Lenis running lets it honor [data-lenis-prevent] on the
+  // command list (see CommandList below), which is the supported pattern for
+  // modals with internal scroll. Base UI's modal Dialog locks the background.
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
