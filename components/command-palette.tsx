@@ -6,6 +6,7 @@ import { useTheme } from "next-themes";
 import {
   HomeIcon,
   NotebookPenIcon,
+  FolderKanbanIcon,
   ListTodoIcon,
   BookOpenIcon,
   SunMoonIcon,
@@ -36,6 +37,7 @@ const EMAIL = "contact@unlux.dev";
 
 const pages = [
   { label: "Home", href: "/", icon: HomeIcon },
+  { label: "Projects", href: "/projects", icon: FolderKanbanIcon },
   { label: "Blog", href: "/blog", icon: NotebookPenIcon },
   { label: "Todo", href: "/todo", icon: ListTodoIcon },
   { label: "Currently reading", href: "/currently-reading", icon: BookOpenIcon },
@@ -49,7 +51,7 @@ const socials = [
 ];
 
 const resumes = [
-  { label: "Résumé: Web dev", href: "/resume.pdf", icon: FileTextIcon },
+  { label: "Résumé: Full-stack and AI", href: "/resume.pdf", icon: FileTextIcon },
   { label: "Résumé: DevOps", href: "/devops.pdf", icon: TerminalIcon },
 ];
 

@@ -1,4 +1,5 @@
 import { getBlogPosts } from "@/app/blog/utils";
+import { projectsWithDetail } from "@/lib/projects";
 
 export const baseUrl = "https://unlux.dev";
 
@@ -8,10 +9,15 @@ export default async function sitemap() {
     lastModified: post.metadata.publishedAt,
   }));
 
-  const routes = ["", "/blog", "/todo", "/currently-reading"].map((route) => ({
+  const projectPages = projectsWithDetail().map((project) => ({
+    url: `${baseUrl}/projects/${project.slug}`,
+    lastModified: new Date().toISOString().split("T")[0],
+  }));
+
+  const routes = ["", "/projects", "/blog", "/todo", "/currently-reading"].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date().toISOString().split("T")[0],
   }));
 
-  return [...routes, ...blogs];
+  return [...routes, ...projectPages, ...blogs];
 }

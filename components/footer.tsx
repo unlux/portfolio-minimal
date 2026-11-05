@@ -98,17 +98,17 @@ export default function Footer() {
               <div className="flex flex-col" role="menu">
                 <a
                   role="menuitem"
-                  href="resume.pdf"
+                  href="/resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm text-popover-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:bg-muted"
                 >
                   <FileTextIcon className="size-4 text-muted-foreground" />
-                  Web dev
+                  Full-stack and AI
                 </a>
                 <a
                   role="menuitem"
-                  href="devops.pdf"
+                  href="/devops.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm text-popover-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:bg-muted"

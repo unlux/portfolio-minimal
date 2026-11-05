@@ -14,7 +14,7 @@ import {
 import { Separator } from "@/components/ui/separator"
 import type { ChevronsUpDownIconHandle } from "@/components/chevrons-up-down-icon"
 import { ChevronsUpDownIcon } from "@/components/chevrons-up-down-icon"
-import { BriefcaseBusinessIcon, InfinityIcon } from "lucide-react"
+import { BriefcaseBusinessIcon } from "lucide-react"
 
 export type ExperiencePositionItemType = {
   /** Unique identifier for the position */
@@ -219,12 +219,8 @@ export function ExperiencePositionItem({
               <dt className="sr-only">Employment Period</dt>
               <dd className="flex items-center gap-0.5 tabular-nums">
                 <span>{start}</span>
-                <span className="font-mono">-</span>
-                {isOngoing ? (
-                  <InfinityIcon className="size-4.5 translate-y-[0.5px]" aria-label="Present" />
-                ) : (
-                  <span>{end}</span>
-                )}
+                <span aria-hidden className="px-0.5">–</span>
+                <span>{isOngoing ? "present" : end}</span>
               </dd>
             </div>
 
