@@ -1,0 +1,68 @@
+% Full-stack / AI products CV. Build: ./build.sh
+\input{preamble}
+\begin{document}
+\cvheader
+\cveducation
+
+\section{Experience}
+\resumeSubHeadingListStart
+
+  \resumeSubheading{Skillion}{Oct 2025 -- present}{Full Stack Developer (full-time)}{Remote}
+  \resumeItemListStart
+    \resumeItem{Built \textbf{Reconexa} end to end as sole developer: an AI product that reads insurer and NDIS payment emails and marks invoices paid in Cliniko and Xero. Live with two physiotherapy clinics.}
+    \resumeItem{Raised invoice extraction accuracy from \textbf{68\% to 97.5\%} by benchmarking LLMs against staff-verified invoices, with an OCR step that reads PDF text first and falls back to OCR.space or AWS Textract.}
+    \resumeItem{Built a five-stage BullMQ email pipeline, bank-feed matching with Meilisearch, and a Playwright worker that records payments in Cliniko; passkeys, 2FA and a full audit trail; \textbf{3,000+ automated tests}.}
+    \resumeItem{Built \textbf{skillionailabs.com} on Next.js 16 and Cloudflare Workers with an AI maturity diagnostic, an OpenAI chatbot and \textbf{Lara}, a voice agent on ElevenLabs and Twilio that emails call summaries and flags hot leads.}
+    \resumeItem{Cut blog page weight from 6.5 MB to 0.2 MB, CMS payloads by 80\% and code-quality issues from 206 to 0; built the Strapi CMS behind two company sites with an AI-assisted YouTube pipeline.}
+    \resumeItem{Built internal AI tools: an RFP system that reviewed 114 RFPs and produced 7 proposals, a multi-model research pipeline with a self-hosted CRM that Claude drives over MCP, and a Jira retro tool used every sprint.}
+  \resumeItemListEnd
+
+  \resumeSubheading{The Joy Junction}{May 2025 -- Dec 2025}{Full Stack Developer (part-time)}{Remote}
+  \resumeItemListStart
+    \resumeItem{Built the brand's e-commerce platform from scratch on MedusaJS 2 and Next.js 15, with custom modules for search, Google sign-in, wishlists, coupons and a content admin.}
+    \resumeItem{Integrated Algolia search with automatic product indexing, returning results in \textbf{under 200 ms}; moved cache, event bus and workflows to Redis, cutting average API latency by \textbf{40\%}.}
+    \resumeItem{Integrated Razorpay with webhook-driven order expiry and refunds for \textbf{99.9\%} reliable payment processing; deployed to AWS Lightsail with GitHub Actions.}
+  \resumeItemListEnd
+
+  \resumeSubheading{PrintSaathi}{Feb 2025 -- Apr 2025}{Backend Development Intern}{Remote}
+  \resumeItemListStart
+    \resumeItem{Designed the move from MongoDB to PostgreSQL with Prisma: a 29-table schema, migrations and data-copy scripts.}
+    \resumeItem{Cut API latency by \textbf{70\%} with Redis caching of hot product data and SQL tuning; built a BullMQ email queue handling \textbf{10,000+ tasks a day}.}
+    \resumeItem{Built coupon redemption, Algolia search and tiered rate limiting; refactored REST APIs, cutting error rates by \textbf{50\%} and response times by 30\%.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+\section{Projects}
+\resumeSubHeadingListStart
+  \resumeProjectHeading{\textbf{Video review platform} (freelance, stealth startup) $|$ \emph{Next.js 16, Hono, Socket.IO, HLS}}{}
+  \resumeItemListStart
+    \resumeItem{Built the whole web app for a Frame.io-style review product: resumable chunked uploads, a frame-accurate HLS player with pinned comments, and real-time collaboration over WebSockets.}
+  \resumeItemListEnd
+  \resumeProjectHeading{\textbf{SoundPrint} $|$ \emph{React, Rust, Internet Computer, Spotify API}}{Mar 2025 -- Apr 2025}
+  \resumeItemListStart
+    \resumeItem{Turns a listener's Spotify taste into generative art minted as an NFT; won 1st place at LPU in Hack the Block 2025. I built the on-chain side: Internet Identity login, minting and mainnet deployment.}
+  \resumeItemListEnd
+  \resumeProjectHeading{\textbf{Mini marketing CRM} $|$ \emph{Next.js, Gemini, BullMQ, PostgreSQL, Docker}}{May 2025}
+  \resumeItemListStart
+    \resumeItem{Gemini turns plain-English audience descriptions into segment rules and drafts campaign copy; a Dockerised queue worker ingests bulk data and sends campaigns with delivery tracking.}
+  \resumeItemListEnd
+  \resumeProjectHeading{\textbf{Video transcoding pipeline} $|$ \emph{AWS SQS, S3, EC2, ECS, Docker, FFmpeg}}{Nov 2024 -- Jan 2025}
+  \resumeItemListStart
+    \resumeItem{Event-driven S3 to SQS to FFmpeg pipeline; running jobs on the worker's own EC2 host instead of ECS Fargate cut infrastructure spend by \textbf{60\%}.}
+  \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.15in, label={}, itemsep=0pt]
+  \small{\item{
+    \textbf{AI and LLMs}{: OpenAI, Claude, Gemini, ElevenLabs, LangChain, n8n, MCP, OCR (AWS Textract), LLM evaluation} \\
+    \textbf{Languages}{: TypeScript, JavaScript, Python, SQL, Bash, Rust, Swift} \\
+    \textbf{Frontend}{: Next.js, React, Tailwind CSS, shadcn/ui, TanStack Query, Astro, Three.js} \\
+    \textbf{Backend and data}{: Node.js, Bun, Hono, Express, Django, BullMQ, Prisma, Drizzle, PostgreSQL, Redis, MongoDB, Meilisearch} \\
+    \textbf{Cloud and DevOps}{: AWS, Cloudflare Workers, Docker, Dokploy, GitHub Actions, Vercel, Sentry, NixOS}
+  }}
+\end{itemize}
+
+\cvachievements
+\end{document}
