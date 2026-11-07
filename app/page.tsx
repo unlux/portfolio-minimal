@@ -10,7 +10,9 @@ import {
 } from "@/components/ui/loading-skeleton";
 import LanyardRPC from "@/components/LanyardRPC";
 import { AnimatedTitle } from "@/components/AnimatedTitle";
+import Link from "next/link";
 import { baseUrl } from "@/app/sitemap";
+import { projects } from "@/lib/projects";
 
 export default function Page() {
   return (
@@ -30,6 +32,18 @@ export default function Page() {
                 url: baseUrl,
                 email: "mailto:contact@unlux.dev",
                 jobTitle: "Full Stack Developer",
+                alumniOf: {
+                  "@type": "CollegeOrUniversity",
+                  name: "Lovely Professional University",
+                },
+                knowsAbout: [
+                  "AI products",
+                  "LLM applications",
+                  "Full-stack development",
+                  "Next.js",
+                  "TypeScript",
+                  "Cloud infrastructure",
+                ],
                 worksFor: {
                   "@type": "Organization",
                   name: "Skillion",
@@ -58,17 +72,16 @@ export default function Page() {
         style={{ animationDelay: "0.2s" }}
       >
         <p>
-          I&apos;m Lakshay Choudhary, a full-stack developer focused on
-          backend-heavy products, cloud infrastructure, and systems that stay
-          maintainable after the first version ships.
+          I build AI products end to end: the model work, the product around
+          it, and the infrastructure that keeps it running. At Skillion I built
+          Reconexa, which reads insurer payment emails with AI and reconciles
+          clinic invoices in Cliniko and Xero, plus the company&apos;s
+          AI-powered website and voice agent.
         </p>
 
         <p>
-          I work mostly with Next.js, TypeScript, Prisma, Redis, AWS, GCP, and
-          Linux/NixOS. Lately, I&apos;ve been building AI-backed product
-          workflows, trading tools, ecommerce systems, and infrastructure setups
-          that are boring in the best way: reliable, observable, and easy to
-          change.
+          I work mostly in TypeScript and Next.js, with Python where it fits,
+          on Cloudflare, AWS and my own servers.
         </p>
       </div>
 
@@ -93,14 +106,15 @@ export default function Page() {
                   icon: <CodeXmlIcon />,
                   isExpanded: true,
                   description:
-                    "- Building AI-backed product workflows across full-stack surfaces.\n- Working on a trading platform with AI insights, backend integrations, and test coverage around critical flows.\n- Ship company marketing sites end to end with Next.js 16, Tailwind v4, statically generated from a headless Strapi CMS, deployed to Cloudflare Workers via OpenNext.\n- Built the content platform behind them: Strapi Cloud CMS with a Cloudflare R2 media pipeline, publish-triggered rebuild webhooks, and GitHub Actions deploys.",
+                    "- Built Reconexa end to end as sole developer: an AI product that reads insurer payment emails and marks invoices paid in Cliniko and Xero, live with two physiotherapy clinics.\n- Raised invoice extraction accuracy from 68% to 97.5% by benchmarking LLMs against staff-verified invoices.\n- Built skillionailabs.com on Next.js 16 and Cloudflare Workers, with an AI diagnostic, a chatbot and Lara, a voice agent on ElevenLabs and Twilio.\n- Built internal AI tools: an RFP proposal system, a multi-model research pipeline with a CRM Claude can drive, and a Jira retro tool used every sprint.",
                   skills: [
+                    "OpenAI",
                     "Next.js",
                     "TypeScript",
-                    "Tailwind CSS",
-                    "Strapi",
-                    "Cloudflare Workers",
+                    "BullMQ",
                     "PostgreSQL",
+                    "Cloudflare Workers",
+                    "ElevenLabs",
                   ],
                 },
               ],
@@ -109,24 +123,23 @@ export default function Page() {
               id: "JoyJunction",
               companyName: "The Joy Junction",
               companyLogo: "/JJ.png",
-              isCurrentEmployer: true,
               positions: [
                 {
                   id: "JoyJunction-Full-Stack-Developer",
                   title: "Full Stack Developer",
-                  employmentPeriod: { start: "04.2025" },
+                  employmentPeriod: { start: "05.2025", end: "12.2025" },
                   employmentType: "Part-Time",
                   icon: <CodeXmlIcon />,
                   isExpanded: false,
                   description:
-                    "- Built an end-to-end ecommerce platform with Next.js and a headless MedusaJS backend.\n- Integrated Google Auth, Razorpay payments, PostHog analytics, Supabase storage, and Redis caching.\n- Set up CI/CD with GitHub Actions for deployments across Vercel and AWS Lightsail.",
+                    "- Built the brand's e-commerce platform from scratch on MedusaJS 2 and Next.js 15.\n- Algolia search under 200 ms; Redis caching, event bus and workflows cut average API latency by 40%.\n- Razorpay with webhook-driven order expiry and refunds, Google sign-in, and GitHub Actions deploys to AWS Lightsail.",
                   skills: [
                     "Next.js",
                     "MedusaJS",
+                    "Algolia",
                     "Razorpay",
-                    "Supabase",
                     "Redis",
-                    "GitHub Actions",
+                    "AWS Lightsail",
                   ],
                 },
               ],
@@ -144,7 +157,7 @@ export default function Page() {
                   icon: <CodeXmlIcon />,
                   isExpanded: false,
                   description:
-                    "- Migrated core data from MongoDB to PostgreSQL with Prisma and stricter schema validation.\n- Reduced API latency by 70% by caching hot paths and tightening SQL queries.\n- Built Redis/BullMQ workers for async jobs and transactional email processing.\n- Refactored REST APIs to reduce error rates and improve response times.",
+                    "- Designed the move from MongoDB to PostgreSQL with Prisma: a 29-table schema, migrations and data-copy scripts.\n- Cut API latency by 70% with Redis caching and SQL tuning.\n- Built a BullMQ queue handling 10,000+ tasks and emails a day, plus coupon redemption and Algolia search.\n- Refactored REST APIs, cutting error rates by 50%.",
                   skills: ["PostgreSQL", "Prisma", "Redis", "BullMQ", "MongoDB"],
                 },
               ],
@@ -156,64 +169,48 @@ export default function Page() {
 
       {/* Projects */}
       <Reveal animation="fadeUp" delay={0.35} className="mt-10">
-        <div className="text-2xl">Projects</div>
+        <div className="text-2xl">Selected projects</div>
         <Projects
           className="px-0 pt-2"
-          projects={[
-            {
-              id: "sla-ticketing",
-              name: "SLAWARE",
-              tagline: "SLA-aware support portal",
-              liveUrl: "https://sl-aware.vercel.app",
-              repoUrl: "https://github.com/unlux/sl-aware",
-              description:
-                "A full-stack ticketing system with role-based workflows for users, agents, and admins. SLA deadlines with breach detection, a full event timeline, optimistic locking that returns 409 on stale writes, plus per-user rate limiting and idempotent ticket creation.",
-              skills: [
-                "Next.js",
-                "React 19",
-                "Prisma",
-                "PostgreSQL",
-                "TanStack Query",
-                "Zod",
-              ],
-            },
-            {
-              id: "joy-junction-commerce",
-              name: "Joy Junction storefront",
-              tagline: "headless commerce platform",
-              liveUrl: "https://tjj.unlux.dev",
-              description:
-                "An end-to-end ecommerce platform for a toy-and-games brand: a Next.js 15 storefront on a headless MedusaJS backend, with Google auth, Razorpay payments, Supabase storage, and Redis caching, deployed across Vercel and AWS Lightsail.",
-              skills: [
-                "Next.js",
-                "MedusaJS",
-                "Razorpay",
-                "Supabase",
-                "Redis",
-                "AWS Lightsail",
-              ],
-            },
-            {
-              id: "video-transcoding-pipeline",
-              name: "Video transcoding pipeline",
-              tagline: "cost-aware AWS pipeline",
-              repoUrl: "https://github.com/unlux/video-transcoding-pipeline",
-              description:
-                "A video transcoding pipeline built for cost, not convenience: SQS-driven jobs running containers directly on the EC2 instance instead of ECS to avoid the orchestration overhead, reading from and writing back to S3.",
-              skills: ["AWS SQS", "EC2", "S3", "Docker", "TypeScript"],
-            },
-            {
-              id: "objecteasy",
-              name: "ObjectEasy",
-              tagline: "client-side S3 uploader",
-              liveUrl: "https://object-easy.vercel.app",
-              repoUrl: "https://github.com/unlux/ObjectEasy",
-              description:
-                "A browser-only S3 uploader: credentials live in local storage and go straight to AWS, never touching a server. Direct-to-S3 uploads with live progress, cancellation, and a copyable link history.",
-              skills: ["Next.js", "AWS SDK v3", "S3", "shadcn/ui", "TypeScript"],
-            },
-          ]}
+          projects={projects
+            .filter((project) => project.featured)
+            .map((project) => ({
+              id: project.slug,
+              name: project.name,
+              tagline: project.tagline,
+              description: project.blurb ?? project.highlights.join(". "),
+              skills: project.tags,
+              liveUrl: project.detail ? `/projects/${project.slug}` : project.liveUrl,
+              repoUrl: project.repoUrl,
+            }))}
         />
+        <Link
+          href="/projects"
+          className="link mt-2 inline-block font-[family-name:var(--font-inter)] text-sm"
+        >
+          All projects →
+        </Link>
+      </Reveal>
+
+      {/* Education and awards */}
+      <Reveal animation="fadeUp" delay={0.38} className="mt-10">
+        <div className="text-2xl">Education and awards</div>
+        <ul className="not-prose mt-4 grid grid-cols-2 gap-2 font-[family-name:var(--font-inter)] text-sm sm:grid-cols-4">
+          {[
+            { title: "B.Tech CSE", detail: "LPU, 2022 – 2026" },
+            { title: "AZ-104", detail: "Azure Administrator" },
+            { title: "1st place", detail: "Hack the Block 2025 at LPU" },
+            { title: "GDSC LPU", detail: "Core team, 2022 – 2024" },
+          ].map((item) => (
+            <li
+              key={item.title}
+              className="rounded-lg border border-dashed border-border px-3 py-2.5"
+            >
+              <span className="block font-semibold text-foreground">{item.title}</span>
+              <span className="text-muted-foreground">{item.detail}</span>
+            </li>
+          ))}
+        </ul>
       </Reveal>
 
       <Reveal animation="fadeUp" delay={0.4} className="mt-8">

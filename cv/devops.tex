@@ -1,0 +1,71 @@
+% DevOps / infrastructure CV. Build: ./build.sh
+\input{preamble}
+\begin{document}
+\cvheader
+\cveducation
+
+\section{Experience}
+\resumeSubHeadingListStart
+
+  \resumeSubheading{Skillion}{Oct 2025 -- present}{Full Stack Developer (full-time)}{Remote}
+  \resumeItemListStart
+    \resumeItem{Run production for \textbf{Reconexa}, an AI reconciliation product live with two clinics: Docker services on Dokploy and Hetzner, Neon Postgres with auto-suspend, Doppler secrets, and Sentry, PostHog and Uptime Kuma monitoring.}
+    \resumeItem{Moved CI off the production host to Blacksmith runners; the product ships behind \textbf{3,000+ automated tests} with passkeys, 2FA and a full audit trail.}
+    \resumeItem{Deployed company websites to \textbf{Cloudflare Workers} with OpenNext and on-demand ISR; cut bot traffic that had used \textbf{38\% of Worker CPU} and blog page weight from 6.5 MB to 0.2 MB.}
+    \resumeItem{Migrated company email from Amazon WorkMail to \textbf{Google Workspace} with no lost mail and no downtime, verified with imapsync; set up SPF, DKIM and DMARC across all company domains.}
+    \resumeItem{Moved about 700 files across 13 owner accounts into a shared drive with Drive API scripts that kept original file links working; every step logged, resumable and verified.}
+    \resumeItem{Self-hosted Twenty CRM on the company server with per-service memory limits; put internal tools behind Cloudflare Access.}
+  \resumeItemListEnd
+
+  \resumeSubheading{The Joy Junction}{May 2025 -- Dec 2025}{Full Stack Developer (part-time)}{Remote}
+  \resumeItemListStart
+    \resumeItem{Built and hosted the brand's e-commerce platform (MedusaJS 2, Next.js 15) on AWS Lightsail with PM2, Caddy and GitHub Actions deploys over SSH.}
+    \resumeItem{Moved cache, event bus and workflows to Redis, cutting average API latency by \textbf{40\%}; Algolia search under 200 ms; Razorpay webhooks for 99.9\% reliable payments.}
+  \resumeItemListEnd
+
+  \resumeSubheading{PrintSaathi}{Feb 2025 -- Apr 2025}{Backend Development Intern}{Remote}
+  \resumeItemListStart
+    \resumeItem{Cut API latency by \textbf{70\%} with Redis caching and SQL tuning; built a BullMQ queue handling \textbf{10,000+ tasks a day}; designed the MongoDB to PostgreSQL move with Prisma.}
+    \resumeItem{Added tiered rate limiting, a GitHub Actions docs pipeline and a reproducible Nix dev environment; REST refactor cut error rates by 50\%.}
+  \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+\section{Projects}
+\resumeSubHeadingListStart
+  \resumeProjectHeading{\textbf{Self-hosted infrastructure} $|$ \emph{Oracle Cloud, Tailscale, Dokploy, systemd, SOPS}}{Aug 2026 -- present}
+  \resumeItemListStart
+    \resumeItem{Two-machine fleet on a private Tailscale network, managed from one Git repo: rebuild playbooks, SOPS-encrypted secrets, 5-minute health checks with Telegram alerts, and systemd-oomd to stop memory freezes.}
+  \resumeItemListEnd
+  \resumeProjectHeading{\textbf{NixOS configuration} $|$ \emph{Nix flakes, Home Manager, disko, Btrfs, sops-nix}}{Feb 2024 -- present}
+  \resumeItemListStart
+    \resumeItem{One flake builds my laptop and desktop from scratch, down to disk partitioning, with Btrfs snapshots, GPU switching, DNS ad blocking and CI builds.}
+  \resumeItemListEnd
+  \resumeProjectHeading{\textbf{Video transcoding pipeline} $|$ \emph{AWS SQS, S3, EC2, ECS, ECR, Docker, FFmpeg}}{Nov 2024 -- Jan 2025}
+  \resumeItemListStart
+    \resumeItem{Event-driven S3 to SQS to FFmpeg pipeline; running jobs on the worker's own EC2 host instead of ECS Fargate cut infrastructure spend by \textbf{60\%}.}
+  \resumeItemListEnd
+  \resumeProjectHeading{\textbf{Proxmox home server} $|$ \emph{Proxmox VE, Docker, Cloudflare Tunnel and Access}}{Mar 2024 -- Jan 2025}
+  \resumeItemListStart
+    \resumeItem{Self-hosted 10+ sites and services behind Cloudflare Tunnel and Access, cutting hosting costs by \textbf{80\%}.}
+  \resumeItemListEnd
+  \resumeProjectHeading{\textbf{Open source: EnvSync self-hosting} $|$ \emph{Kubernetes, Helm, kind, Docker Compose}}{Mar 2026}
+  \resumeItemListStart
+    \resumeItem{Helm chart and Kubernetes bring-up for the full EnvSync stack: setup and migration jobs, RBAC, autoscaling and ingress (42 files, about 2,100 lines).}
+  \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.15in, label={}, itemsep=0pt]
+  \small{\item{
+    \textbf{Cloud}{: AWS (EC2, S3, SQS, ECS, ECR, Lightsail, Route 53, SES), Cloudflare (Workers, R2, Access, Tunnel), Oracle Cloud, Hetzner} \\
+    \textbf{Containers and CI/CD}{: Docker, Docker Compose, Kubernetes, Helm, Dokploy, GitHub Actions} \\
+    \textbf{Config and secrets}{: NixOS flakes, Home Manager, systemd, SOPS and age, Doppler} \\
+    \textbf{Observability}{: Sentry, PostHog, Prometheus, Grafana, Uptime Kuma} \\
+    \textbf{Networking and email}{: Tailscale, Cloudflare Tunnel, DNS, SPF, DKIM, DMARC, Google Workspace admin} \\
+    \textbf{Languages}{: Bash, Python, TypeScript, SQL}
+  }}
+\end{itemize}
+
+\cvachievements
+\end{document}

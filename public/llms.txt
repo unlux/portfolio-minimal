@@ -1,15 +1,21 @@
 # unlux · Lakshay Choudhary
 
-> Personal site of Lakshay Choudhary (unlux), a full-stack developer focused on backend-heavy products, cloud infrastructure, and systems that stay maintainable after v1 ships. Works mostly with Next.js, TypeScript, Prisma, Redis, AWS, GCP, and Linux/NixOS.
+> Personal site of Lakshay Choudhary (unlux), a full-stack engineer who builds AI products end to end: the model work, the product around it, and the infrastructure that keeps it running. Works mostly in TypeScript and Next.js, with Python where it fits, on Cloudflare, AWS and self-hosted servers.
 
-Currently a Full Stack Developer at Skillion (full-time) and The Joy Junction (part-time).
+Currently a Full Stack Developer at Skillion (full-time, since October 2025). Built Reconexa (AI invoice reconciliation for physiotherapy clinics), the Skillion AI Labs website with the Lara voice agent, and internal AI tools.
 
 ## Pages
 
-- [Home](https://unlux.dev/): bio, work experience, and live Discord/Spotify status
+- [Home](https://unlux.dev/): intro, work experience, selected projects, education and awards
+- [Projects](https://unlux.dev/projects): every project, grouped, with detail pages for the bigger ones
 - [Writing](https://unlux.dev/blog): posts on backend systems, tooling, and personal experiments
 - [Todo](https://unlux.dev/todo): a public slice of the working queue, synced from Notion
 - [Reading](https://unlux.dev/currently-reading): books, articles, and technical rabbit holes
+
+## CVs
+
+- [Full-stack and AI CV](https://unlux.dev/resume.pdf)
+- [DevOps CV](https://unlux.dev/devops.pdf)
 
 ## Feeds
 

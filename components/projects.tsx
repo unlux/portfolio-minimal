@@ -1,4 +1,5 @@
 import type { ComponentProps } from "react"
+import Link from "next/link"
 import { ArrowUpRightIcon, GithubIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -14,7 +15,7 @@ export type ProjectItem = {
   description: string
   /** A list of technologies used */
   skills: string[]
-  /** Optional live demo URL */
+  /** Optional live demo URL, or an internal path such as /projects/slug */
   liveUrl?: string
   /** Optional source repository URL */
   repoUrl?: string
@@ -42,7 +43,11 @@ function ProjectItemRow({ project }: { project: ProjectItem }) {
     <div className="space-y-2 border-b border-border py-5 last:border-none">
       <div className="not-prose flex flex-wrap items-baseline gap-x-2 gap-y-1">
         <h3 className="text-lg leading-snug font-semibold">
-          {liveUrl ? (
+          {liveUrl?.startsWith("/") ? (
+            <Link className="link" href={liveUrl}>
+              {name}
+            </Link>
+          ) : liveUrl ? (
             <a
               className="link inline-flex items-center gap-0.5"
               href={liveUrl}
