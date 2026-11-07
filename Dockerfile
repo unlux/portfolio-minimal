@@ -15,6 +15,7 @@ FROM base AS builder
 RUN apk add --no-cache openssl
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+COPY --from=deps /app/lib/generated ./lib/generated
 RUN npm run build
 
 FROM base AS runner
