@@ -8,12 +8,14 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat openssl
 COPY package.json package-lock.json ./
 COPY prisma ./prisma
+COPY prisma.config.ts ./
 RUN npm ci
 
 FROM base AS builder
 RUN apk add --no-cache openssl
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+COPY --from=deps /app/lib/generated ./lib/generated
 RUN npm run build
 
 FROM base AS runner

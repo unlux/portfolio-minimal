@@ -1,6 +1,7 @@
 import type { ComponentProps } from "react"
 import Link from "next/link"
-import { ArrowUpRightIcon, GithubIcon } from "lucide-react"
+import { ArrowUpRightIcon } from "lucide-react"
+import { FaGithub } from "react-icons/fa"
 
 import { cn } from "@/lib/utils"
 
@@ -72,7 +73,7 @@ function ProjectItemRow({ project }: { project: ProjectItem }) {
             rel="noopener noreferrer"
             aria-label={`${name} source on GitHub`}
           >
-            <GithubIcon className="size-4" aria-hidden />
+            <FaGithub className="size-4" aria-hidden />
           </a>
         )}
       </div>
