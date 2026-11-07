@@ -1,8 +1,11 @@
 import { NotionPageShell } from "@/components/NotionPageShell";
 import { ReadingCollection } from "@/components/ReadingCollection";
 
-import { NotionAPI } from "notion-client";
-import { getNormalizedNotionPage, getNotionPageCover } from "@/lib/notion";
+import {
+  createNotionClient,
+  getNormalizedNotionPage,
+  getNotionPageCover,
+} from "@/lib/notion";
 import type { ExtendedRecordMap } from "notion-types";
 
 export const revalidate = 21600;
@@ -16,7 +19,7 @@ export const metadata = {
 };
 
 export default async function CurrentlyReadingPage() {
-  const notion = new NotionAPI();
+  const notion = createNotionClient();
   let recordMap: ExtendedRecordMap | null = null;
   let error: unknown = null;
   const pageId = "1e4ca11c6d658078b2a6ccf2fcaa6471";
