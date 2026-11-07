@@ -43,7 +43,7 @@ npx prisma studio          # Open Prisma Studio GUI
 - **Next.js 16** with App Router and **React 19**
 - **TypeScript** with path alias `@/*` pointing to project root
 - **Tailwind CSS v4** for styling
-- **Prisma ORM** with PostgreSQL (`@prisma/client`)
+- **Prisma ORM 7** with PostgreSQL through the `@prisma/adapter-pg` driver adapter
 - **Clerk** for authentication (optional, auto-disabled without env vars)
 - **MDX** for blog content
 - **Radix UI** primitives for accessible components (shadcn new-york style, `components.json`)
@@ -60,7 +60,7 @@ The app gracefully handles missing Clerk credentials:
 - `app/layout.tsx`: Conditionally wraps app in `ClerkProvider` only if `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` exists
 
 #### Prisma Client Setup
-Prisma client is generated through `@prisma/client` and imported via `lib/prisma.ts`, which implements a singleton pattern for development hot-reloading.
+The `prisma-client` generator writes the client to `lib/generated/prisma` (gitignored, rebuilt by `postinstall`). Import the client via `lib/prisma.ts`, a singleton that builds it with the `PrismaPg` adapter, and import model types from `@/lib/generated/prisma/client`. The CLI reads the datasource URL from `prisma.config.ts`, not `schema.prisma`; Prisma 7 no longer loads `.env` on its own, so that file calls `process.loadEnvFile()`.
 
 #### MDX Blog System
 - Blog posts live in `app/blog/posts/*.mdx`
@@ -190,4 +190,4 @@ DATABASE_URL=postgresql://...
 - PostHog initializes in `instrumentation-client.ts` only when `NEXT_PUBLIC_POSTHOG_KEY`/`HOST` are set
 - Path imports use `@/` alias (points to project root)
 - The app is designed to work without Clerk - middleware becomes a no-op if credentials are missing
-- Prisma Client is generated into the default `@prisma/client` package location.
+- Prisma Client is generated into `lib/generated/prisma`, not the `@prisma/client` package.

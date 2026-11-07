@@ -1,7 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowUpRightIcon, ChevronDownIcon, GithubIcon } from "lucide-react"
+import { ArrowUpRightIcon, ChevronDownIcon } from "lucide-react"
+import { FaGithub } from "react-icons/fa"
 
 import { cn } from "@/lib/utils"
 import {
@@ -133,7 +134,7 @@ export function ProjectLinks({
           aria-label={`${name} source on GitHub`}
           className="inline-flex items-center gap-1 text-muted-foreground transition-colors hover:text-foreground"
         >
-          <GithubIcon className="size-3.5" aria-hidden />
+          <FaGithub className="size-3.5" aria-hidden />
           Source
         </a>
       )}
