@@ -1,6 +1,17 @@
 import type { ExtendedRecordMap } from "notion-types";
-import type { NotionAPI } from "notion-client";
+import { NotionAPI } from "notion-client";
 import { defaultMapImageUrl, getBlockValue, parsePageId } from "notion-utils";
+
+// Notion's edge returns 403 for Node's default `User-Agent: node`, so every
+// request has to carry a browser-like one.
+const NOTION_USER_AGENT =
+  "Mozilla/5.0 (compatible; unlux.dev/1.0; +https://unlux.dev)";
+
+export function createNotionClient() {
+  return new NotionAPI({
+    ofetchOptions: { headers: { "User-Agent": NOTION_USER_AGENT } },
+  });
+}
 
 type WrappedRecord<T> = {
   role?: unknown;

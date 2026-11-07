@@ -10,12 +10,15 @@ export const metadata = {
 
 import { NotionRenderer } from "@/components/NotionRenderer";
 import { NotionPageShell } from "@/components/NotionPageShell";
-import { NotionAPI } from "notion-client";
-import { getNormalizedNotionPage, getNotionPageCover } from "@/lib/notion";
+import {
+  createNotionClient,
+  getNormalizedNotionPage,
+  getNotionPageCover,
+} from "@/lib/notion";
 import type { ExtendedRecordMap } from "notion-types";
 
 export default async function TodoPage() {
-  const notion = new NotionAPI();
+  const notion = createNotionClient();
   let recordMap: ExtendedRecordMap | null = null;
   let error: unknown = null;
   const pageId = "22cca11c6d65808b8453ca55e4032397";
