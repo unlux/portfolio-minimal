@@ -198,7 +198,7 @@ export default function Page() {
         <ul className="not-prose mt-4 grid grid-cols-2 gap-2 font-[family-name:var(--font-inter)] text-sm sm:grid-cols-4">
           {[
             { title: "B.Tech CSE", detail: "LPU, 2022 – 2026" },
-            { title: "AZ-104", detail: "Azure Administrator" },
+            { title: "AZ-104", detail: "Azure Administrator, 2025 (expired)" },
             { title: "1st place", detail: "Hack the Block 2025 at LPU" },
             { title: "GDSC LPU", detail: "Core team, 2022 – 2024" },
           ].map((item) => (
