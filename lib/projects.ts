@@ -48,12 +48,12 @@ export const projects: Project[] = [
     tags: ["Next.js 16", "OpenAI", "BullMQ", "Prisma", "Playwright"],
     highlights: [
       "Turns insurer payment emails into paid invoices in Cliniko and Xero",
-      "AI document reading, 68% to 97.5% extraction accuracy",
+      "AI document reading, benchmarked at 97.5% invoice accuracy for about a tenth of the cost",
       "Automatic bank matching, including deposits that cover many invoices",
     ],
     featured: true,
     blurb:
-      "Reads insurer and NDIS payment emails with AI and marks invoices paid in Cliniko and Xero, so clinic staff don't reconcile by hand. Live with two physiotherapy clinics; extraction accuracy raised from 68% to 97.5%.",
+      "Reads insurer and NDIS payment emails with AI and marks invoices paid in Cliniko and Xero, so clinic staff don't reconcile by hand. Live with two physiotherapy clinics. A benchmark against staff-verified invoices moved it to a model that matched the best one's 97.5% invoice accuracy at about a tenth of the cost.",
     detail: {
       role: "Sole developer at Skillion",
       status: "Live with two physiotherapy clinics",
@@ -63,7 +63,7 @@ export const projects: Project[] = [
       ],
       features: [
         { title: "Email to paid, end to end", body: "Turns a payment email into a recorded payment in Cliniko and a matching entry in Xero, with staff approval in between." },
-        { title: "AI document reading", body: "OCR and LLMs read emails and PDFs, including scanned ones. Model tuning raised extraction accuracy from 68% to 97.5%." },
+        { title: "AI document reading", body: "OCR and LLMs read emails and PDFs, including scanned ones. I benchmarked our AI models against staff-verified invoices from production and moved us to one that matched our best model's 97.5% invoice accuracy at about a tenth of the cost. A later 168-email check had it at 269 of 271 invoices." },
         { title: "Automatic bank matching", body: "Matches each payment to its deposit in the bank feed, including deposits that cover many invoices at once." },
         { title: "Reliable payment recording", body: "Payments are confirmed against Cliniko before being marked done. Anything unclear is held for a person to review and raises an alert." },
         { title: "Multi-clinic", body: "Each clinic has its own setup and isolated data." },

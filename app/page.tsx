@@ -106,7 +106,7 @@ export default function Page() {
                   icon: <CodeXmlIcon />,
                   isExpanded: true,
                   description:
-                    "- Built Reconexa end to end as sole developer: an AI product that reads insurer payment emails and marks invoices paid in Cliniko and Xero, live with two physiotherapy clinics.\n- Raised invoice extraction accuracy from 68% to 97.5% by benchmarking LLMs against staff-verified invoices.\n- Built skillionailabs.com on Next.js 16 and Cloudflare Workers, with an AI diagnostic, a chatbot and Lara, a voice agent on ElevenLabs and Twilio.\n- Built internal AI tools: an RFP proposal system, a multi-model research pipeline with a CRM Claude can drive, and a Jira retro tool used every sprint.",
+                    "- Built Reconexa end to end as sole developer: an AI product that reads insurer payment emails and marks invoices paid in Cliniko and Xero, live with two physiotherapy clinics.\n- Benchmarked our AI models against staff-verified invoices from production and moved us to one that matched our best model's 97.5% invoice accuracy at about a tenth of the cost.\n- Built skillionailabs.com on Next.js 16 and Cloudflare Workers, with an AI diagnostic, a chatbot and Lara, a voice agent on ElevenLabs and Twilio.\n- Built internal AI tools: an RFP proposal system, a multi-model research pipeline with a CRM Claude can drive, and a Jira retro tool used every sprint.",
                   skills: [
                     "OpenAI",
                     "Next.js",
