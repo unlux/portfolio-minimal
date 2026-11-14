@@ -123,8 +123,7 @@ export default function Footer() {
         <li></li>
       </ul>
       <p className="text-sm mt-8 text-neutral-600 dark:text-neutral-300">
-        built with nextjs and cloudflare mindfuk <br /> © 1969 MIT Licensed to
-        fkn no one
+        built with nextjs and cloudflare mindfuk
         <br />
         <InteractiveLink
           href={"https://github.com/unlux/portfolio-minimal"}
